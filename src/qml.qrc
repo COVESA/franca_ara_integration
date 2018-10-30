@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>VehicleBoundingBox.qml</file>
+        <file>LaneIndicator.qml</file>
+        <file>DebugTexts.qml</file>
+        <file>VideoImage.qml</file>
+    </qresource>
+</RCC>
