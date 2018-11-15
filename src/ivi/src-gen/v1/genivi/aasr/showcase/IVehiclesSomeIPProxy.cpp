@@ -31,7 +31,7 @@ std::shared_ptr<CommonAPI::SomeIP::Proxy> createIVehiclesSomeIPProxy(
 void initializeIVehiclesSomeIPProxy() {
     CommonAPI::SomeIP::AddressTranslator::get()->insert(
         "local:genivi.aasr.showcase.IVehicles:v1_0:test",
-        0x1234, 0x5678, 1, 0);
+        0x537, 0x5678, 1, 0);
      CommonAPI::SomeIP::Factory::get()->registerProxyCreateMethod(
          IVehicles::getInterface(),
          &createIVehiclesSomeIPProxy);
@@ -45,7 +45,7 @@ IVehiclesSomeIPProxy::IVehiclesSomeIPProxy(
     const CommonAPI::SomeIP::Address &_address,
     const std::shared_ptr<CommonAPI::SomeIP::ProxyConnection> &_connection)
         : CommonAPI::SomeIP::Proxy(_address, _connection )
-,          vehicles_(*this, CommonAPI::SomeIP::eventgroup_id_t(0x3ed), CommonAPI::SomeIP::event_id_t(0x3eb), CommonAPI::SomeIP::method_id_t(0x3e9), false, false, CommonAPI::SomeIP::method_id_t(0x3ea), false, static_cast< ::v1::genivi::aasr::showcase::IVehicles_::ListOfVehiclesDeployment_t* >(nullptr))
+,          vehicles_(*this, CommonAPI::SomeIP::eventgroup_id_t(0x1), CommonAPI::SomeIP::event_id_t(0xbb8), CommonAPI::SomeIP::method_id_t(0xbb9), false, false, CommonAPI::SomeIP::method_id_t(0xbba), false, static_cast< ::v1::genivi::aasr::showcase::IVehicles_::ListOfVehiclesDeployment_t* >(nullptr))
     {
     }
 
@@ -72,7 +72,7 @@ IVehiclesSomeIPProxy::IVehiclesSomeIPProxy(
                 >
             >::callMethodWithReply(
             *this,
-            CommonAPI::SomeIP::method_id_t(0x3e8),
+            CommonAPI::SomeIP::method_id_t(0x80e8),
             false,
             false,
     (_info ? _info : &CommonAPI::SomeIP::defaultCallInfo),
@@ -99,7 +99,7 @@ IVehiclesSomeIPProxy::IVehiclesSomeIPProxy(
             >
         >::callMethodAsync(
             *this,
-            CommonAPI::SomeIP::method_id_t(0x3e8),
+            CommonAPI::SomeIP::method_id_t(0x80e8),
             false,
             false,
             (_info ? _info : &CommonAPI::SomeIP::defaultCallInfo),

@@ -72,8 +72,8 @@ public:
         // Provided events/fields
         {
             std::set<CommonAPI::SomeIP::eventgroup_id_t> itsEventGroups;
-            itsEventGroups.insert(CommonAPI::SomeIP::eventgroup_id_t(0xbb8));
-            CommonAPI::SomeIP::StubAdapter::registerEvent(CommonAPI::SomeIP::event_id_t(0x7d1), itsEventGroups, false);
+            itsEventGroups.insert(CommonAPI::SomeIP::eventgroup_id_t(0x1));
+            CommonAPI::SomeIP::StubAdapter::registerEvent(CommonAPI::SomeIP::event_id_t(0x1), itsEventGroups, false);
         }
     }
 
@@ -93,7 +93,7 @@ void IDrivingLaneSomeIPStubAdapterInternal<_Stub, _Stubs...>::fireLaneDetectedEv
     >>
         ::sendEvent(
             *this,
-            CommonAPI::SomeIP::event_id_t(0x7d1),
+            CommonAPI::SomeIP::event_id_t(0x1),
             false,
              deployed_drivingLane 
     );
