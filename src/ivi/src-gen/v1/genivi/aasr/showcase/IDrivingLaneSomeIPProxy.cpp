@@ -31,7 +31,7 @@ std::shared_ptr<CommonAPI::SomeIP::Proxy> createIDrivingLaneSomeIPProxy(
 void initializeIDrivingLaneSomeIPProxy() {
     CommonAPI::SomeIP::AddressTranslator::get()->insert(
         "local:genivi.aasr.showcase.IDrivingLane:v1_0:drivinglane",
-        0x270e, 0xd431, 1, 0);
+        0x536, 0xd431, 1, 0);
      CommonAPI::SomeIP::Factory::get()->registerProxyCreateMethod(
          IDrivingLane::getInterface(),
          &createIDrivingLaneSomeIPProxy);
@@ -45,7 +45,7 @@ IDrivingLaneSomeIPProxy::IDrivingLaneSomeIPProxy(
     const CommonAPI::SomeIP::Address &_address,
     const std::shared_ptr<CommonAPI::SomeIP::ProxyConnection> &_connection)
         : CommonAPI::SomeIP::Proxy(_address, _connection )
-,          laneDetected_(*this, 0xbb8, CommonAPI::SomeIP::event_id_t(0x7d1), false, false, std::make_tuple(static_cast< ::v1::genivi::aasr::showcase::IDrivingLane_::LaneTypeDeployment_t* >(nullptr)))
+,          laneDetected_(*this, 0x1, CommonAPI::SomeIP::event_id_t(0x1), false, false, std::make_tuple(static_cast< ::v1::genivi::aasr::showcase::IDrivingLane_::LaneTypeDeployment_t* >(nullptr)))
     {
     }
 
