@@ -33,7 +33,7 @@ std::shared_ptr<CommonAPI::SomeIP::StubAdapter> createIVehiclesSomeIPStubAdapter
 void initializeIVehiclesSomeIPStubAdapter() {
     CommonAPI::SomeIP::AddressTranslator::get()->insert(
         "local:genivi.aasr.showcase.IVehicles:v1_0:test",
-         0x1234, 0x5678, 1, 0);
+         0x537, 0x5678, 1, 0);
     CommonAPI::SomeIP::Factory::get()->registerStubAdapterCreateMethod(
         IVehicles::getInterface(),
         &createIVehiclesSomeIPStubAdapter);

@@ -85,17 +85,17 @@ public:
             std::dynamic_pointer_cast< IVehiclesStub>(_stub))
     {
 
-                IVehiclesSomeIPStubAdapterHelper::addStubDispatcher( { CommonAPI::SomeIP::method_id_t(0x3e9) }, &getVehiclesAttributeStubDispatcher );
-                IVehiclesSomeIPStubAdapterHelper::addStubDispatcher( { CommonAPI::SomeIP::method_id_t(0x3ea) }, &setVehiclesAttributeStubDispatcher );
+                IVehiclesSomeIPStubAdapterHelper::addStubDispatcher( { CommonAPI::SomeIP::method_id_t(0xbb9) }, &getVehiclesAttributeStubDispatcher );
+                IVehiclesSomeIPStubAdapterHelper::addStubDispatcher( { CommonAPI::SomeIP::method_id_t(0xbba) }, &setVehiclesAttributeStubDispatcher );
         
-                IVehiclesSomeIPStubAdapterHelper::addStubDispatcher( { CommonAPI::SomeIP::method_id_t(0x3e8) }, &setFloatingPointPrecisionStubDispatcher );
+                IVehiclesSomeIPStubAdapterHelper::addStubDispatcher( { CommonAPI::SomeIP::method_id_t(0x80e8) }, &setFloatingPointPrecisionStubDispatcher );
         std::shared_ptr<CommonAPI::SomeIP::ClientId> clientId = std::make_shared<CommonAPI::SomeIP::ClientId>(0xFFFF);
 
         // Provided events/fields
         {
             std::set<CommonAPI::SomeIP::eventgroup_id_t> itsEventGroups;
-            itsEventGroups.insert(CommonAPI::SomeIP::eventgroup_id_t(CommonAPI::SomeIP::eventgroup_id_t(0x3ed)));
-            CommonAPI::SomeIP::StubAdapter::registerEvent(CommonAPI::SomeIP::event_id_t(0x3eb), itsEventGroups, true);
+            itsEventGroups.insert(CommonAPI::SomeIP::eventgroup_id_t(CommonAPI::SomeIP::eventgroup_id_t(0x1)));
+            CommonAPI::SomeIP::StubAdapter::registerEvent(CommonAPI::SomeIP::event_id_t(0xbb8), itsEventGroups, true);
             fireVehiclesAttributeChanged(std::dynamic_pointer_cast< ::v1::genivi::aasr::showcase::IVehiclesStub>(_stub)->getVehiclesAttribute(clientId));
         }
 
@@ -157,7 +157,7 @@ void IVehiclesSomeIPStubAdapterInternal<_Stub, _Stubs...>::fireVehiclesAttribute
             >
     >::sendEvent(
         *this,
-        CommonAPI::SomeIP::event_id_t(0x3eb),
+        CommonAPI::SomeIP::event_id_t(0xbb8),
         false,
         deployedValue
     );
