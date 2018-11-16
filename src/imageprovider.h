@@ -21,7 +21,7 @@ public slots:
     void setImage(const QImage &img);
 
 Q_SIGNALS:
-    void newFrameReceived();
+    void updateGraphicsImage();
 
 private:
     QImage m_image;

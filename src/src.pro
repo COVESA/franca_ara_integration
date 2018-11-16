@@ -13,10 +13,20 @@ OBJECTS_DIR = build/obj
 # Executable name
 TARGET = ../franca-ara
 
-HEADERS += imageprovider.h imagesource.h
+HEADERS += imageprovider.h imagesource.h SomeIpNetworkThread.h
 
 # Compile these sources
-SOURCES += main.cpp imageprovider.cpp imagesource.cpp
+SOURCES += main.cpp imageprovider.cpp imagesource.cpp SomeIpNetworkThread.cpp
+
+# Add generated code
+HEADERS += src-gen/v1/genivi/aasr/showcase/*.hpp
+SOURCES += src-gen/v1/genivi/aasr/showcase/*.cpp
+INCLUDEPATH += src-gen
+
+# Location of CommonAPI headers & libs (temporary, for local host
+# development without SDK)
+INCLUDEPATH += /usr/local/include/CommonAPI-3.1
+LIBS += -L/usr/local/lib -lCommonAPI -lCommonAPI-SomeIP -lvsomeip
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
