@@ -23,7 +23,7 @@ public:
     void newVehicleIdentification (const BoxDefinition &box);
     void newLaneIdentification (const LaneLineDefinition &left, const LaneLineDefinition &right);
 
-Q_SIGNALS:
+Q_SIGNALS: // (Signals sent to QML graphics program)
     void imageReady(const QImage &s);
     void vehicle_identified(QRect box);
     void lane_identified(QLine &leftLine, QLine &rightLine);

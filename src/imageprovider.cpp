@@ -31,5 +31,5 @@ QPixmap ImageProvider::requestPixmap(const QString &id, QSize *size, const QSize
 void ImageProvider::setImage(const QImage &img)
 {
     m_image = img;
-    emit newFrameReceived();
+    emit updateGraphicsImage(); // to QML thread
 }
