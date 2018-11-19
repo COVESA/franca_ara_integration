@@ -18,6 +18,11 @@ HEADERS += imageprovider.h imagesource.h
 # Compile these sources
 SOURCES += main.cpp imageprovider.cpp imagesource.cpp
 
+# Add generated code
+HEADERS += src-gen/v1/genivi/aasr/showcase/*.hpp
+SOURCES += src-gen/v1/genivi/aasr/showcase/*.cpp
+INCLUDEPATH += src-gen
+
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
 
