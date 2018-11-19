@@ -4,8 +4,8 @@
 #include <QQmlEngine>
 #include <QQmlContext>
 
+#include "SomeIpNetworkThread.h"
 #include "imageprovider.h"
-#include "imagesource.h"
 
 int main(int argc, char *argv[])
 {
@@ -24,12 +24,11 @@ int main(int argc, char *argv[])
     view.setSource(QUrl(QStringLiteral("qrc:/main.qml")));
     view.show();
 
-    ImageSource *source = new ImageSource();
-
-    QObject::connect(source, SIGNAL(imageReady(const QImage&)),
+    SomeIpNetworkThread *network_thread = new SomeIpNetworkThread();
+    QObject::connect(network_thread, SIGNAL(imageReady(const QImage&)),
             provider, SLOT(setImage(const QImage&)));
 
-    source->start();
+    network_thread->start();
 
     return app.exec();
 }

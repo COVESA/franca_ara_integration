@@ -13,10 +13,10 @@ OBJECTS_DIR = build/obj
 # Executable name
 TARGET = ../franca-ara
 
-HEADERS += imageprovider.h imagesource.h
+HEADERS += imageprovider.h imagesource.h SomeIpNetworkThread.h
 
 # Compile these sources
-SOURCES += main.cpp imageprovider.cpp imagesource.cpp
+SOURCES += main.cpp imageprovider.cpp imagesource.cpp SomeIpNetworkThread.cpp
 
 # Add generated code
 HEADERS += src-gen/v1/genivi/aasr/showcase/*.hpp
