@@ -1,3 +1,8 @@
+// SPDX-License-Identifier: MPL-2.0
+
+// (C) 2018 GENIVI Alliance
+// This file is part of FRANCA--ARA integration demo/pilot project
+
 #include "imageprovider.h"
 #include <iostream>
 #include <assert.h>

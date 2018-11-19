@@ -2,7 +2,6 @@
 
 // (C) 2018 GENIVI Alliance
 // This file is part of FRANCA--ARA integration demo/pilot project
-
 #include "imagesource.h"
 
 #include <QDebug>
