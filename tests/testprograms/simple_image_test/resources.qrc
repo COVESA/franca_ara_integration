@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>img/GENIVI_Black_Logo-white_background.jpg</file>
+        <file>img/GENIVI_White_Logo-black_background.jpg</file>
+    </qresource>
+</RCC>
