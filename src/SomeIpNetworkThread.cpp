@@ -104,6 +104,9 @@ void SomeIpNetworkThread::run()
         m_image_source.newFrameId(id);
 
         // TODO: Is this ^^ frame ID supposed to drive the playback rate?
+
+        m_image_source.newFrameId(id);
+
         vehicles = v.getDetectedVehicles();
         bounding_box_map = v.getBoxes();
         std::string hash = v.getFrameHash();
@@ -127,6 +130,8 @@ void SomeIpNetworkThread::run()
         Q_UNUSED(id);
     };
 
+    printf("Running: SomeIpNetworkThread\n");
+
     std::string domain = "local";
     std::string instance = "test"; // FIXME
     //   std::string connection = "mysomeipconnection";
@@ -144,6 +149,10 @@ void SomeIpNetworkThread::run()
 
     // Register callback function
     myProxy->getVehiclesAttribute().getChangedEvent().subscribe(vehicles_attribute_update);
+
+    // Initial image to get started
+    printf("OFOOOOO");
+    m_image_source.newFrameId(0);
 
     while (true) {
         // Here the main loop.  Not sure how much needs to be done here
