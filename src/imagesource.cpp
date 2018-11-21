@@ -39,12 +39,15 @@ static Drawn_Lane_Boundary_t get_bounding_lines(void/*todo*/) {
 // Public functions called by networking class/thread:
 
 void ImageSource::newFrameId(int frameID) {
-      QImageReader reader(image_url(limit_id(frameID)));
-      emit imageReady(reader.read()); // Signal to QML
+    printf("newFrameId: %d\n", frameID);
+    QImageReader reader(image_url(limit_id(frameID)));
+    printf("emit imageReady\n");
+    emit imageReady(reader.read()); // Signal to QML
 }
 
 void ImageSource::newVehicleIdentification (const BoxDefinition &box) {
    QRect rect = get_bounding_qrect(box);
+   printf("emit vehicle_identified\n");
    emit vehicle_identified(rect); // Signal to QML
 }
 
@@ -53,5 +56,6 @@ void ImageSource::newLaneIdentification (const LaneLineDefinition &left, const L
    Q_UNUSED(right);
 
    Drawn_Lane_Boundary_t lines = get_bounding_lines(/*...*/);
+   printf("emit lane_identified\n");
    emit lane_identified(lines.first, lines.second);  // Signal to QML
 }

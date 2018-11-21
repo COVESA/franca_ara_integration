@@ -58,9 +58,11 @@ static std::string bounding_box_color(uint8_t id) {
     return known_bounding_box_ids[id];
 }
 
+// Convert box to our own POD data type before passing it on.
 // (this is a possibly unnecessary abstraction, but at least we add the
 // color info, which was not given in the network protocol)
-static BoxDefinition get_pod_box(uint8_t id, const IVehicles::BoundingBox &box) {
+static BoxDefinition get_pod_box(uint8_t id, const IVehicles::BoundingBox &box)
+{
     BoxDefinition b;
     b.height = box.getHeight();
     b.width = box.getWidth();
@@ -152,7 +154,6 @@ void SomeIpNetworkThread::run()
         // OK now what?
         int x = 0;
         ++x;
-
     }
 
     // TODO: On lane update:
