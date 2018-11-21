@@ -9,7 +9,8 @@
 #include <math.h>
 #include "imagesource.h"
 
-#define IMAGE_FEED_PATH "/home/mirzak/project/genivi/src/franca_ara_integration/src/feed"
+#define IMAGE_FEED_PATH                                                        \
+    "/home/user/devel/GENIVI/franca_ara_integration/src/feed"
 #define MAX_IMAGE_ID 228
 
 // Internal helpers
