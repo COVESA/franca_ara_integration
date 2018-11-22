@@ -151,7 +151,6 @@ void SomeIpNetworkThread::run()
     myProxy->getVehiclesAttribute().getChangedEvent().subscribe(vehicles_attribute_update);
 
     // Initial image to get started
-    printf("OFOOOOO");
     m_image_source.newFrameId(0);
 
     while (true) {

@@ -6,7 +6,7 @@ Item {
 
     Connections {
         target: imageprovider
-        onNewFrameReceived: image.reload();
+        onupdateGraphicsImage: image.reload();
     }
 
     Image {
