@@ -3,12 +3,12 @@
 // (C) 2018 GENIVI Alliance
 // This file is part of FRANCA--ARA integration demo/pilot project
 
+#include "imagesource.h"
 #include <QDebug>
 #include <QElapsedTimer>
 #include <QImageReader>
-#include <math.h>
 #include <iostream>
-#include "imagesource.h"
+#include <math.h>
 
 #define IMAGE_FEED_PATH                                                        \
     "/home/user/devel/GENIVI/franca_ara_integration/src/feed"
@@ -25,11 +25,11 @@ static int limit_id(int id) {
 
 static QString image_url(int frameId)
 {
-   qDebug() << QString("%1/l_image%2.png").arg(IMAGE_FEED_PATH).arg(frameId);
-   auto s = QString("%1/l_image%2.png").arg(IMAGE_FEED_PATH).arg(frameId);
-   std::cout << s.toStdString();
-   printf("here\n");
-   return QString("%1/l_image%2.png").arg(IMAGE_FEED_PATH).arg(frameId);
+    qDebug() << QString("%1/l_image%2.png").arg(IMAGE_FEED_PATH).arg(frameId);
+    auto s = QString("%1/l_image%2.png").arg(IMAGE_FEED_PATH).arg(frameId);
+    std::cout << s.toStdString();
+    printf("here\n");
+    return QString("%1/l_image%2.png").arg(IMAGE_FEED_PATH).arg(frameId);
 }
 
 static QRect get_bounding_qrect(BoxDefinition box) {
