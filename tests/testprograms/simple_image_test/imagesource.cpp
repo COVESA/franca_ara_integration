@@ -1,14 +1,29 @@
+#include <QImageReader>
+#include <QElapsedTimer>
+#include <QDebug>
+
 #include "imagesource.h"
+
+#define IMAGE_FEED_PATH "/usr/share/franca-ara"
 
 void ImageSource::run()
 {
-    QImage im1 = QImage(":img/GENIVI_Black_Logo-white_background.jpg");
-    QImage im2 = QImage(":img/GENIVI_White_Logo-black_background.jpg");
+    uint8_t imagecount = 0;
+    QElapsedTimer timer;
+    timer.start();
 
     while (true) {
-        emit imageReady(im1);
-        sleep(1);
-        emit imageReady(im2);
-        sleep(1);
+        QImageReader reader(QString("%1/l_image%2.png").arg(IMAGE_FEED_PATH).arg(imagecount++));
+        emit imageReady(reader.read());
+
+        msleep(20);
+
+        /* wrap around */
+        if ((imagecount % 228) == 0) {
+            imagecount = 0;
+
+            qDebug() << "Image sequence total playtime: " << timer.elapsed()/1000 << "seconds";
+            timer.restart();
+        }
     }
 }
