@@ -1,0 +1,80 @@
+{
+   "logging": {
+      "dlt": "true",
+      "console": "true",
+      "file": {
+         "path": "/var/log/vsomeip.log",
+         "enable": "false"
+      },
+      "level": "debug"
+   },
+   "unicast": "192.168.100.5",
+   "applications": [
+      {
+         "name": "vsomeipd",
+         "id": 1
+      },
+      {
+         "name": "FrancaAraSomeIP_instance",
+         "id": "0x2f68"
+      }
+   ],
+   "routing": "vsomeipd",
+
+   "services": [
+      {
+         "service": "0x0536",
+         "instance": "0x0001",
+         "unreliable": "1334",
+         "events": [
+            {
+               "is_reliable": "false",
+               "event": "1",
+               "is_field": "false"
+            }
+         ],
+         "eventgroups": [
+            {
+               "eventgroup": "0x0001",
+               "events": [
+                  "0x0001"
+               ]
+            }
+         ]
+      },
+      {
+         "service": "0x0537",
+         "instance": "0x0001",
+         "unreliable": "1335",
+         "events": [
+            {
+               "event": "0x0BB8",
+               "is_field": "true",
+               "is_reliable": "false"
+            }
+         ],
+         "eventgroups": [
+            {
+               "eventgroup": "0x0001",
+               "events": [
+                  "0x0BB8"
+               ],
+               "is_multicast": "false"
+            }
+         ]
+      }
+   ],
+      "service-discovery": {
+         "enable": "true",
+         "repetitions_max": "3",
+         "repetitions_base_delay": "200",
+         "initial_delay_min": "10",
+         "cyclic_offer_delay": "2000",
+         "multicast": "224.244.224.245",
+         "request_response_delay": "1500",
+         "initial_delay_max": "100",
+         "ttl": "3",
+         "protocol": "udp",
+         "port": "30490"
+      }
+}
