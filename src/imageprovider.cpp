@@ -4,6 +4,7 @@
 // This file is part of FRANCA--ARA integration demo/pilot project
 
 #include "imageprovider.h"
+#include <iostream>
 
 ImageProvider::ImageProvider(QObject* parent) :  QObject(parent), QQuickImageProvider(QQuickImageProvider::Pixmap)
 {
@@ -19,6 +20,7 @@ QPixmap ImageProvider::requestPixmap(const QString &id, QSize *size, const QSize
     Q_UNUSED(size);
     QPixmap pixmap;
 
+    std::cout << "requestPixmap()\n";
     if (m_image.isNull())
       return QPixmap();
 
@@ -35,6 +37,7 @@ QPixmap ImageProvider::requestPixmap(const QString &id, QSize *size, const QSize
 
 void ImageProvider::setImage(const QImage &img)
 {
+    std::cout <<"setImage()"; 
     m_image = img;
     emit updateGraphicsImage(); // to QML thread
 }
