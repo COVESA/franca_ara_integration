@@ -6,6 +6,8 @@
 #include "imageprovider.h"
 #include <iostream>
 
+#include "dltlogger.h"
+
 ImageProvider::ImageProvider(QObject* parent) :  QObject(parent), QQuickImageProvider(QQuickImageProvider::Pixmap)
 {
 }
@@ -20,7 +22,8 @@ QPixmap ImageProvider::requestPixmap(const QString &id, QSize *size, const QSize
     Q_UNUSED(size);
     QPixmap pixmap;
 
-    std::cout << "requestPixmap()\n";
+    DLT_LOG(DLT_FRA_ARA_CONTEXT, DLT_LOG_DEBUG, DLT_STRING("requestPixmap()!"));
+
     if (m_image.isNull())
       return QPixmap();
 
@@ -37,7 +40,7 @@ QPixmap ImageProvider::requestPixmap(const QString &id, QSize *size, const QSize
 
 void ImageProvider::setImage(const QImage &img)
 {
-    std::cout << "setImage()";
+    DLT_LOG(DLT_FRA_ARA_CONTEXT, DLT_LOG_DEBUG, DLT_STRING("setImage()!"));
     m_image = img;
     emit updateGraphicsImage(); // to QML thread
 }
