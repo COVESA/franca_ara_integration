@@ -91,6 +91,11 @@ static LaneDefinition_t get_bounding_lines(void/*todo*/) {
     return LaneDefinition_t(left, right);
 }
 
+void SomeIpNetworkThread::connections(QQuickView &view)
+{
+    m_image_source.connectImageProvider(view);
+}
+
 void SomeIpNetworkThread::run()
 {
     // (Note on style) Declaring this lambda expression inside of the member
