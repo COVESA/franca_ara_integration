@@ -34,7 +34,7 @@ static QString image_url(int frameId)
 
 static QRect get_bounding_qrect(BoxDefinition box) {
    return QRect(box.x, box.y, box.width, box.height);
-};
+}
 
 static Drawn_Lane_Boundary_t get_bounding_lines(void/*todo*/) {
    return Drawn_Lane_Boundary_t(QLine(),QLine());
