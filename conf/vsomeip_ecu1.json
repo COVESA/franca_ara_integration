@@ -64,7 +64,6 @@
          ]
       }
    ],
-   {
       "service-discovery": {
          "enable": "true",
          "repetitions_max": "3",
@@ -78,5 +77,4 @@
          "protocol": "udp",
          "port": "30490"
       }
-   }
 }
