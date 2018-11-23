@@ -23,10 +23,10 @@ HEADERS += src-gen/v1/genivi/aasr/showcase/*.hpp
 SOURCES += src-gen/v1/genivi/aasr/showcase/*.cpp
 INCLUDEPATH += src-gen
 
-# Location of CommonAPI headers & libs (temporary, for local host
-# development without SDK)
-INCLUDEPATH += /usr/local/include/CommonAPI-3.1
-LIBS += -L/usr/local/lib -lCommonAPI -lCommonAPI-SomeIP -lvsomeip
+unix {
+    CONFIG += link_pkgconfig
+    PKGCONFIG += CommonAPI CommonAPI-SomeIP vsomeip
+}
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
