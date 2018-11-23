@@ -5,7 +5,7 @@ HOMEPAGE = "https://github.com/GENIVI/franca_ara_integration"
 LICENSE  = "MPL-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=9741c346eef56131163e13b9db1241b3"
 
-DEPENDS = "qtbase qtdeclarative"
+DEPENDS = "qtbase qtdeclarative common-api-c++-someip"
 
 SRC_URI = "\
     git://git@github.com/GENIVI/franca_ara_integration;protocol=ssh;branch=skeleton-code \
