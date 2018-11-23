@@ -13,14 +13,40 @@ OBJECTS_DIR = build/obj
 # Executable name
 TARGET = ../franca-ara
 
-HEADERS += imageprovider.h imagesource.h SomeIpNetworkThread.h
+HEADERS += imageprovider.h \
+           imagesource.h \
+           SomeIpNetworkThread.h
 
 # Compile these sources
-SOURCES += main.cpp imageprovider.cpp imagesource.cpp SomeIpNetworkThread.cpp
+SOURCES += main.cpp \
+           imageprovider.cpp \
+           imagesource.cpp \
+           SomeIpNetworkThread.cpp
 
-# Add generated code
-HEADERS += src-gen/v1/genivi/aasr/showcase/*.hpp
-SOURCES += src-gen/v1/genivi/aasr/showcase/*.cpp
+# Add generated headers
+HEADERS += src-gen/v1/genivi/aasr/showcase/IDrivingLane.hpp \
+           src-gen/v1/genivi/aasr/showcase/IDrivingLaneProxyBase.hpp \
+           src-gen/v1/genivi/aasr/showcase/IDrivingLaneProxy.hpp \
+           src-gen/v1/genivi/aasr/showcase/IDrivingLaneSomeIPDeployment.hpp \
+           src-gen/v1/genivi/aasr/showcase/IDrivingLaneSomeIPProxy.hpp \
+           src-gen/v1/genivi/aasr/showcase/IDrivingLaneSomeIPStubAdapter.hpp \
+           src-gen/v1/genivi/aasr/showcase/IDrivingLaneStub.hpp \
+           src-gen/v1/genivi/aasr/showcase/IVehicles.hpp \
+           src-gen/v1/genivi/aasr/showcase/IVehiclesProxyBase.hpp \
+           src-gen/v1/genivi/aasr/showcase/IVehiclesProxy.hpp \
+           src-gen/v1/genivi/aasr/showcase/IVehiclesSomeIPDeployment.hpp \
+           src-gen/v1/genivi/aasr/showcase/IVehiclesSomeIPProxy.hpp \
+           src-gen/v1/genivi/aasr/showcase/IVehiclesSomeIPStubAdapter.hpp \
+           src-gen/v1/genivi/aasr/showcase/IVehiclesStub.hpp
+
+# Add generated sources
+SOURCES += src-gen/v1/genivi/aasr/showcase/IDrivingLaneSomeIPDeployment.cpp \
+           src-gen/v1/genivi/aasr/showcase/IDrivingLaneSomeIPProxy.cpp \
+           src-gen/v1/genivi/aasr/showcase/IDrivingLaneSomeIPStubAdapter.cpp \
+           src-gen/v1/genivi/aasr/showcase/IVehiclesSomeIPDeployment.cpp \
+           src-gen/v1/genivi/aasr/showcase/IVehiclesSomeIPProxy.cpp \
+           src-gen/v1/genivi/aasr/showcase/IVehiclesSomeIPStubAdapter.cpp
+
 INCLUDEPATH += src-gen
 
 unix {
