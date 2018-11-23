@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 http://autosar.org/schema/r4.0/autosar40/gs/gtc/i">
+  <AR-PACKAGES>
+    <AR-PACKAGE UUID="3d7540c5-2fdb-4804-9f52-28d7b3941243">
+      <SHORT-NAME>genivi</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE UUID="5831cd59-a7b5-427d-b313-cff046653e5a">
+          <SHORT-NAME>aasr</SHORT-NAME>
+          <AR-PACKAGES>
+            <AR-PACKAGE UUID="c8d73449-ae79-43fe-8195-88b45cd046a5">
+              <SHORT-NAME>showcase</SHORT-NAME>
+              <ELEMENTS>
+                <IMPLEMENTATION-DATA-TYPE UUID="d98b287f-33e3-458f-a0b2-3b8551488ebc">
+                  <SHORT-NAME>BoundingBox</SHORT-NAME>
+                  <CATEGORY>STRUCTURE</CATEGORY>
+                  <SUB-ELEMENTS>
+                    <IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="5e6e5035-7a0a-4727-8faf-b5588d49923f">
+                      <SHORT-NAME>topLeftX</SHORT-NAME>
+                      <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                      <SW-DATA-DEF-PROPS>
+                        <SW-DATA-DEF-PROPS-VARIANTS>
+                          <SW-DATA-DEF-PROPS-CONDITIONAL>
+                            <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/ara/stdtypes/UInt32</IMPLEMENTATION-DATA-TYPE-REF>
+                          </SW-DATA-DEF-PROPS-CONDITIONAL>
+                        </SW-DATA-DEF-PROPS-VARIANTS>
+                      </SW-DATA-DEF-PROPS>
+                    </IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                    <IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="5b72dd44-1891-4ba5-b4e9-f43aec908494">
+                      <SHORT-NAME>topLeftY</SHORT-NAME>
+                      <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                      <SW-DATA-DEF-PROPS>
+                        <SW-DATA-DEF-PROPS-VARIANTS>
+                          <SW-DATA-DEF-PROPS-CONDITIONAL>
+                            <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/ara/stdtypes/UInt32</IMPLEMENTATION-DATA-TYPE-REF>
+                          </SW-DATA-DEF-PROPS-CONDITIONAL>
+                        </SW-DATA-DEF-PROPS-VARIANTS>
+                      </SW-DATA-DEF-PROPS>
+                    </IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                    <IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="f364fb75-ec52-49af-8c75-460fad839609">
+                      <SHORT-NAME>width</SHORT-NAME>
+                      <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                      <SW-DATA-DEF-PROPS>
+                        <SW-DATA-DEF-PROPS-VARIANTS>
+                          <SW-DATA-DEF-PROPS-CONDITIONAL>
+                            <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/ara/stdtypes/UInt32</IMPLEMENTATION-DATA-TYPE-REF>
+                          </SW-DATA-DEF-PROPS-CONDITIONAL>
+                        </SW-DATA-DEF-PROPS-VARIANTS>
+                      </SW-DATA-DEF-PROPS>
+                    </IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                    <IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="dd2291ee-37a8-4a1d-bf39-64612ff19844">
+                      <SHORT-NAME>height</SHORT-NAME>
+                      <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                      <SW-DATA-DEF-PROPS>
+                        <SW-DATA-DEF-PROPS-VARIANTS>
+                          <SW-DATA-DEF-PROPS-CONDITIONAL>
+                            <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/ara/stdtypes/UInt32</IMPLEMENTATION-DATA-TYPE-REF>
+                          </SW-DATA-DEF-PROPS-CONDITIONAL>
+                        </SW-DATA-DEF-PROPS-VARIANTS>
+                      </SW-DATA-DEF-PROPS>
+                    </IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                  </SUB-ELEMENTS>
+                </IMPLEMENTATION-DATA-TYPE>
+                <IMPLEMENTATION-DATA-TYPE-EXTENSION UUID="beecd8bd-0907-40ee-b450-d9c5d99dfc10">
+                  <SHORT-NAME>BoundingBoxExt</SHORT-NAME>
+                  <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/genivi/aasr/showcase/BoundingBox</IMPLEMENTATION-DATA-TYPE-REF>
+                  <NAMESPACES>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>genivi</SHORT-NAME>
+                      <SYMBOL>genivi</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>aasr</SHORT-NAME>
+                      <SYMBOL>aasr</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>showcase</SHORT-NAME>
+                      <SYMBOL>showcase</SYMBOL>
+                    </SYMBOL-PROPS>
+                  </NAMESPACES>
+                </IMPLEMENTATION-DATA-TYPE-EXTENSION>
+                <IMPLEMENTATION-DATA-TYPE UUID="068d7bf3-edff-415e-ac36-923a03439af8">
+                  <SHORT-NAME>BoundingBoxes</SHORT-NAME>
+                  <CATEGORY>ASSOCIATIVE_MAP</CATEGORY>
+                  <SUB-ELEMENTS>
+                    <IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="5b37b60d-2de1-4877-b70d-989940c14edb">
+                      <SHORT-NAME>keyType</SHORT-NAME>
+                      <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                      <SW-DATA-DEF-PROPS>
+                        <SW-DATA-DEF-PROPS-VARIANTS>
+                          <SW-DATA-DEF-PROPS-CONDITIONAL>
+                            <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/ara/stdtypes/UInt8</IMPLEMENTATION-DATA-TYPE-REF>
+                          </SW-DATA-DEF-PROPS-CONDITIONAL>
+                        </SW-DATA-DEF-PROPS-VARIANTS>
+                      </SW-DATA-DEF-PROPS>
+                    </IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                    <IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="a86d4279-4ff1-4a5d-b5d3-13e888b485c0">
+                      <SHORT-NAME>valueType</SHORT-NAME>
+                      <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                      <SW-DATA-DEF-PROPS>
+                        <SW-DATA-DEF-PROPS-VARIANTS>
+                          <SW-DATA-DEF-PROPS-CONDITIONAL>
+                            <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/genivi/aasr/showcase/BoundingBox</IMPLEMENTATION-DATA-TYPE-REF>
+                          </SW-DATA-DEF-PROPS-CONDITIONAL>
+                        </SW-DATA-DEF-PROPS-VARIANTS>
+                      </SW-DATA-DEF-PROPS>
+                    </IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                  </SUB-ELEMENTS>
+                </IMPLEMENTATION-DATA-TYPE>
+                <IMPLEMENTATION-DATA-TYPE-EXTENSION UUID="e63ca3a7-2a23-4224-83bc-f9b6e9ebd99b">
+                  <SHORT-NAME>BoundingBoxesExt</SHORT-NAME>
+                  <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/genivi/aasr/showcase/BoundingBoxes</IMPLEMENTATION-DATA-TYPE-REF>
+                  <NAMESPACES>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>genivi</SHORT-NAME>
+                      <SYMBOL>genivi</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>aasr</SHORT-NAME>
+                      <SYMBOL>aasr</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>showcase</SHORT-NAME>
+                      <SYMBOL>showcase</SYMBOL>
+                    </SYMBOL-PROPS>
+                  </NAMESPACES>
+                </IMPLEMENTATION-DATA-TYPE-EXTENSION>
+                <IMPLEMENTATION-DATA-TYPE UUID="da9224ff-833a-42d7-9d72-e4dbd1072d9b">
+                  <SHORT-NAME>FlexibleFloatingPoint</SHORT-NAME>
+                  <CATEGORY>STRUCTURE</CATEGORY>
+                  <SUB-ELEMENTS>
+                    <IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="053c0473-4dda-4e0b-99e8-319578f8feac">
+                      <SHORT-NAME>floatingPoint32Bit</SHORT-NAME>
+                      <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                      <SW-DATA-DEF-PROPS>
+                        <SW-DATA-DEF-PROPS-VARIANTS>
+                          <SW-DATA-DEF-PROPS-CONDITIONAL>
+                            <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/ara/stdtypes/Float</IMPLEMENTATION-DATA-TYPE-REF>
+                          </SW-DATA-DEF-PROPS-CONDITIONAL>
+                        </SW-DATA-DEF-PROPS-VARIANTS>
+                      </SW-DATA-DEF-PROPS>
+                    </IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                    <IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="86086688-49be-4aee-b5f2-86ca1c11e03c">
+                      <SHORT-NAME>floatingPoint64Bit</SHORT-NAME>
+                      <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                      <SW-DATA-DEF-PROPS>
+                        <SW-DATA-DEF-PROPS-VARIANTS>
+                          <SW-DATA-DEF-PROPS-CONDITIONAL>
+                            <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/ara/stdtypes/Double</IMPLEMENTATION-DATA-TYPE-REF>
+                          </SW-DATA-DEF-PROPS-CONDITIONAL>
+                        </SW-DATA-DEF-PROPS-VARIANTS>
+                      </SW-DATA-DEF-PROPS>
+                    </IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                  </SUB-ELEMENTS>
+                </IMPLEMENTATION-DATA-TYPE>
+                <IMPLEMENTATION-DATA-TYPE UUID="ce23a1b0-f6b7-45a2-b0e1-c937c01609ec">
+                  <SHORT-NAME>FlexibleFloatingPointContainer</SHORT-NAME>
+                  <CATEGORY>STRUCTURE</CATEGORY>
+                  <SUB-ELEMENTS>
+                    <IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="649a0056-bf8e-443f-9725-740783bc9112">
+                      <SHORT-NAME>precision</SHORT-NAME>
+                      <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                      <SW-DATA-DEF-PROPS>
+                        <SW-DATA-DEF-PROPS-VARIANTS>
+                          <SW-DATA-DEF-PROPS-CONDITIONAL>
+                            <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/genivi/aasr/showcase/FloatingPointPrecision</IMPLEMENTATION-DATA-TYPE-REF>
+                          </SW-DATA-DEF-PROPS-CONDITIONAL>
+                        </SW-DATA-DEF-PROPS-VARIANTS>
+                      </SW-DATA-DEF-PROPS>
+                    </IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                    <IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="7c043d9c-65c9-4ff2-a2c5-2669949cdac8">
+                      <SHORT-NAME>floatingPoint</SHORT-NAME>
+                      <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                      <SW-DATA-DEF-PROPS>
+                        <SW-DATA-DEF-PROPS-VARIANTS>
+                          <SW-DATA-DEF-PROPS-CONDITIONAL>
+                            <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/genivi/aasr/showcase/FlexibleFloatingPoint</IMPLEMENTATION-DATA-TYPE-REF>
+                          </SW-DATA-DEF-PROPS-CONDITIONAL>
+                        </SW-DATA-DEF-PROPS-VARIANTS>
+                      </SW-DATA-DEF-PROPS>
+                    </IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                  </SUB-ELEMENTS>
+                </IMPLEMENTATION-DATA-TYPE>
+                <IMPLEMENTATION-DATA-TYPE-EXTENSION UUID="e2f77ee4-b347-4d36-8c0d-de2350a67743">
+                  <SHORT-NAME>FlexibleFloatingPointContainerExt</SHORT-NAME>
+                  <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/genivi/aasr/showcase/FlexibleFloatingPointContainer</IMPLEMENTATION-DATA-TYPE-REF>
+                  <NAMESPACES>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>genivi</SHORT-NAME>
+                      <SYMBOL>genivi</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>aasr</SHORT-NAME>
+                      <SYMBOL>aasr</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>showcase</SHORT-NAME>
+                      <SYMBOL>showcase</SYMBOL>
+                    </SYMBOL-PROPS>
+                  </NAMESPACES>
+                </IMPLEMENTATION-DATA-TYPE-EXTENSION>
+                <IMPLEMENTATION-DATA-TYPE-EXTENSION UUID="ca604ab5-60f8-4e81-b455-90d526ad4514">
+                  <SHORT-NAME>FlexibleFloatingPointExt</SHORT-NAME>
+                  <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/genivi/aasr/showcase/FlexibleFloatingPoint</IMPLEMENTATION-DATA-TYPE-REF>
+                  <NAMESPACES>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>genivi</SHORT-NAME>
+                      <SYMBOL>genivi</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>aasr</SHORT-NAME>
+                      <SYMBOL>aasr</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>showcase</SHORT-NAME>
+                      <SYMBOL>showcase</SYMBOL>
+                    </SYMBOL-PROPS>
+                  </NAMESPACES>
+                </IMPLEMENTATION-DATA-TYPE-EXTENSION>
+                <IMPLEMENTATION-DATA-TYPE UUID="e0aaa25f-f41b-42f8-a8af-d9b01a2e29a9">
+                  <SHORT-NAME>FloatingPointPrecision</SHORT-NAME>
+                  <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                  <SW-DATA-DEF-PROPS>
+                    <SW-DATA-DEF-PROPS-VARIANTS>
+                      <SW-DATA-DEF-PROPS-CONDITIONAL>
+                        <COMPU-METHOD-REF DEST="COMPU-METHOD">/genivi/aasr/showcase/FloatingPointPrecision_CompuMethod</COMPU-METHOD-REF>
+                        <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/ara/stdtypes/UInt32</IMPLEMENTATION-DATA-TYPE-REF>
+                      </SW-DATA-DEF-PROPS-CONDITIONAL>
+                    </SW-DATA-DEF-PROPS-VARIANTS>
+                  </SW-DATA-DEF-PROPS>
+                </IMPLEMENTATION-DATA-TYPE>
+                <IMPLEMENTATION-DATA-TYPE-EXTENSION UUID="fdaf339a-4585-4a4f-bba9-5b3f73f2429c">
+                  <SHORT-NAME>FloatingPointPrecisionExt</SHORT-NAME>
+                  <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/genivi/aasr/showcase/FloatingPointPrecision</IMPLEMENTATION-DATA-TYPE-REF>
+                  <NAMESPACES>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>genivi</SHORT-NAME>
+                      <SYMBOL>genivi</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>aasr</SHORT-NAME>
+                      <SYMBOL>aasr</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>showcase</SHORT-NAME>
+                      <SYMBOL>showcase</SYMBOL>
+                    </SYMBOL-PROPS>
+                  </NAMESPACES>
+                </IMPLEMENTATION-DATA-TYPE-EXTENSION>
+                <COMPU-METHOD UUID="67366b39-c4b1-4a76-8cda-25acc8f6288d">
+                  <SHORT-NAME>FloatingPointPrecision_CompuMethod</SHORT-NAME>
+                  <CATEGORY>TEXTTABLE</CATEGORY>
+                  <COMPU-INTERNAL-TO-PHYS>
+                    <COMPU-SCALES>
+                      <COMPU-SCALE>
+                        <SYMBOL>Bit32</SYMBOL>
+                        <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x01</LOWER-LIMIT>
+                        <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x01</UPPER-LIMIT>
+                      </COMPU-SCALE>
+                      <COMPU-SCALE>
+                        <SYMBOL>Bit64</SYMBOL>
+                        <LOWER-LIMIT INTERVAL-TYPE="CLOSED">0x02</LOWER-LIMIT>
+                        <UPPER-LIMIT INTERVAL-TYPE="CLOSED">0x02</UPPER-LIMIT>
+                      </COMPU-SCALE>
+                    </COMPU-SCALES>
+                  </COMPU-INTERNAL-TO-PHYS>
+                </COMPU-METHOD>
+                <SERVICE-INTERFACE UUID="7d82cf09-66a7-411a-8143-5be65a0300d0">
+                  <SHORT-NAME>IVehicles</SHORT-NAME>
+                  <NAMESPACES>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>genivi</SHORT-NAME>
+                      <SYMBOL>genivi</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>aasr</SHORT-NAME>
+                      <SYMBOL>aasr</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>showcase</SHORT-NAME>
+                      <SYMBOL>showcase</SYMBOL>
+                    </SYMBOL-PROPS>
+                  </NAMESPACES>
+                  <FIELDS>
+                    <FIELD UUID="c3bb75c0-7984-4455-951f-169b66c0110b">
+                      <SHORT-NAME>Vehicles</SHORT-NAME>
+                      <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/genivi/aasr/showcase/ListOfVehicles</TYPE-TREF>
+                      <HAS-GETTER>true</HAS-GETTER>
+                      <HAS-NOTIFIER>true</HAS-NOTIFIER>
+                      <HAS-SETTER>false</HAS-SETTER>
+                    </FIELD>
+                  </FIELDS>
+                  <METHODS>
+                    <CLIENT-SERVER-OPERATION UUID="81951ac4-ad5d-4b8e-89db-50cf02eeff9f">
+                      <SHORT-NAME>SetFloatingPointPrecision</SHORT-NAME>
+                      <ARGUMENTS>
+                        <ARGUMENT-DATA-PROTOTYPE UUID="4079eefc-bb1e-49f9-8953-e1be313757a0">
+                          <SHORT-NAME>precision</SHORT-NAME>
+                          <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/genivi/aasr/showcase/FloatingPointPrecision</TYPE-TREF>
+                          <DIRECTION>IN</DIRECTION>
+                        </ARGUMENT-DATA-PROTOTYPE>
+                        <ARGUMENT-DATA-PROTOTYPE UUID="6898ed3f-99d0-45c5-a347-cfed3a5257d7">
+                          <SHORT-NAME>rv</SHORT-NAME>
+                          <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/ara/stdtypes/Boolean</TYPE-TREF>
+                          <DIRECTION>OUT</DIRECTION>
+                        </ARGUMENT-DATA-PROTOTYPE>
+                      </ARGUMENTS>
+                    </CLIENT-SERVER-OPERATION>
+                  </METHODS>
+                </SERVICE-INTERFACE>
+                <IMPLEMENTATION-DATA-TYPE UUID="ca3894e6-af69-4943-9db1-3302b14662da">
+                  <SHORT-NAME>ListOfVehicles</SHORT-NAME>
+                  <CATEGORY>STRUCTURE</CATEGORY>
+                  <SUB-ELEMENTS>
+                    <IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="bfbf7107-6e04-4c41-a4bc-704d0a230f35">
+                      <SHORT-NAME>frameId</SHORT-NAME>
+                      <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                      <SW-DATA-DEF-PROPS>
+                        <SW-DATA-DEF-PROPS-VARIANTS>
+                          <SW-DATA-DEF-PROPS-CONDITIONAL>
+                            <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/ara/stdtypes/UInt16</IMPLEMENTATION-DATA-TYPE-REF>
+                          </SW-DATA-DEF-PROPS-CONDITIONAL>
+                        </SW-DATA-DEF-PROPS-VARIANTS>
+                      </SW-DATA-DEF-PROPS>
+                    </IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                    <IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="1f49c322-3f7d-4c6d-b94d-f335b5afe9e7">
+                      <SHORT-NAME>frameHash</SHORT-NAME>
+                      <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                      <SW-DATA-DEF-PROPS>
+                        <SW-DATA-DEF-PROPS-VARIANTS>
+                          <SW-DATA-DEF-PROPS-CONDITIONAL>
+                            <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/ara/stdtypes/String</IMPLEMENTATION-DATA-TYPE-REF>
+                          </SW-DATA-DEF-PROPS-CONDITIONAL>
+                        </SW-DATA-DEF-PROPS-VARIANTS>
+                      </SW-DATA-DEF-PROPS>
+                    </IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                    <IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="2dc07d95-b6ad-4eaf-9baf-69b142dc61ca">
+                      <SHORT-NAME>detectedVehicles</SHORT-NAME>
+                      <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                      <SW-DATA-DEF-PROPS>
+                        <SW-DATA-DEF-PROPS-VARIANTS>
+                          <SW-DATA-DEF-PROPS-CONDITIONAL>
+                            <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/genivi/aasr/showcase/VehicleVector</IMPLEMENTATION-DATA-TYPE-REF>
+                          </SW-DATA-DEF-PROPS-CONDITIONAL>
+                        </SW-DATA-DEF-PROPS-VARIANTS>
+                      </SW-DATA-DEF-PROPS>
+                    </IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                    <IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="18a9e750-bcfb-4857-9062-ec6521a4a17f">
+                      <SHORT-NAME>boxes</SHORT-NAME>
+                      <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                      <SW-DATA-DEF-PROPS>
+                        <SW-DATA-DEF-PROPS-VARIANTS>
+                          <SW-DATA-DEF-PROPS-CONDITIONAL>
+                            <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/genivi/aasr/showcase/BoundingBoxes</IMPLEMENTATION-DATA-TYPE-REF>
+                          </SW-DATA-DEF-PROPS-CONDITIONAL>
+                        </SW-DATA-DEF-PROPS-VARIANTS>
+                      </SW-DATA-DEF-PROPS>
+                    </IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                  </SUB-ELEMENTS>
+                </IMPLEMENTATION-DATA-TYPE>
+                <IMPLEMENTATION-DATA-TYPE-EXTENSION UUID="e35e87bb-1113-4756-a0a4-bc99e2b9efbe">
+                  <SHORT-NAME>ListOfVehiclesExt</SHORT-NAME>
+                  <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/genivi/aasr/showcase/ListOfVehicles</IMPLEMENTATION-DATA-TYPE-REF>
+                  <NAMESPACES>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>genivi</SHORT-NAME>
+                      <SYMBOL>genivi</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>aasr</SHORT-NAME>
+                      <SYMBOL>aasr</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>showcase</SHORT-NAME>
+                      <SYMBOL>showcase</SYMBOL>
+                    </SYMBOL-PROPS>
+                  </NAMESPACES>
+                </IMPLEMENTATION-DATA-TYPE-EXTENSION>
+                <IMPLEMENTATION-DATA-TYPE UUID="27d22965-bfca-49d7-8d04-9320ea6b880f">
+                  <SHORT-NAME>Vehicle</SHORT-NAME>
+                  <CATEGORY>STRUCTURE</CATEGORY>
+                  <SUB-ELEMENTS>
+                    <IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="c4119356-a99a-4124-baee-978b59f1fde1">
+                      <SHORT-NAME>id</SHORT-NAME>
+                      <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                      <SW-DATA-DEF-PROPS>
+                        <SW-DATA-DEF-PROPS-VARIANTS>
+                          <SW-DATA-DEF-PROPS-CONDITIONAL>
+                            <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/ara/stdtypes/UInt8</IMPLEMENTATION-DATA-TYPE-REF>
+                          </SW-DATA-DEF-PROPS-CONDITIONAL>
+                        </SW-DATA-DEF-PROPS-VARIANTS>
+                      </SW-DATA-DEF-PROPS>
+                    </IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                    <IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="658126ce-3aa7-4f68-a062-58dff8efa563">
+                      <SHORT-NAME>currentDistance</SHORT-NAME>
+                      <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                      <SW-DATA-DEF-PROPS>
+                        <SW-DATA-DEF-PROPS-VARIANTS>
+                          <SW-DATA-DEF-PROPS-CONDITIONAL>
+                            <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/genivi/aasr/showcase/FlexibleFloatingPointContainer</IMPLEMENTATION-DATA-TYPE-REF>
+                          </SW-DATA-DEF-PROPS-CONDITIONAL>
+                        </SW-DATA-DEF-PROPS-VARIANTS>
+                      </SW-DATA-DEF-PROPS>
+                    </IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                    <IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="578df4ed-eeb4-4c96-856f-423b6fc54567">
+                      <SHORT-NAME>collisionTime</SHORT-NAME>
+                      <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                      <SW-DATA-DEF-PROPS>
+                        <SW-DATA-DEF-PROPS-VARIANTS>
+                          <SW-DATA-DEF-PROPS-CONDITIONAL>
+                            <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/genivi/aasr/showcase/FlexibleFloatingPointContainer</IMPLEMENTATION-DATA-TYPE-REF>
+                          </SW-DATA-DEF-PROPS-CONDITIONAL>
+                        </SW-DATA-DEF-PROPS-VARIANTS>
+                      </SW-DATA-DEF-PROPS>
+                    </IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                  </SUB-ELEMENTS>
+                </IMPLEMENTATION-DATA-TYPE>
+                <IMPLEMENTATION-DATA-TYPE-EXTENSION UUID="f785462e-8bb7-4a41-be3a-6259ddcf1223">
+                  <SHORT-NAME>VehicleExt</SHORT-NAME>
+                  <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/genivi/aasr/showcase/Vehicle</IMPLEMENTATION-DATA-TYPE-REF>
+                  <NAMESPACES>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>genivi</SHORT-NAME>
+                      <SYMBOL>genivi</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>aasr</SHORT-NAME>
+                      <SYMBOL>aasr</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>showcase</SHORT-NAME>
+                      <SYMBOL>showcase</SYMBOL>
+                    </SYMBOL-PROPS>
+                  </NAMESPACES>
+                </IMPLEMENTATION-DATA-TYPE-EXTENSION>
+                <IMPLEMENTATION-DATA-TYPE UUID="3441c32e-4e37-4e6c-895b-32bc7b56d1a3">
+                  <SHORT-NAME>VehicleVector</SHORT-NAME>
+                  <CATEGORY>VECTOR</CATEGORY>
+                  <SUB-ELEMENTS>
+                    <IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="ef92f788-3896-4839-92c3-1e8909506686">
+                      <SHORT-NAME>valueType</SHORT-NAME>
+                      <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                      <SW-DATA-DEF-PROPS>
+                        <SW-DATA-DEF-PROPS-VARIANTS>
+                          <SW-DATA-DEF-PROPS-CONDITIONAL>
+                            <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/genivi/aasr/showcase/Vehicle</IMPLEMENTATION-DATA-TYPE-REF>
+                          </SW-DATA-DEF-PROPS-CONDITIONAL>
+                        </SW-DATA-DEF-PROPS-VARIANTS>
+                      </SW-DATA-DEF-PROPS>
+                    </IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                  </SUB-ELEMENTS>
+                </IMPLEMENTATION-DATA-TYPE>
+                <IMPLEMENTATION-DATA-TYPE-EXTENSION UUID="7b27ca22-9234-4e95-8804-4210651b9101">
+                  <SHORT-NAME>VehicleVectorExt</SHORT-NAME>
+                  <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/genivi/aasr/showcase/VehicleVector</IMPLEMENTATION-DATA-TYPE-REF>
+                  <NAMESPACES>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>genivi</SHORT-NAME>
+                      <SYMBOL>genivi</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>aasr</SHORT-NAME>
+                      <SYMBOL>aasr</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>showcase</SHORT-NAME>
+                      <SYMBOL>showcase</SYMBOL>
+                    </SYMBOL-PROPS>
+                  </NAMESPACES>
+                </IMPLEMENTATION-DATA-TYPE-EXTENSION>
+              </ELEMENTS>
+            </AR-PACKAGE>
+          </AR-PACKAGES>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

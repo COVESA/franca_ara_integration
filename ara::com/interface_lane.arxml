@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 http://autosar.org/schema/r4.0/autosar40/gs/gtc/i">
+  <AR-PACKAGES>
+    <AR-PACKAGE UUID="2a257d6c-63d2-4200-bbea-96ac1297f3ba">
+      <SHORT-NAME>genivi</SHORT-NAME>
+      <AR-PACKAGES>
+        <AR-PACKAGE UUID="7e34b0ca-b39b-4832-9db4-060ac670877d">
+          <SHORT-NAME>aasr</SHORT-NAME>
+          <AR-PACKAGES>
+            <AR-PACKAGE UUID="b9e0c8e5-c46b-4896-b18c-4bb0c0d93c9e">
+              <SHORT-NAME>showcase</SHORT-NAME>
+              <ELEMENTS>
+                <SERVICE-INTERFACE UUID="923b5d79-43ea-47f1-a39a-81a0d565d450">
+                  <SHORT-NAME>IDrivingLane</SHORT-NAME>
+                  <NAMESPACES>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>genivi</SHORT-NAME>
+                      <SYMBOL>genivi</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>aasr</SHORT-NAME>
+                      <SYMBOL>aasr</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>showcase</SHORT-NAME>
+                      <SYMBOL>showcase</SYMBOL>
+                    </SYMBOL-PROPS>
+                  </NAMESPACES>
+                  <EVENTS>
+                    <VARIABLE-DATA-PROTOTYPE UUID="baf4bd51-b253-4379-9535-ac65596add71">
+                      <SHORT-NAME>LaneDetected</SHORT-NAME>
+                      <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/genivi/aasr/showcase/LaneType</TYPE-TREF>
+                    </VARIABLE-DATA-PROTOTYPE>
+                  </EVENTS>
+                </SERVICE-INTERFACE>
+                <IMPLEMENTATION-DATA-TYPE UUID="ca8e5714-aea4-4d0c-b4f2-c8e81118076c">
+                  <SHORT-NAME>LaneType</SHORT-NAME>
+                  <CATEGORY>STRUCTURE</CATEGORY>
+                  <SUB-ELEMENTS>
+                    <IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="215fc48f-67c7-44f9-a94d-dac3fe8cb099">
+                      <SHORT-NAME>frameId</SHORT-NAME>
+                      <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                      <SW-DATA-DEF-PROPS>
+                        <SW-DATA-DEF-PROPS-VARIANTS>
+                          <SW-DATA-DEF-PROPS-CONDITIONAL>
+                            <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/ara/stdtypes/UInt16</IMPLEMENTATION-DATA-TYPE-REF>
+                          </SW-DATA-DEF-PROPS-CONDITIONAL>
+                        </SW-DATA-DEF-PROPS-VARIANTS>
+                      </SW-DATA-DEF-PROPS>
+                    </IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                    <IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="5de2f006-99f9-475a-9361-4dbe33a56e0a">
+                      <SHORT-NAME>frameHash</SHORT-NAME>
+                      <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                      <SW-DATA-DEF-PROPS>
+                        <SW-DATA-DEF-PROPS-VARIANTS>
+                          <SW-DATA-DEF-PROPS-CONDITIONAL>
+                            <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/ara/stdtypes/String</IMPLEMENTATION-DATA-TYPE-REF>
+                          </SW-DATA-DEF-PROPS-CONDITIONAL>
+                        </SW-DATA-DEF-PROPS-VARIANTS>
+                      </SW-DATA-DEF-PROPS>
+                    </IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                    <IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="289a5293-4f89-4875-90de-7ad108292e2e">
+                      <SHORT-NAME>lowerLeftPointX</SHORT-NAME>
+                      <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                      <SW-DATA-DEF-PROPS>
+                        <SW-DATA-DEF-PROPS-VARIANTS>
+                          <SW-DATA-DEF-PROPS-CONDITIONAL>
+                            <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/ara/stdtypes/UInt32</IMPLEMENTATION-DATA-TYPE-REF>
+                          </SW-DATA-DEF-PROPS-CONDITIONAL>
+                        </SW-DATA-DEF-PROPS-VARIANTS>
+                      </SW-DATA-DEF-PROPS>
+                    </IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                    <IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="cbb3fc23-574f-4833-b54c-ecb71d807cdd">
+                      <SHORT-NAME>lowerLeftPointY</SHORT-NAME>
+                      <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                      <SW-DATA-DEF-PROPS>
+                        <SW-DATA-DEF-PROPS-VARIANTS>
+                          <SW-DATA-DEF-PROPS-CONDITIONAL>
+                            <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/ara/stdtypes/UInt32</IMPLEMENTATION-DATA-TYPE-REF>
+                          </SW-DATA-DEF-PROPS-CONDITIONAL>
+                        </SW-DATA-DEF-PROPS-VARIANTS>
+                      </SW-DATA-DEF-PROPS>
+                    </IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                    <IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="cdcaa324-8cf1-4e13-ae84-0353d94e2446">
+                      <SHORT-NAME>lowerRightPointX</SHORT-NAME>
+                      <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                      <SW-DATA-DEF-PROPS>
+                        <SW-DATA-DEF-PROPS-VARIANTS>
+                          <SW-DATA-DEF-PROPS-CONDITIONAL>
+                            <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/ara/stdtypes/UInt32</IMPLEMENTATION-DATA-TYPE-REF>
+                          </SW-DATA-DEF-PROPS-CONDITIONAL>
+                        </SW-DATA-DEF-PROPS-VARIANTS>
+                      </SW-DATA-DEF-PROPS>
+                    </IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                    <IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="5f99a4d2-027a-4d0e-a94b-ef3562ae97c7">
+                      <SHORT-NAME>lowerRightPointY</SHORT-NAME>
+                      <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                      <SW-DATA-DEF-PROPS>
+                        <SW-DATA-DEF-PROPS-VARIANTS>
+                          <SW-DATA-DEF-PROPS-CONDITIONAL>
+                            <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/ara/stdtypes/UInt32</IMPLEMENTATION-DATA-TYPE-REF>
+                          </SW-DATA-DEF-PROPS-CONDITIONAL>
+                        </SW-DATA-DEF-PROPS-VARIANTS>
+                      </SW-DATA-DEF-PROPS>
+                    </IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                    <IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="b6e7b83d-08df-417c-912a-69b5017f972c">
+                      <SHORT-NAME>intersectionPointX</SHORT-NAME>
+                      <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                      <SW-DATA-DEF-PROPS>
+                        <SW-DATA-DEF-PROPS-VARIANTS>
+                          <SW-DATA-DEF-PROPS-CONDITIONAL>
+                            <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/ara/stdtypes/UInt32</IMPLEMENTATION-DATA-TYPE-REF>
+                          </SW-DATA-DEF-PROPS-CONDITIONAL>
+                        </SW-DATA-DEF-PROPS-VARIANTS>
+                      </SW-DATA-DEF-PROPS>
+                    </IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                    <IMPLEMENTATION-DATA-TYPE-ELEMENT UUID="88d8ea31-0d4c-4467-ab2a-a79691e32d2a">
+                      <SHORT-NAME>intersectionPointY</SHORT-NAME>
+                      <CATEGORY>TYPE_REFERENCE</CATEGORY>
+                      <SW-DATA-DEF-PROPS>
+                        <SW-DATA-DEF-PROPS-VARIANTS>
+                          <SW-DATA-DEF-PROPS-CONDITIONAL>
+                            <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/ara/stdtypes/UInt32</IMPLEMENTATION-DATA-TYPE-REF>
+                          </SW-DATA-DEF-PROPS-CONDITIONAL>
+                        </SW-DATA-DEF-PROPS-VARIANTS>
+                      </SW-DATA-DEF-PROPS>
+                    </IMPLEMENTATION-DATA-TYPE-ELEMENT>
+                  </SUB-ELEMENTS>
+                </IMPLEMENTATION-DATA-TYPE>
+                <IMPLEMENTATION-DATA-TYPE-EXTENSION UUID="07d55621-a139-494c-a1cb-ac7492fa9eb8">
+                  <SHORT-NAME>LaneTypeExt</SHORT-NAME>
+                  <IMPLEMENTATION-DATA-TYPE-REF DEST="IMPLEMENTATION-DATA-TYPE">/genivi/aasr/showcase/LaneType</IMPLEMENTATION-DATA-TYPE-REF>
+                  <NAMESPACES>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>genivi</SHORT-NAME>
+                      <SYMBOL>genivi</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>aasr</SHORT-NAME>
+                      <SYMBOL>aasr</SYMBOL>
+                    </SYMBOL-PROPS>
+                    <SYMBOL-PROPS>
+                      <SHORT-NAME>showcase</SHORT-NAME>
+                      <SYMBOL>showcase</SYMBOL>
+                    </SYMBOL-PROPS>
+                  </NAMESPACES>
+                </IMPLEMENTATION-DATA-TYPE-EXTENSION>
+              </ELEMENTS>
+            </AR-PACKAGE>
+          </AR-PACKAGES>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>
