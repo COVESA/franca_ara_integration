@@ -7,6 +7,10 @@
 #include <QDebug>
 #include <QElapsedTimer>
 #include <QImageReader>
+#include <QQmlContext>
+#include <QQuickView>
+#include <QQmlEngine>
+
 #include <iostream>
 #include <math.h>
 
@@ -27,8 +31,7 @@ static QString image_url(int frameId)
 {
     qDebug() << QString("%1/l_image%2.png").arg(IMAGE_FEED_PATH).arg(frameId);
     auto s = QString("%1/l_image%2.png").arg(IMAGE_FEED_PATH).arg(frameId);
-    std::cout << s.toStdString();
-    printf("here\n");
+    std::cout << "Using image path: " << s.toStdString() << std::endl;
     return QString("%1/l_image%2.png").arg(IMAGE_FEED_PATH).arg(frameId);
 }
 
@@ -43,11 +46,22 @@ static Drawn_Lane_Boundary_t get_bounding_lines(void/*todo*/) {
 
 // Public functions called by networking class/thread:
 
+// Init, called from main at startup
+void ImageSource::connectImageProvider(QQuickView &view)
+{
+    std::cout << "LOG(connecting)" << std::endl;
+    view.engine()->addImageProvider("imageprovider", &_provider);
+    view.engine()->rootContext()->setContextProperty("imageprovider",
+                                                     &_provider);
+    QObject::connect(this, SIGNAL(imageReady(const QImage &)), &_provider,
+                     SLOT(setImage(const QImage &)));
+}
+
 void ImageSource::newFrameId(int frameID) {
     printf("newFrameId: %d\n", frameID);
     QImageReader reader(image_url(limit_id(frameID)));
     printf("emit imageReady\n");
-    emit imageReady(reader.read()); // Signal to QML
+    emit imageReady(reader.read()); // Signal to ImageProvider
 }
 
 void ImageSource::newVehicleIdentification (const BoxDefinition &box) {
