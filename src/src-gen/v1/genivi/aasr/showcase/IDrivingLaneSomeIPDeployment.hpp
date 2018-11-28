@@ -27,7 +27,6 @@ namespace IDrivingLane_ {
 // Interface-specific deployment types
 typedef CommonAPI::SomeIP::StructDeployment<
     CommonAPI::SomeIP::IntegerDeployment<uint16_t>,
-    CommonAPI::SomeIP::StringDeployment,
     CommonAPI::SomeIP::IntegerDeployment<uint32_t>,
     CommonAPI::SomeIP::IntegerDeployment<uint32_t>,
     CommonAPI::SomeIP::IntegerDeployment<uint32_t>,
