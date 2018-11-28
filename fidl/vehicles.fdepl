@@ -21,6 +21,6 @@ define org.genivi.commonapi.someip.deployment for interface genivi.aasr.showcase
 define org.genivi.commonapi.someip.deployment for provider MyService {
 	instance genivi.aasr.showcase.IVehicles {
 		InstanceId = "test"
-		SomeIpInstanceID = 22136
+		SomeIpInstanceID = 1
 	}
 }

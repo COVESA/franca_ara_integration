@@ -23,7 +23,6 @@
 #include <CommonAPI/OutputStream.hpp>
 #include <CommonAPI/Struct.hpp>
 #include <cstdint>
-#include <string>
 #include <vector>
 
 #include <CommonAPI/Attribute.hpp>
