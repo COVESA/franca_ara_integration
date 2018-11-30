@@ -17,6 +17,10 @@
       {
          "name": "FrancaAraSomeIP_instance",
          "id": "0x2f68"
+      },
+      {
+         "name": "fara test client",
+         "id": "0x3333"
       }
    ],
    "routing": "vsomeipd",
