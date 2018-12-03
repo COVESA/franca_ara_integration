@@ -1,6 +1,3 @@
-[submodule "dependencies/capicxx-core-runtime"]
-	path = dependencies/capicxx-core-runtime
-	url = https://github.com/GENIVI/capicxx-core-runtime.git
-[submodule "dependencies/capicxx-someip-runtime"]
-	path = dependencies/capicxx-someip-runtime
-	url = https://github.com/GENIVI/capicxx-someip-runtime.git
+[submodule "tests/dependencies/build-common-api-cpp-native"]
+	path = dependencies/build-common-api-cpp-native
+	url = https://github.com/gunnarx/build-common-api-cpp-native
