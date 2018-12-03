@@ -117,7 +117,7 @@ CommonAPI::SomeIP::GetAttributeStubDispatcher<
     ::v1::genivi::aasr::showcase::IVehicles_::ListOfVehiclesDeployment_t
 > IVehiclesSomeIPStubAdapterInternal<_Stub, _Stubs...>::getVehiclesAttributeStubDispatcher(
     &IVehiclesStub::lockVehiclesAttribute,
-    &IVehiclesStub::getVehiclesAttribute, false);
+    &IVehiclesStub::getVehiclesAttribute, true);
 template <typename _Stub, typename... _Stubs>
 CommonAPI::SomeIP::SetObservableAttributeStubDispatcher<
     ::v1::genivi::aasr::showcase::IVehiclesStub,
@@ -129,7 +129,7 @@ CommonAPI::SomeIP::SetObservableAttributeStubDispatcher<
     &IVehiclesStubRemoteEvent::onRemoteSetVehiclesAttribute,
     &IVehiclesStubRemoteEvent::onRemoteVehiclesAttributeChanged,
     &IVehiclesStubAdapter::fireVehiclesAttributeChanged,
-    false
+    true
 );
 
 template <typename _Stub, typename... _Stubs>
@@ -141,7 +141,7 @@ CommonAPI::SomeIP::MethodWithReplyStubDispatcher<
     std::tuple< CommonAPI::EmptyDeployment>
 > IVehiclesSomeIPStubAdapterInternal<_Stub, _Stubs...>::setFloatingPointPrecisionStubDispatcher(
     &IVehiclesStub::SetFloatingPointPrecision,
-    false,
+    true,
     std::make_tuple(static_cast< ::v1::genivi::aasr::showcase::IVehicles_::FloatingPointPrecisionDeployment_t* >(nullptr)),
     std::make_tuple(static_cast< CommonAPI::EmptyDeployment* >(nullptr)));
 
@@ -158,7 +158,7 @@ void IVehiclesSomeIPStubAdapterInternal<_Stub, _Stubs...>::fireVehiclesAttribute
     >::sendEvent(
         *this,
         CommonAPI::SomeIP::event_id_t(0xbb8),
-        false,
+        true,
         deployedValue
     );
 }

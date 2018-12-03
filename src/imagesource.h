@@ -3,6 +3,9 @@
 
 #include <QThread>
 #include <QImage>
+#include <QQuickView>
+#include "imageprovider.h"
+
 #include "SomeIpNetworkThreadTypes.h"
 
 // Types used in communication between image source class (C++)
@@ -14,19 +17,30 @@ class ImageSource : public QObject
 {
     Q_OBJECT
 
-// These functions are called explicitly (they are not slots that can be
-// bound to any signal), from the network thread.  The functions take
-// "non-Qt" data and construct an appropriate Qt object and send it by
-// signal to the QML thread.
+
 public:
+    // Called from network class to initialize signals/slots etc
+    void connectImageProvider(QQuickView &view);
+
+    // These functions are called explicitly (they are not slots that can be
+    // bound to any signal), from the network thread.  The functions take
+    // "non-Qt" data and construct an appropriate Qt object and send it by
+    // signal to the QML thread.
     void newFrameId(int frameID);
-    void newVehicleIdentification (const BoxDefinition &box);
-    void newLaneIdentification (const LaneLineDefinition &left, const LaneLineDefinition &right);
+    void newVehicleIdentification(const BoxDefinition &box);
+    void newLaneIdentification(const LaneLineDefinition &left,
+                             const LaneLineDefinition &right);
+
+    QLine getLeftLaneLine ();
+    QLine getRightLaneLine ();
 
 Q_SIGNALS: // (Signals sent to QML graphics program)
     void imageReady(const QImage &s);
-    void vehicle_identified(QRect box);
-    void lane_identified(QLine &leftLine, QLine &rightLine);
+    void vehicleIdentified(QRect box);
+    void laneIdentified(QLine &leftLine, QLine &rightLine);
+
+private:
+    ImageProvider _provider;
 };
 
 #endif

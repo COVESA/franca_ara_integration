@@ -9,10 +9,12 @@ define org.genivi.commonapi.someip.deployment for interface genivi.aasr.showcase
 		SomeIpSetterID = 3002
 		SomeIpNotifierID = 3000
 		SomeIpEventGroups = { 1 }
+		SomeIpAttributeEndianess = le
 	}
 
 	method SetFloatingPointPrecision {
 		SomeIpMethodID = 33000
+		SomeIpMethodEndianess = le
 	}
 }
 
@@ -21,6 +23,6 @@ define org.genivi.commonapi.someip.deployment for interface genivi.aasr.showcase
 define org.genivi.commonapi.someip.deployment for provider MyService {
 	instance genivi.aasr.showcase.IVehicles {
 		InstanceId = "test"
-		SomeIpInstanceID = 22136
+		SomeIpInstanceID = 1
 	}
 }

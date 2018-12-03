@@ -23,7 +23,6 @@
 #include <CommonAPI/Struct.hpp>
 #include <CommonAPI/Types.hpp>
 #include <cstdint>
-#include <string>
 
 #undef COMMONAPI_INTERNAL_COMPILATION
 
@@ -38,48 +37,44 @@ public:
 
     static inline const char* getInterface();
     static inline CommonAPI::Version getInterfaceVersion();
-    struct LaneType : CommonAPI::Struct< uint16_t, std::string, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t> {
+    struct LaneType : CommonAPI::Struct< uint16_t, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t> {
     
         LaneType()
         {
             std::get< 0>(values_) = 0u;
-            std::get< 1>(values_) = "";
+            std::get< 1>(values_) = 0ul;
             std::get< 2>(values_) = 0ul;
             std::get< 3>(values_) = 0ul;
             std::get< 4>(values_) = 0ul;
             std::get< 5>(values_) = 0ul;
             std::get< 6>(values_) = 0ul;
-            std::get< 7>(values_) = 0ul;
         }
-        LaneType(const uint16_t &_frameId, const std::string &_frameHash, const uint32_t &_lowerLeftPointX, const uint32_t &_lowerLeftPointY, const uint32_t &_lowerRightPointX, const uint32_t &_lowerRightPointY, const uint32_t &_intersectionPointX, const uint32_t &_intersectionPointY)
+        LaneType(const uint16_t &_frameId, const uint32_t &_lowerLeftPointX, const uint32_t &_lowerLeftPointY, const uint32_t &_lowerRightPointX, const uint32_t &_lowerRightPointY, const uint32_t &_intersectionPointX, const uint32_t &_intersectionPointY)
         {
             std::get< 0>(values_) = _frameId;
-            std::get< 1>(values_) = _frameHash;
-            std::get< 2>(values_) = _lowerLeftPointX;
-            std::get< 3>(values_) = _lowerLeftPointY;
-            std::get< 4>(values_) = _lowerRightPointX;
-            std::get< 5>(values_) = _lowerRightPointY;
-            std::get< 6>(values_) = _intersectionPointX;
-            std::get< 7>(values_) = _intersectionPointY;
+            std::get< 1>(values_) = _lowerLeftPointX;
+            std::get< 2>(values_) = _lowerLeftPointY;
+            std::get< 3>(values_) = _lowerRightPointX;
+            std::get< 4>(values_) = _lowerRightPointY;
+            std::get< 5>(values_) = _intersectionPointX;
+            std::get< 6>(values_) = _intersectionPointY;
         }
         inline const uint16_t &getFrameId() const { return std::get< 0>(values_); }
         inline void setFrameId(const uint16_t &_value) { std::get< 0>(values_) = _value; }
-        inline const std::string &getFrameHash() const { return std::get< 1>(values_); }
-        inline void setFrameHash(const std::string &_value) { std::get< 1>(values_) = _value; }
-        inline const uint32_t &getLowerLeftPointX() const { return std::get< 2>(values_); }
-        inline void setLowerLeftPointX(const uint32_t &_value) { std::get< 2>(values_) = _value; }
-        inline const uint32_t &getLowerLeftPointY() const { return std::get< 3>(values_); }
-        inline void setLowerLeftPointY(const uint32_t &_value) { std::get< 3>(values_) = _value; }
-        inline const uint32_t &getLowerRightPointX() const { return std::get< 4>(values_); }
-        inline void setLowerRightPointX(const uint32_t &_value) { std::get< 4>(values_) = _value; }
-        inline const uint32_t &getLowerRightPointY() const { return std::get< 5>(values_); }
-        inline void setLowerRightPointY(const uint32_t &_value) { std::get< 5>(values_) = _value; }
-        inline const uint32_t &getIntersectionPointX() const { return std::get< 6>(values_); }
-        inline void setIntersectionPointX(const uint32_t &_value) { std::get< 6>(values_) = _value; }
-        inline const uint32_t &getIntersectionPointY() const { return std::get< 7>(values_); }
-        inline void setIntersectionPointY(const uint32_t &_value) { std::get< 7>(values_) = _value; }
+        inline const uint32_t &getLowerLeftPointX() const { return std::get< 1>(values_); }
+        inline void setLowerLeftPointX(const uint32_t &_value) { std::get< 1>(values_) = _value; }
+        inline const uint32_t &getLowerLeftPointY() const { return std::get< 2>(values_); }
+        inline void setLowerLeftPointY(const uint32_t &_value) { std::get< 2>(values_) = _value; }
+        inline const uint32_t &getLowerRightPointX() const { return std::get< 3>(values_); }
+        inline void setLowerRightPointX(const uint32_t &_value) { std::get< 3>(values_) = _value; }
+        inline const uint32_t &getLowerRightPointY() const { return std::get< 4>(values_); }
+        inline void setLowerRightPointY(const uint32_t &_value) { std::get< 4>(values_) = _value; }
+        inline const uint32_t &getIntersectionPointX() const { return std::get< 5>(values_); }
+        inline void setIntersectionPointX(const uint32_t &_value) { std::get< 5>(values_) = _value; }
+        inline const uint32_t &getIntersectionPointY() const { return std::get< 6>(values_); }
+        inline void setIntersectionPointY(const uint32_t &_value) { std::get< 6>(values_) = _value; }
         inline bool operator==(const LaneType& _other) const {
-        return (getFrameId() == _other.getFrameId() && getFrameHash() == _other.getFrameHash() && getLowerLeftPointX() == _other.getLowerLeftPointX() && getLowerLeftPointY() == _other.getLowerLeftPointY() && getLowerRightPointX() == _other.getLowerRightPointX() && getLowerRightPointY() == _other.getLowerRightPointY() && getIntersectionPointX() == _other.getIntersectionPointX() && getIntersectionPointY() == _other.getIntersectionPointY());
+        return (getFrameId() == _other.getFrameId() && getLowerLeftPointX() == _other.getLowerLeftPointX() && getLowerLeftPointY() == _other.getLowerLeftPointY() && getLowerRightPointX() == _other.getLowerRightPointX() && getLowerRightPointY() == _other.getLowerRightPointY() && getIntersectionPointX() == _other.getIntersectionPointX() && getIntersectionPointY() == _other.getIntersectionPointY());
         }
         inline bool operator!=(const LaneType &_other) const {
             return !((*this) == _other);

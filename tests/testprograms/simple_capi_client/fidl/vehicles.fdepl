@@ -1,0 +1,23 @@
+import "platform:/plugin/org.genivi.commonapi.someip/deployment/CommonAPI-SOMEIP_deployment_spec.fdepl"
+import "vehicles.fidl"
+
+define org.genivi.commonapi.someip.deployment for interface genivi.testexec.IVehicles {
+	SomeIpServiceID = 1335
+
+	attribute Vehicles {
+		SomeIpGetterID = 3001
+		SomeIpSetterID = 3002
+		SomeIpNotifierID = 3000
+		SomeIpEventGroups = { 1 }
+        SomeIpAttributeEndianess = le
+    }
+}
+
+// Not sure if "provider" is the correct usage here since ivi side is the service consumer
+// but we might use the generated code for just a test server
+define org.genivi.commonapi.someip.deployment for provider MyService {
+	instance genivi.testexec.IVehicles {
+		InstanceId = "test"
+		SomeIpInstanceID = 1
+	}
+}

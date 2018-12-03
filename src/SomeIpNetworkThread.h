@@ -43,6 +43,7 @@ class SomeIpNetworkThread : public QThread
 
    public:
     void run() override;
+    void connections(QQuickView &view);
 };
 
 #endif

@@ -94,7 +94,7 @@ void IDrivingLaneSomeIPStubAdapterInternal<_Stub, _Stubs...>::fireLaneDetectedEv
         ::sendEvent(
             *this,
             CommonAPI::SomeIP::event_id_t(0x1),
-            false,
+            true,
              deployed_drivingLane 
     );
 }

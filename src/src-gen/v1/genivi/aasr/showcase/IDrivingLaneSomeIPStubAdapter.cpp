@@ -33,7 +33,7 @@ std::shared_ptr<CommonAPI::SomeIP::StubAdapter> createIDrivingLaneSomeIPStubAdap
 void initializeIDrivingLaneSomeIPStubAdapter() {
     CommonAPI::SomeIP::AddressTranslator::get()->insert(
         "local:genivi.aasr.showcase.IDrivingLane:v1_0:drivinglane",
-         0x536, 0xd431, 1, 0);
+         0x536, 0x1, 1, 0);
     CommonAPI::SomeIP::Factory::get()->registerStubAdapterCreateMethod(
         IDrivingLane::getInterface(),
         &createIDrivingLaneSomeIPStubAdapter);

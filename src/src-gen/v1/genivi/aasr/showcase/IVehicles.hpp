@@ -22,11 +22,7 @@
 #include <CommonAPI/OutputStream.hpp>
 #include <CommonAPI/Struct.hpp>
 #include <CommonAPI/Types.hpp>
-#include <CommonAPI/Variant.hpp>
 #include <cstdint>
-#include <memory>
-#include <string>
-#include <unordered_map>
 
 #undef COMMONAPI_INTERNAL_COMPILATION
 
@@ -77,7 +73,30 @@ public:
         inline bool operator<(const Literal &_value) const { return (value_ < static_cast< int32_t>(_value)); }
         inline bool operator>(const Literal &_value) const { return (value_ > static_cast< int32_t>(_value)); }
     };
-    typedef CommonAPI::Variant< float, double>  FlexibleFloatingPoint;
+    struct FlexibleFloatingPoint : CommonAPI::Struct< float, double> {
+    
+        FlexibleFloatingPoint()
+        {
+            std::get< 0>(values_) = 0.0f;
+            std::get< 1>(values_) = 0.0;
+        }
+        FlexibleFloatingPoint(const float &_floatingPoint32Bit, const double &_floatingPoint64Bit)
+        {
+            std::get< 0>(values_) = _floatingPoint32Bit;
+            std::get< 1>(values_) = _floatingPoint64Bit;
+        }
+        inline const float &getFloatingPoint32Bit() const { return std::get< 0>(values_); }
+        inline void setFloatingPoint32Bit(const float &_value) { std::get< 0>(values_) = _value; }
+        inline const double &getFloatingPoint64Bit() const { return std::get< 1>(values_); }
+        inline void setFloatingPoint64Bit(const double &_value) { std::get< 1>(values_) = _value; }
+        inline bool operator==(const FlexibleFloatingPoint& _other) const {
+        return (getFloatingPoint32Bit() == _other.getFloatingPoint32Bit() && getFloatingPoint64Bit() == _other.getFloatingPoint64Bit());
+        }
+        inline bool operator!=(const FlexibleFloatingPoint &_other) const {
+            return !((*this) == _other);
+        }
+    
+    };
     struct FlexibleFloatingPointContainer : CommonAPI::Struct< FloatingPointPrecision, FlexibleFloatingPoint> {
     
         FlexibleFloatingPointContainer()
@@ -134,7 +153,6 @@ public:
         }
     
     };
-    typedef std::unordered_map< uint8_t, ::v1::genivi::aasr::showcase::IVehicles::BoundingBox> BoundingBoxes;
     struct Vehicle : CommonAPI::Struct< uint8_t, FlexibleFloatingPointContainer, FlexibleFloatingPointContainer> {
     
         Vehicle()
@@ -163,32 +181,28 @@ public:
         }
     
     };
-    struct ListOfVehicles : CommonAPI::Struct< uint16_t, std::string, std::vector< Vehicle >, BoundingBoxes> {
+    struct ListOfVehicles : CommonAPI::Struct< uint16_t, Vehicle, BoundingBox> {
     
         ListOfVehicles()
         {
             std::get< 0>(values_) = 0u;
-            std::get< 1>(values_) = "";
-            std::get< 2>(values_) = std::vector< Vehicle >();
-            std::get< 3>(values_) = BoundingBoxes();
+            std::get< 1>(values_) = Vehicle();
+            std::get< 2>(values_) = BoundingBox();
         }
-        ListOfVehicles(const uint16_t &_frameId, const std::string &_frameHash, const std::vector< Vehicle > &_detectedVehicles, const BoundingBoxes &_boxes)
+        ListOfVehicles(const uint16_t &_frameId, const Vehicle &_detectedVehicle, const BoundingBox &_box)
         {
             std::get< 0>(values_) = _frameId;
-            std::get< 1>(values_) = _frameHash;
-            std::get< 2>(values_) = _detectedVehicles;
-            std::get< 3>(values_) = _boxes;
+            std::get< 1>(values_) = _detectedVehicle;
+            std::get< 2>(values_) = _box;
         }
         inline const uint16_t &getFrameId() const { return std::get< 0>(values_); }
         inline void setFrameId(const uint16_t &_value) { std::get< 0>(values_) = _value; }
-        inline const std::string &getFrameHash() const { return std::get< 1>(values_); }
-        inline void setFrameHash(const std::string &_value) { std::get< 1>(values_) = _value; }
-        inline const std::vector< Vehicle > &getDetectedVehicles() const { return std::get< 2>(values_); }
-        inline void setDetectedVehicles(const std::vector< Vehicle > &_value) { std::get< 2>(values_) = _value; }
-        inline const BoundingBoxes &getBoxes() const { return std::get< 3>(values_); }
-        inline void setBoxes(const BoundingBoxes &_value) { std::get< 3>(values_) = _value; }
+        inline const Vehicle &getDetectedVehicle() const { return std::get< 1>(values_); }
+        inline void setDetectedVehicle(const Vehicle &_value) { std::get< 1>(values_) = _value; }
+        inline const BoundingBox &getBox() const { return std::get< 2>(values_); }
+        inline void setBox(const BoundingBox &_value) { std::get< 2>(values_) = _value; }
         inline bool operator==(const ListOfVehicles& _other) const {
-        return (getFrameId() == _other.getFrameId() && getFrameHash() == _other.getFrameHash() && getDetectedVehicles() == _other.getDetectedVehicles() && getBoxes() == _other.getBoxes());
+        return (getFrameId() == _other.getFrameId() && getDetectedVehicle() == _other.getDetectedVehicle() && getBox() == _other.getBox());
         }
         inline bool operator!=(const ListOfVehicles &_other) const {
             return !((*this) == _other);

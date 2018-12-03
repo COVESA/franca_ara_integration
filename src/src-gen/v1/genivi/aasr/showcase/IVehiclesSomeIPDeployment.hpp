@@ -26,13 +26,13 @@ namespace IVehicles_ {
 
 // Interface-specific deployment types
 typedef CommonAPI::SomeIP::EnumerationDeployment<int32_t> FloatingPointPrecisionDeployment_t;
-typedef CommonAPI::SomeIP::VariantDeployment<
+typedef CommonAPI::SomeIP::StructDeployment<
     CommonAPI::EmptyDeployment,
     CommonAPI::EmptyDeployment
 > FlexibleFloatingPointDeployment_t;
 typedef CommonAPI::SomeIP::StructDeployment<
     ::v1::genivi::aasr::showcase::IVehicles_::FloatingPointPrecisionDeployment_t,
-    CommonAPI::SomeIP::VariantDeployment<
+    CommonAPI::SomeIP::StructDeployment<
         CommonAPI::EmptyDeployment,
         CommonAPI::EmptyDeployment
     >
@@ -43,27 +43,18 @@ typedef CommonAPI::SomeIP::StructDeployment<
     CommonAPI::SomeIP::IntegerDeployment<uint32_t>,
     CommonAPI::SomeIP::IntegerDeployment<uint32_t>
 > BoundingBoxDeployment_t;
-typedef CommonAPI::SomeIP::MapDeployment<
-    CommonAPI::SomeIP::IntegerDeployment<uint8_t>,
-    CommonAPI::SomeIP::StructDeployment<
-        CommonAPI::SomeIP::IntegerDeployment<uint32_t>,
-        CommonAPI::SomeIP::IntegerDeployment<uint32_t>,
-        CommonAPI::SomeIP::IntegerDeployment<uint32_t>,
-        CommonAPI::SomeIP::IntegerDeployment<uint32_t>
-    >
-> BoundingBoxesDeployment_t;
 typedef CommonAPI::SomeIP::StructDeployment<
     CommonAPI::SomeIP::IntegerDeployment<uint8_t>,
     CommonAPI::SomeIP::StructDeployment<
         ::v1::genivi::aasr::showcase::IVehicles_::FloatingPointPrecisionDeployment_t,
-        CommonAPI::SomeIP::VariantDeployment<
+        CommonAPI::SomeIP::StructDeployment<
             CommonAPI::EmptyDeployment,
             CommonAPI::EmptyDeployment
         >
     >,
     CommonAPI::SomeIP::StructDeployment<
         ::v1::genivi::aasr::showcase::IVehicles_::FloatingPointPrecisionDeployment_t,
-        CommonAPI::SomeIP::VariantDeployment<
+        CommonAPI::SomeIP::StructDeployment<
             CommonAPI::EmptyDeployment,
             CommonAPI::EmptyDeployment
         >
@@ -71,34 +62,28 @@ typedef CommonAPI::SomeIP::StructDeployment<
 > VehicleDeployment_t;
 typedef CommonAPI::SomeIP::StructDeployment<
     CommonAPI::SomeIP::IntegerDeployment<uint16_t>,
-    CommonAPI::SomeIP::StringDeployment,
-    CommonAPI::SomeIP::ArrayDeployment<
+    CommonAPI::SomeIP::StructDeployment<
+        CommonAPI::SomeIP::IntegerDeployment<uint8_t>,
         CommonAPI::SomeIP::StructDeployment<
-            CommonAPI::SomeIP::IntegerDeployment<uint8_t>,
+            ::v1::genivi::aasr::showcase::IVehicles_::FloatingPointPrecisionDeployment_t,
             CommonAPI::SomeIP::StructDeployment<
-                ::v1::genivi::aasr::showcase::IVehicles_::FloatingPointPrecisionDeployment_t,
-                CommonAPI::SomeIP::VariantDeployment<
-                    CommonAPI::EmptyDeployment,
-                    CommonAPI::EmptyDeployment
-                >
-            >,
+                CommonAPI::EmptyDeployment,
+                CommonAPI::EmptyDeployment
+            >
+        >,
+        CommonAPI::SomeIP::StructDeployment<
+            ::v1::genivi::aasr::showcase::IVehicles_::FloatingPointPrecisionDeployment_t,
             CommonAPI::SomeIP::StructDeployment<
-                ::v1::genivi::aasr::showcase::IVehicles_::FloatingPointPrecisionDeployment_t,
-                CommonAPI::SomeIP::VariantDeployment<
-                    CommonAPI::EmptyDeployment,
-                    CommonAPI::EmptyDeployment
-                >
+                CommonAPI::EmptyDeployment,
+                CommonAPI::EmptyDeployment
             >
         >
     >,
-    CommonAPI::SomeIP::MapDeployment<
-        CommonAPI::SomeIP::IntegerDeployment<uint8_t>,
-        CommonAPI::SomeIP::StructDeployment<
-            CommonAPI::SomeIP::IntegerDeployment<uint32_t>,
-            CommonAPI::SomeIP::IntegerDeployment<uint32_t>,
-            CommonAPI::SomeIP::IntegerDeployment<uint32_t>,
-            CommonAPI::SomeIP::IntegerDeployment<uint32_t>
-        >
+    CommonAPI::SomeIP::StructDeployment<
+        CommonAPI::SomeIP::IntegerDeployment<uint32_t>,
+        CommonAPI::SomeIP::IntegerDeployment<uint32_t>,
+        CommonAPI::SomeIP::IntegerDeployment<uint32_t>,
+        CommonAPI::SomeIP::IntegerDeployment<uint32_t>
     >
 > ListOfVehiclesDeployment_t;
 
