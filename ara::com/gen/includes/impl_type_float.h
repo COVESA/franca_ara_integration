@@ -1,0 +1,9 @@
+#ifndef _100_ApplicationDevelopment_APDTestApplication_buildARA____gen_includes_impl_type_float_h
+#define _100_ApplicationDevelopment_APDTestApplication_buildARA____gen_includes_impl_type_float_h
+
+#include "base_type_cpp_float.h"
+
+typedef ::cpp_float Float;
+
+#endif // _100_ApplicationDevelopment_APDTestApplication_buildARA____gen_includes_impl_type_float_h
+
