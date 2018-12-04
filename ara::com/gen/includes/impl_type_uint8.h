@@ -1,0 +1,9 @@
+#ifndef _100_ApplicationDevelopment_APDTestApplication_buildARA____gen_includes_impl_type_uint8_h
+#define _100_ApplicationDevelopment_APDTestApplication_buildARA____gen_includes_impl_type_uint8_h
+
+#include "base_type_std_uint8_t.h"
+
+typedef ::std_uint8_t UInt8;
+
+#endif // _100_ApplicationDevelopment_APDTestApplication_buildARA____gen_includes_impl_type_uint8_h
+

@@ -1,0 +1,9 @@
+#ifndef _100_ApplicationDevelopment_APDTestApplication_buildARA____gen_includes_impl_type_string_h
+#define _100_ApplicationDevelopment_APDTestApplication_buildARA____gen_includes_impl_type_string_h
+
+#include "ara/core/string.h"
+
+using String = ara::core::string;
+
+#endif // _100_ApplicationDevelopment_APDTestApplication_buildARA____gen_includes_impl_type_string_h
+

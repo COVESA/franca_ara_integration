@@ -1,0 +1,9 @@
+#ifndef _100_ApplicationDevelopment_APDTestApplication_buildARA____gen_includes_impl_type_double_h
+#define _100_ApplicationDevelopment_APDTestApplication_buildARA____gen_includes_impl_type_double_h
+
+#include "base_type_cpp_double.h"
+
+typedef ::cpp_double Double;
+
+#endif // _100_ApplicationDevelopment_APDTestApplication_buildARA____gen_includes_impl_type_double_h
+

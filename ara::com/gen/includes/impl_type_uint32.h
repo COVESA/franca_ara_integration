@@ -1,0 +1,9 @@
+#ifndef _100_ApplicationDevelopment_APDTestApplication_buildARA____gen_includes_impl_type_uint32_h
+#define _100_ApplicationDevelopment_APDTestApplication_buildARA____gen_includes_impl_type_uint32_h
+
+#include "base_type_std_uint32_t.h"
+
+typedef ::std_uint32_t UInt32;
+
+#endif // _100_ApplicationDevelopment_APDTestApplication_buildARA____gen_includes_impl_type_uint32_h
+
