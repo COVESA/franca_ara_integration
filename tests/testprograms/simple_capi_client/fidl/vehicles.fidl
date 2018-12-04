@@ -1,0 +1,26 @@
+package genivi.testexec
+
+interface IVehicles {
+	// Meta -----------------------------------------------
+	
+	version {
+		major 1
+		minor 0
+	}
+
+	struct Vehicle {
+		UInt8 id
+	}
+	
+	struct ListOfVehicles {
+		UInt16 frameId
+		Vehicle oneVehicle
+		Vehicle twoVehicle
+		String frameHash
+	}
+	
+	// Mesages --------------------------------------------
+	
+	// Currently detected vehicles
+	attribute ListOfVehicles Vehicles
+}
