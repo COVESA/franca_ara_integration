@@ -12,13 +12,15 @@ interface IVehicles {
 		UInt8 id
 	}
 	
-	struct ListOfVehicles {
-		UInt16 frameId
-		Vehicle oneVehicle
-		Vehicle twoVehicle
-		String frameHash
+	map Int_to_Int_Map {
+		UInt8 to UInt16
 	}
-	
+
+	struct ListOfVehicles {
+        Int_to_Int_Map themap
+	}
+
+
 	// Mesages --------------------------------------------
 	
 	// Currently detected vehicles
