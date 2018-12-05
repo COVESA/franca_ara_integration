@@ -35,6 +35,7 @@ QPixmap ImageProvider::requestPixmap(const QString &id, QSize *size, const QSize
 
 void ImageProvider::setImage(const QImage &img)
 {
+    std::cout << "setImage slot activated" << std::endl;
     DLT_LOG(DLT_FRA_ARA_CONTEXT, DLT_LOG_DEBUG, DLT_STRING("setImage()!"));
     m_image = img;
     emit updateGraphicsImage(); // to QML thread

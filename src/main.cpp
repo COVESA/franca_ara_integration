@@ -15,7 +15,6 @@ DLT_DECLARE_CONTEXT(DLT_FRA_ARA_CONTEXT)
 
 int main(int argc, char *argv[])
 {
-    ImageProvider *provider = new ImageProvider;
     QGuiApplication app(argc, argv);
     QQuickView view;
 
@@ -27,17 +26,13 @@ int main(int argc, char *argv[])
     setenv("QT_QPA_PLATFORM", "wayland", 1);
     setenv("QT_WAYLAND_DISABLE_WINDOWDECORATION", "1", 1);
 
-    view.engine()->addImportPath(QCoreApplication::applicationDirPath() + "/imports");
+    SomeIpNetworkThread *network_thread = new SomeIpNetworkThread();
+    network_thread->connections(view);
 
-    view.engine()->addImageProvider("imageprovider", provider);
-    view.engine()->rootContext()->setContextProperty("imageprovider", provider);
-
+    view.engine()->addImportPath(QCoreApplication::applicationDirPath() +
+                                 "/imports");
     view.setSource(QUrl(QStringLiteral("qrc:/main.qml")));
     view.show();
-
-    SomeIpNetworkThread *network_thread = new SomeIpNetworkThread();
-    QObject::connect(network_thread, SIGNAL(imageReady(const QImage&)),
-            provider, SLOT(setImage(const QImage&)));
 
     network_thread->start();
 

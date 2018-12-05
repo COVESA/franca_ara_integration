@@ -3,24 +3,30 @@
 // (C) 2018 GENIVI Alliance
 // This file is part of FRANCA--ARA integration demo/pilot project
 
+#include "SomeIpNetworkThread.h"
+#include "imagesource.h"
+#include "v1/genivi/aasr/showcase/IDrivingLaneProxy.hpp"
+#include "v1/genivi/aasr/showcase/IVehiclesProxy.hpp"
+#include "v1/genivi/aasr/showcase/IVehiclesSomeIPProxy.hpp"
 #include <CommonAPI/AttributeCacheExtension.hpp>
 #include <CommonAPI/CommonAPI.hpp>
 #include <QDebug>
 #include <QElapsedTimer>
 #include <QImageReader>
+#include <QQuickView>
 #include <map>
 #include <math.h>
 #include <set>
-#include "imagesource.h"
-#include "v1/genivi/aasr/showcase/IDrivingLaneProxy.hpp"
-#include "v1/genivi/aasr/showcase/IVehiclesProxy.hpp"
-#include "v1/genivi/aasr/showcase/IVehiclesSomeIPProxy.hpp"
-#include "SomeIpNetworkThread.h"
 
 #define IMAGE_FEED_PATH                                                        \
    "/home/user/devel/GENIVI/franca_ara_integration/src/feed"
 
 #define MAX_IMAGE_ID 228
+
+#define LOG(x) std::cerr << #x << std::endl;
+//#define LOG(x) LOG2((x))
+#define MSLEEP(x)                                                              \
+    std::this_thread::sleep_for(std::chrono::milliseconds((x)));
 
 using v1::genivi::aasr::showcase::IVehiclesProxy;
 using v1::genivi::aasr::showcase::IVehicles;
@@ -47,7 +53,7 @@ void identify_bounding_box(uint8_t id) {
     if (known_bounding_box_ids.find(id) == known_bounding_box_ids.end()) {
         // Not found, i.e. new
         std::string color = get_new_color();
-        std::cout << "New identified object (stored) : " << id << ", with color" << color << std::endl;
+        std::cerr << "New identified object (stored) : " << id << ", with color" << color << std::endl;
         known_bounding_box_ids.insert(std::make_pair(id, color));
     }
 }
@@ -103,7 +109,7 @@ void SomeIpNetworkThread::run()
     // variable, and the closure this creates will make that possible.
     // There are surely a few other ways this could be done.
     auto vehicles_attribute_update = [&](const IVehicles::ListOfVehicles & v) {
-        std::cout << "Received change on Vehicles Attributes for frameId: " << v.getFrameId() << std::endl;
+        std::cerr << "Received change on Vehicles Attributes for frameId: " << v.getFrameId() << std::endl;
 
         int id = v.getFrameId();
         m_image_source.newFrameId(id);
@@ -143,17 +149,36 @@ void SomeIpNetworkThread::run()
 
     std::shared_ptr <CommonAPI::Runtime> runtime = CommonAPI::Runtime::get();
 
-    auto myProxy = runtime->buildProxyWithDefaultAttributeExtension
-        <IVehiclesProxy,CommonAPI::Extensions::AttributeCacheExtension>
-        (domain, instance);
+    LOG(Build proxy in 1 seconds from now);
+    MSLEEP(1000);
 
-//    while (!myProxy->isAvailable())
-//        std::this_thread::sleep_for(std::chrono::microseconds(1000));
-    while (!myProxy->isAvailable())
-        std::this_thread::sleep_for(std::chrono::microseconds(1000));
+    //    auto myProxy = runtime->buildProxyWithDefaultAttributeExtension
+    //        <IVehiclesProxy,CommonAPI::Extensions::AttributeCacheExtension>
+    //        (domain, instance);
+    //
+    LOG(buildProxy);
+    auto myProxy = runtime->buildProxy<IVehiclesProxy>(domain, instance);
 
+    if (!myProxy) {
+       LOG(Building proxy failed!  Is NULL.  Stoppping);
+       exit(0);
+    }
+
+    // This helps me understand what the hell is going on...
+    LOG(Reminder : IVehicle Service ID = 1335 which is hex 0x537)
+    LOG(Reminder : IVehicle Instance ID is 22136 which is hex 0x5678)
+
+    LOG(waiting for proxy isAvailable);
+    while (!myProxy->isAvailable()) {
+        std::this_thread::sleep_for(std::chrono::microseconds(500000));
+    }
+    LOG(proxy is available !);
+
+    MSLEEP(3000);
+    LOG(register callback);
     // Register callback function
     myProxy->getVehiclesAttribute().getChangedEvent().subscribe(vehicles_attribute_update);
+    LOG(registered callback);
 
     // Initial image to get started
     m_image_source.newFrameId(0);
@@ -163,10 +188,12 @@ void SomeIpNetworkThread::run()
         // since a callback has been set up driven by the CommonAPI own
         // threads?
 
+        LOG(MAIN LOOP);
         // Attributes are updated through callback above...
         // OK now what?
         int x = 0;
         ++x;
+        MSLEEP(1000);
     }
 
     // TODO: On lane update:
