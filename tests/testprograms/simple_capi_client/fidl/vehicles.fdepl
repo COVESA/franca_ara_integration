@@ -9,7 +9,8 @@ define org.genivi.commonapi.someip.deployment for interface genivi.testexec.IVeh
 		SomeIpSetterID = 3002
 		SomeIpNotifierID = 3000
 		SomeIpEventGroups = { 1 }
-	}
+        SomeIpAttributeEndianess = le
+    }
 }
 
 // Not sure if "provider" is the correct usage here since ivi side is the service consumer
