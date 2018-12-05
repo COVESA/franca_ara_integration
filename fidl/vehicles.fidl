@@ -19,8 +19,8 @@ interface IVehicles {
 	 * as they were just added for the R18-10 release.
 	 * As a workaround I suggest to use a struct or a workaround on
 	 * ARXML level and code.
-	 */ 
-	union FlexibleFloatingPoint {
+	 */
+	struct FlexibleFloatingPoint {
 		Float floatingPoint32Bit
 		Double floatingPoint64Bit
 	}
@@ -36,11 +36,7 @@ interface IVehicles {
 		UInt32 width
 		UInt32 height
 	}
-	
-	map BoundingBoxes {
-		UInt8 to BoundingBox
-	}
-	
+
 	struct Vehicle {
 		// Vehicle Id used to search in the BoundingBoxes map
 		UInt8 id
@@ -50,13 +46,12 @@ interface IVehicles {
 	
 	struct ListOfVehicles {
 		UInt16 frameId
-		String frameHash
-		Vehicle[] detectedVehicles
-		BoundingBoxes boxes
+		Vehicle detectedVehicle
+		BoundingBox box
 	}
-	
-	// Mesages --------------------------------------------
-	
+
+	// Messages --------------------------------------------
+
 	// Currently detected vehicles
 	attribute ListOfVehicles Vehicles
 	
