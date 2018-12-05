@@ -56,7 +56,16 @@ int main() {
       //        inline void setFrameHash(const std::string &_value) { std::get< 3>(values_) = _value; }
 
       // Change some value
-      list_of_vehicles.setFrameId(i++);
+//      list_of_vehicles.setFrameId(i++);
+
+      // typedef std::unordered_map< uint8_t, uint16_t> Int_to_Int_Map;
+      //inline void setThemap(const Int_to_Int_Map &_value) { std::get< 1>(values_) = _value; }
+      IVehicles::Int_to_Int_Map tmp;
+      tmp.insert(make_pair(i,0x10+i));
+      tmp.insert(make_pair(i+1,0x20+i+1));
+      ++i;
+
+      list_of_vehicles.setThemap(tmp);
 
       LOG(simple_capi_server: Setting new list_of_vehicles value);
       myService->setVehiclesAttribute(list_of_vehicles);
