@@ -6,11 +6,11 @@ define org.genivi.commonapi.someip.deployment for interface genivi.aasr.showcase
 	SomeIpServiceID = 1334
 
 	broadcast LaneDetected {
-		SomeIpBroadcastEndianess = be
 		SomeIpEventID = 1
 		SomeIpPriority = 0
 		SomeIpEventGroups = { 1 }
 		SomeIpBroadcastCRCWidth = four
+		SomeIpBroadcastEndianess = le
 	}
 }
 

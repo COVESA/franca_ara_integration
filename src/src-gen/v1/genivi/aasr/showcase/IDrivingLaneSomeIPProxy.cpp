@@ -45,7 +45,7 @@ IDrivingLaneSomeIPProxy::IDrivingLaneSomeIPProxy(
     const CommonAPI::SomeIP::Address &_address,
     const std::shared_ptr<CommonAPI::SomeIP::ProxyConnection> &_connection)
         : CommonAPI::SomeIP::Proxy(_address, _connection )
-,          laneDetected_(*this, 0x1, CommonAPI::SomeIP::event_id_t(0x1), false, false, std::make_tuple(static_cast< ::v1::genivi::aasr::showcase::IDrivingLane_::LaneTypeDeployment_t* >(nullptr)))
+,          laneDetected_(*this, 0x1, CommonAPI::SomeIP::event_id_t(0x1), false, true, std::make_tuple(static_cast< ::v1::genivi::aasr::showcase::IDrivingLane_::LaneTypeDeployment_t* >(nullptr)))
     {
     }
 
