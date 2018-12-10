@@ -10,9 +10,6 @@
 #include "v1/genivi/aasr/showcase/IVehiclesSomeIPProxy.hpp"
 #include <CommonAPI/AttributeCacheExtension.hpp>
 #include <CommonAPI/CommonAPI.hpp>
-#include <QDebug>
-#include <QElapsedTimer>
-#include <QImageReader>
 #include <QQuickView>
 #include <map>
 #include <math.h>
@@ -23,18 +20,18 @@
 
 #define MAX_IMAGE_ID 228
 
-#define LOG(x) std::cerr << #x << std::endl;
-//#define LOG(x) LOG2((x))
+#define LOG(x) std::cout << #x << std::endl;
 #define MSLEEP(x)                                                              \
     std::this_thread::sleep_for(std::chrono::milliseconds((x)));
 
 using v1::genivi::aasr::showcase::IVehiclesProxy;
 using v1::genivi::aasr::showcase::IVehicles;
+using v1::genivi::aasr::showcase::IDrivingLane;
+using v1::genivi::aasr::showcase::IDrivingLaneProxy;
 
 // Permanent / shared data  -- These should be made class member for cleaner look
 static std::map<uint8_t, std::string /*color*/> known_bounding_box_ids;
-static IVehicles::BoundingBoxes bounding_box_map;
-static std::vector<IVehicles::Vehicle> vehicles;
+//static IVehicles::BoundingBox bounding_box_map;
 
 static int sanity_check_id (int id) {
     return id; // FIXME
@@ -80,19 +77,19 @@ static BoxDefinition get_pod_box(uint8_t id, const IVehicles::BoundingBox &box)
 
 typedef std::pair<LaneLineDefinition, LaneLineDefinition> LaneDefinition_t;
 
-static LaneDefinition_t get_bounding_lines(void/*todo*/) {
-
+static LaneDefinition_t get_bounding_lines(IDrivingLane::LaneType l)
+{
     LaneLineDefinition left;
-    // left.lower_x =
-    // left.lower_y =
-    // left.upper_x =
-    // left.upper_y =
+    left.lower_x = l.getLowerLeftPointX();
+    left.lower_y = l.getLowerLeftPointY();
+    left.upper_x = l.getIntersectionPointX();
+    left.upper_y = l.getIntersectionPointY();
 
     LaneLineDefinition right;
-    // right.lower_x =
-    // right.lower_y =
-    // right.upper_x =
-    // right.upper_y =
+    right.lower_x = l.getLowerRightPointX();
+    right.lower_y = l.getLowerRightPointY();
+    right.upper_x = l.getIntersectionPointX();
+    right.upper_y = l.getIntersectionPointY();
 
     return LaneDefinition_t(left, right);
 }
@@ -104,6 +101,10 @@ void SomeIpNetworkThread::connections(QQuickView &view)
 
 void SomeIpNetworkThread::run()
 {
+
+    // Initial image to get started
+    m_image_source.newFrameId(0);
+
     // (Note on style) Declaring this lambda expression inside of the member
     // function only because we need access to the m_image_source member
     // variable, and the closure this creates will make that possible.
@@ -114,31 +115,27 @@ void SomeIpNetworkThread::run()
         int id = v.getFrameId();
         m_image_source.newFrameId(id);
 
-        // TODO: Is this ^^ frame ID supposed to drive the playback rate?
+        auto vehicle = v.getDetectedVehicle();
+        auto bounding_box = v.getBox();
 
-        m_image_source.newFrameId(id);
+        int vehicle_id = sanity_check_id(vehicle.getId());
+        BoxDefinition box_pod = get_pod_box(vehicle_id, bounding_box);
 
-        vehicles = v.getDetectedVehicles();
-        bounding_box_map = v.getBoxes();
-        std::string hash = v.getFrameHash();
+        // Delegate to image class to signal QML graphics to draw vehicle identification lines
+        m_image_source.newVehicleIdentification(box_pod);
+    };
 
-        for (auto it : vehicles) {
-            int vehicle_id = sanity_check_id(it.getId());
+    auto lane_broadcast_update = [&](const IDrivingLane::LaneType & l) {
+        std::cerr << "Received change on Lane Attribute for frameId: " << l.getFrameId() << std::endl;
 
-            // Look up vehicle in bounding box map
-            auto it2 = bounding_box_map.find(vehicle_id);
-            if (it2 != bounding_box_map.end()) {
-                // Found!  map returns a pair, so look at the box which is
-                // the second parameter
-                IVehicles::BoundingBox box = it2->second;
+        int id = l.getFrameId();
+        LaneDefinition_t lines = get_bounding_lines(l);
 
-                BoxDefinition box_pod = get_pod_box(vehicle_id, box);
+        // Delegate to image class to signal QML graphics to draw lane
+        // identification lines
+        m_image_source.newLaneIdentification(lines.first, lines.second);
 
-                // Signal QML graphics to draw vehicle identifying lines
-                m_image_source.newVehicleIdentification(box_pod);
-            }
-        }
-        Q_UNUSED(id);
+        Q_UNUSED(id);  // FIXME
     };
 
     printf("Running: SomeIpNetworkThread\n");
@@ -152,16 +149,21 @@ void SomeIpNetworkThread::run()
     LOG(Build proxy in 1 seconds from now);
     MSLEEP(1000);
 
-    //    auto myProxy = runtime->buildProxyWithDefaultAttributeExtension
+    //    auto vProxy = runtime->buildProxyWithDefaultAttributeExtension
     //        <IVehiclesProxy,CommonAPI::Extensions::AttributeCacheExtension>
     //        (domain, instance);
     //
     LOG(buildProxy);
-    auto myProxy = runtime->buildProxy<IVehiclesProxy>(domain, instance);
+    auto vProxy = runtime->buildProxy<IVehiclesProxy>(domain, instance);
+    auto lProxy = runtime->buildProxy<IDrivingLaneProxy>(domain, instance);
 
-    if (!myProxy) {
-       LOG(Building proxy failed!  Is NULL.  Stoppping);
-       exit(0);
+    if (!vProxy) {
+       LOG(Building vehicle i/f proxy failed!  Is NULL.  Stoppping);
+       exit(1);
+    }
+    if (!lProxy) {
+       LOG(Building lane i/f proxy failed!  Is NULL.  Stoppping);
+       exit(1);
     }
 
     // This helps me understand what the hell is going on...
@@ -169,19 +171,23 @@ void SomeIpNetworkThread::run()
     LOG(Reminder : IVehicle Instance ID is 22136 which is hex 0x5678)
 
     LOG(waiting for proxy isAvailable);
-    while (!myProxy->isAvailable()) {
+    while (!vProxy->isAvailable()) {
         std::this_thread::sleep_for(std::chrono::microseconds(500000));
     }
-    LOG(proxy is available !);
+    LOG(vehicle proxy is available !);
+    while (!lProxy->isAvailable()) {
+        std::this_thread::sleep_for(std::chrono::microseconds(500000));
+    }
+    LOG(lane proxy is available !);
 
     MSLEEP(3000);
     LOG(register callback);
     // Register callback function
-    myProxy->getVehiclesAttribute().getChangedEvent().subscribe(vehicles_attribute_update);
-    LOG(registered callback);
+    vProxy->getVehiclesAttribute().getChangedEvent().subscribe(vehicles_attribute_update);
+    lProxy->getLaneDetectedEvent().subscribe(lane_broadcast_update);
 
-    // Initial image to get started
-    m_image_source.newFrameId(0);
+
+    LOG(registered callback);
 
     while (true) {
         // Here the main loop.  Not sure how much needs to be done here
@@ -194,11 +200,12 @@ void SomeIpNetworkThread::run()
         int x = 0;
         ++x;
         MSLEEP(1000);
-    }
 
-    // TODO: On lane update:
-    // Signal QML graphics to draw lane identifications
-    LaneDefinition_t lines = get_bounding_lines(/*...*/);
-    m_image_source.newLaneIdentification(lines.first, lines.second);
+        // Try one output of lane signal
+    static    auto x1 = new QLine(10,20,30,40);
+    static            auto x2 = new QLine(10,20,30,40);
+
+    m_image_source.laneIdentified(*x1,*x2);
+    }
 }
 

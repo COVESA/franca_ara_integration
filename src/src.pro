@@ -47,7 +47,7 @@ SOURCES += src-gen/v1/genivi/aasr/showcase/IDrivingLaneSomeIPDeployment.cpp \
            src-gen/v1/genivi/aasr/showcase/IVehiclesSomeIPProxy.cpp \
            src-gen/v1/genivi/aasr/showcase/IVehiclesSomeIPStubAdapter.cpp
 
-INCLUDEPATH += src-gen
+INCLUDEPATH += src-gen  /usr/local/include
 
 unix {
     CONFIG += link_pkgconfig
