@@ -12,8 +12,18 @@ SOMEIP_GEN=../../../dependencies/build-common-api-cpp-native/project/cgen/common
 CORE_GEN="$(readlink -f $CORE_GEN)"
 SOMEIP_GEN="$(readlink -f $SOMEIP_GEN)"
 
-echo got: CORE_GEN=$CORE_GEN 
-echo got: SOMEIP_GEN=$SOMEIP_GEN 
+if [ -z "$CORE_GEN" ]; then
+  echo "Can't find code generator at location $CORE_GEN"
+  exit 2
+fi
+
+if [ -z "$SOMEIP_GEN" ]; then
+  echo "Can't find code generator at location $SOMEIP_GEN"
+  exit 3
+fi
+
+echo Using: CORE_GEN=$CORE_GEN 
+echo Using: SOMEIP_GEN=$SOMEIP_GEN 
 
 echo
 echo GENERATING CODE
