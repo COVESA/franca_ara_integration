@@ -4,9 +4,8 @@ cd $(dirname $0)
 test_file_exists() {
   [ -f "$1" ] || echo "Missing file $1 !"
 }
-export COMMONAPI_CONFIG="$(readlink -f ../../../conf/commonapi.ini)"
-#export COMMONAPI_SOMEIP_CONFIG="$(readlink -f ../../../conf/commonapi-someip.ini)"
-export VSOMEIP_CONFIGURATION="$(readlink -f ../../../conf/vsomeip_ecu1.json)"
+
+export VSOMEIP_CONFIGURATION="$(readlink -f ./conf/vsomeip.json)"
 test_file_exists $COMMONAPI_CONFIG
 #test_file_exists $COMMONAPI_SOMEIP_CONFIG
 test_file_exists $VSOMEIP_CONFIGURATION
