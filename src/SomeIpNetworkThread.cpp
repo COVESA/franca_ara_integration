@@ -51,8 +51,6 @@ static BoxDefinition get_pod_box(uint8_t id, const IVehicles::BoundingBox &box)
     return b;
 }
 
-typedef std::pair<LaneLineDefinition, LaneLineDefinition> LaneDefinition_t;
-
 static LaneDefinition_t get_bounding_lines(IDrivingLane::LaneType l)
 {
     LaneLineDefinition left;
