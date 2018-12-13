@@ -29,37 +29,10 @@ using v1::genivi::aasr::showcase::IVehicles;
 using v1::genivi::aasr::showcase::IDrivingLane;
 using v1::genivi::aasr::showcase::IDrivingLaneProxy;
 
-// Permanent / shared data  -- These should be made class member for cleaner look
-static std::map<uint8_t, std::string /*color*/> known_bounding_box_ids;
-//static IVehicles::BoundingBox bounding_box_map;
-
 static int sanity_check_id (int id) {
    return std::max(0, std::min(id, MAX_IMAGE_ID));
 }
 
-static std::string get_new_color() {
-    return "Red";
-}
-
-// Assuming that identified vehicles might not always come in the same order
-// Actually, to be clear a map is unordered anyway.
-// To keep the same color on each we should consider remembering which IDs have been seen
-// To be decided: Do this in C++ part (efficient data structures) or in QML (would normally handle the colors)
-void identify_bounding_box(uint8_t id) {
-    //
-    if (known_bounding_box_ids.find(id) == known_bounding_box_ids.end()) {
-        // Not found, i.e. new
-        std::string color = get_new_color();
-        std::cerr << "New identified object (stored) : " << id << ", with color" << color << std::endl;
-        known_bounding_box_ids.insert(std::make_pair(id, color));
-    }
-}
-
-// Only call this after identify_bounding_box (when we know it exists in the map)
-static std::string bounding_box_color(uint8_t id) {
-    // assert (exists in map)
-    return known_bounding_box_ids[id];
-}
 
 // Convert box to our own POD data type before passing it on.
 // (this is a possibly unnecessary abstraction, but at least we add the
@@ -71,7 +44,10 @@ static BoxDefinition get_pod_box(uint8_t id, const IVehicles::BoundingBox &box)
     b.width = box.getWidth();
     b.x = box.getTopLeftX();
     b.y = box.getTopLeftY();
-    b.color = bounding_box_color(id);
+
+    // We used to support multiple boxes.  Right now it's constant so the
+    // color is constant too (and could just as well be handled in QML)
+    b.color = "red";
     return b;
 }
 
