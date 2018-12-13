@@ -15,12 +15,14 @@ TARGET = ../franca-ara
 
 HEADERS += imageprovider.h \
            imagesource.h \
+           recognitionmodel.h \
            SomeIpNetworkThread.h
 
 # Compile these sources
 SOURCES += main.cpp \
            imageprovider.cpp \
            imagesource.cpp \
+           recognitionmodel.cpp \
            SomeIpNetworkThread.cpp
 
 # Add generated headers
