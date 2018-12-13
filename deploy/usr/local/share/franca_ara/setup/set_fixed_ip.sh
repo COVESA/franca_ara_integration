@@ -1,0 +1,1 @@
+../../../../../../conf/ivi/set_fixed_ip.sh
