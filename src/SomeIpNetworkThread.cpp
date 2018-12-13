@@ -12,7 +12,7 @@
 #include <CommonAPI/CommonAPI.hpp>
 #include <QQuickView>
 #include <map>
-#include <math.h>
+#include <algorithm>
 #include <set>
 
 #define IMAGE_FEED_PATH                                                        \
@@ -34,7 +34,7 @@ static std::map<uint8_t, std::string /*color*/> known_bounding_box_ids;
 //static IVehicles::BoundingBox bounding_box_map;
 
 static int sanity_check_id (int id) {
-    return id; // FIXME
+   return std::max(0, std::min(id, MAX_IMAGE_ID));
 }
 
 static std::string get_new_color() {
