@@ -8,7 +8,6 @@
 #include "v1/genivi/aasr/showcase/IDrivingLaneProxy.hpp"
 #include "v1/genivi/aasr/showcase/IVehiclesProxy.hpp"
 #include "v1/genivi/aasr/showcase/IVehiclesSomeIPProxy.hpp"
-#include <CommonAPI/AttributeCacheExtension.hpp>
 #include <CommonAPI/CommonAPI.hpp>
 #include <QQuickView>
 #include <map>
@@ -125,10 +124,6 @@ void SomeIpNetworkThread::run()
     LOG(Build proxy in 1 seconds from now);
     MSLEEP(1000);
 
-    //    auto vProxy = runtime->buildProxyWithDefaultAttributeExtension
-    //        <IVehiclesProxy,CommonAPI::Extensions::AttributeCacheExtension>
-    //        (domain, instance);
-    //
     LOG(buildProxy);
     auto vProxy = runtime->buildProxy<IVehiclesProxy>(domain, instance);
     auto lProxy = runtime->buildProxy<IDrivingLaneProxy>(domain, instance);
