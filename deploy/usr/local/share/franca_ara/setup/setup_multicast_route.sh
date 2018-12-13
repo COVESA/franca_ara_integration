@@ -1,0 +1,1 @@
+../../../../../../conf/ivi/setup_multicast_route.sh
