@@ -16,7 +16,7 @@
 #include <set>
 
 #define IMAGE_FEED_PATH                                                        \
-   "/home/user/devel/GENIVI/franca_ara_integration/src/feed"
+   "/usr/local/share/franca-ara/images"
 
 #define MAX_IMAGE_ID 228
 
