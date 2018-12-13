@@ -9,6 +9,17 @@ Item {
         onUpdateGraphicsImage: image.reload();
     }
 
+    ListView {
+        width: 100; height: 100
+        model: recognitionModel
+        Rectangle {
+            height: model.modelData.box.height
+            width: model.modelData.box.width
+            color: model.modelData.box.color
+            Text { text: name }
+        }
+    }
+
     Image {
         id: image
         anchors.fill: parent
