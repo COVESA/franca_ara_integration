@@ -21,4 +21,6 @@ struct LaneLineDefinition {
        upper_y;
 };
 
+typedef std::pair<LaneLineDefinition, LaneLineDefinition> LaneDefinition_t;
+
 #endif
