@@ -138,7 +138,7 @@ void SomeIpNetworkThread::run()
 
         // Delegate to image class to signal QML graphics to draw lane
         // identification lines
-        m_image_source.newLaneIdentification(lines.first, lines.second);
+        m_recognition_model.newLaneIdentification(lines);
 
         Q_UNUSED(id);  // FIXME
     };
