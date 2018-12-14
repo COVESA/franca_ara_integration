@@ -7,7 +7,6 @@
 #include "v1/genivi/aasr/showcase/IDrivingLaneProxy.hpp"
 #include "v1/genivi/aasr/showcase/IVehiclesProxy.hpp"
 #include "v1/genivi/aasr/showcase/IVehiclesSomeIPProxy.hpp"
-#include <CommonAPI/AttributeCacheExtension.hpp>
 #include <CommonAPI/CommonAPI.hpp>
 
 #define LOG(x) std::cerr << #x << std::endl;
@@ -44,6 +43,7 @@ static void lane_broadcast_update(const v1::genivi::aasr::showcase::IDrivingLane
    std::cerr << "lane.lowerLeftPointX = " << lane.getLowerLeftPointX() << std::endl;
    std::cerr << "    .lowerLeftPointY = " << lane.getLowerLeftPointY() << std::endl;
    std::cerr << "    .lowerRightPointX = " << lane.getLowerRightPointX() << std::endl;
+   std::cerr << "    .lowerRightPointY = " << lane.getLowerRightPointY() << std::endl;
    std::cerr << "    .intersectionPointX = " << lane.getIntersectionPointX() << std::endl;
    std::cerr << "    .intersectionPointY = " << lane.getIntersectionPointY() << std::endl;
 }
