@@ -48,15 +48,15 @@ public:
     int boxW() const { return m_box.width; };
     QColor boxColor() const { return QColor(m_box.color.c_str()); };
 
-    int laneLeftX1() const { return m_lanes.first.upper_x; };
-    int laneLeftX2() const { return m_lanes.first.lower_x; };
-    int laneLeftY1() const { return m_lanes.first.upper_y; };
-    int laneLeftY2() const { return m_lanes.first.lower_y; };
+    int laneLeftX1() const { return m_lanes.first.lower_x; };
+    int laneLeftX2() const { return m_lanes.first.upper_x; };
+    int laneLeftY1() const { return m_lanes.first.lower_y; };
+    int laneLeftY2() const { return m_lanes.first.upper_y; };
 
-    int laneRightX1() const { return m_lanes.second.upper_x; };
-    int laneRightX2() const { return m_lanes.second.lower_x; };
-    int laneRightY1() const { return m_lanes.second.upper_y; };
-    int laneRightY2() const { return m_lanes.second.lower_y; };
+    int laneRightX1() const { return m_lanes.second.lower_x; };
+    int laneRightX2() const { return m_lanes.second.upper_x; };
+    int laneRightY1() const { return m_lanes.second.lower_y; };
+    int laneRightY2() const { return m_lanes.second.upper_y; };
 
     LaneDefinition_t lanes() const;
     void newLaneIdentification(const LaneDefinition_t &lane);
