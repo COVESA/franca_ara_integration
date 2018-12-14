@@ -74,6 +74,32 @@ void SomeIpNetworkThread::connections(QQuickView &view)
     m_image_source.connectImageProvider(view);
 }
 
+static void debug_print_vehicle(const IVehicles::ListOfVehicles & v) {
+   auto vehicle = v.getDetectedVehicle();
+   auto id = vehicle.getId();
+   if (id != 0) {
+      std::cerr << "detectedVehicle.id = " << (int)id << std::endl;
+      std::cerr << "               .currentDistance(float) = " << vehicle.getCurrentDistance().getFloatingPoint().getFloatingPoint32Bit() << std::endl;
+      std::cerr << "               .currentDistance(double) = " << vehicle.getCurrentDistance().getFloatingPoint().getFloatingPoint64Bit() << std::endl;
+      auto box = v.getBox();
+      std::cerr << "box.topLeftX = " << box.getTopLeftX() << std::endl;
+      std::cerr << "box.topLeftY = " << box.getTopLeftY() << std::endl;
+      std::cerr << "box.width = " << box.getWidth() << std::endl;
+      std::cerr << "box.height = " << box.getHeight() << std::endl;
+   } else {
+      std::cerr << "No identified vehicle" << std::endl;
+   }
+}
+
+static void debug_print_lane(const IDrivingLane::LaneType &lane) {
+   std::cerr << "lane.lowerLeftPointX = " << lane.getLowerLeftPointX() << std::endl;
+   std::cerr << "    .lowerLeftPointY = " << lane.getLowerLeftPointY() << std::endl;
+   std::cerr << "    .lowerRightPointX = " << lane.getLowerRightPointX() << std::endl;
+   std::cerr << "    .lowerRightPointY = " << lane.getLowerRightPointY() << std::endl;
+   std::cerr << "    .intersectionPointX = " << lane.getIntersectionPointX() << std::endl;
+   std::cerr << "    .intersectionPointY = " << lane.getIntersectionPointY() << std::endl;
+}
+
 void SomeIpNetworkThread::run()
 {
 
@@ -86,6 +112,8 @@ void SomeIpNetworkThread::run()
     // There are surely a few other ways this could be done.
     auto vehicles_attribute_update = [&](const IVehicles::ListOfVehicles & v) {
         std::cerr << "Received change on Vehicles Attributes for frameId: " << v.getFrameId() << std::endl;
+
+        debug_print_vehicle(v);
 
         int id = v.getFrameId();
         m_image_source.newFrameId(id);
@@ -102,6 +130,8 @@ void SomeIpNetworkThread::run()
 
     auto lane_broadcast_update = [&](const IDrivingLane::LaneType & l) {
         std::cerr << "Received change on Lane Attribute for frameId: " << l.getFrameId() << std::endl;
+
+        debug_print_lane(l);
 
         int id = l.getFrameId();
         LaneDefinition_t lines = get_bounding_lines(l);
