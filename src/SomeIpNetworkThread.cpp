@@ -137,7 +137,7 @@ void SomeIpNetworkThread::run()
         int id = l.getFrameId();
         LaneDefinition_t lines = get_bounding_lines(l);
 
-        // Delegate to image class to signal QML graphics to draw lane
+        // Delegate to recognition model class to signal QML graphics to draw lane
         // identification lines
         m_recognition_model.newLaneIdentification(lines);
 
@@ -206,12 +206,6 @@ void SomeIpNetworkThread::run()
         int x = 0;
         ++x;
         MSLEEP(1000);
-
-        // Try one output of lane signal
-    static    auto x1 = new QLine(10,20,30,40);
-    static            auto x2 = new QLine(10,20,30,40);
-
-    m_image_source.laneIdentified(*x1,*x2);
     }
 }
 
