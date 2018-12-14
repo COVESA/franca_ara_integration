@@ -3,6 +3,7 @@
 // (C) 2018 GENIVI Alliance
 // This file is part of FRANCA--ARA integration demo/pilot project
 #include "recognitionmodel.h"
+#include <iostream>
 
 RecognitionModel::RecognitionModel(QObject *parent)
     : QObject(parent)
@@ -15,6 +16,7 @@ RecognitionModel::RecognitionModel(int id, const BoxDefinition &box,
 {
 }
 
+/*
 int RecognitionModel::id() const
 {
     return m_id;
@@ -25,6 +27,7 @@ void RecognitionModel::setId(const int &id)
         m_id = id;
         emit idChanged();
 }
+*/
 
 BoxDefinition RecognitionModel::box() const
 {
@@ -42,8 +45,10 @@ LaneDefinition_t RecognitionModel::lanes() const
     return m_lanes;
 }
 
-void RecognitionModel::setLanes(const LaneDefinition_t &lanes)
+void RecognitionModel::newLaneIdentification(const LaneDefinition_t &lanes)
 {
+   std::cerr << "Model: Emitting signal, after newlLane value: lanes.first.lower_x = " << lanes.first.lower_x << std::endl;
         m_lanes = lanes;
         emit lanesChanged();
 }
+
