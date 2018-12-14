@@ -23,44 +23,12 @@ Item {
         }
     }
 
-    // Test connection to data moddel
-
-    // Old junk
+    // Lane representation
     Rectangle {
-        height: recognitionModel.boxH
-        width: recognitionModel.boxW
-        x: recognitionModel.boxH
-        y: recognitionModel.boxW
-        color: recognitionModel.boxColor // this is set to "Red"
-        //Text { text: name }
-    }
-
-    // Directly connected
-    Rectangle {
-        height: recognitionModel.leftLaneX1
-        width: recognitionModel.leftLaneY1
-        x: recognitionModel.leftLaneX2 + 500
-        y: recognitionModel.leftLaneY2 + 500
-        color: "yellow"
-    }
-
-    Connections {
-        target: myrect
-        onLanesChanged: {
-            myrect.height = recognitionModel.rightLaneY2;
-            myrect.width = recognitionModel.rightLaneY2;
-            myrect.x = recognitionModel.rightLaneY2;
-            myrect.y = recognitionModel.rightLaneY2;
-        }
-    }
-
-    // Fixed size, later modified
-    Rectangle {
-        id: myrect
         height: 200
-        width: 300
-        x: 400
-        y: 500
-        color: "blue"
+        width: 200
+        x: recognitionModel.laneLeftX1
+        y: recognitionModel.leftLaneY2
+        color: "yellow"
     }
 }
