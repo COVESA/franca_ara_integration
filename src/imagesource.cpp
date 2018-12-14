@@ -93,7 +93,7 @@ void ImageSource::newLaneIdentification (const LaneLineDefinition &left, const L
    emit laneIdentified(lines.first, lines.second);  // Signal to QML
 }
 
-QLine ImageSource::getLeftLaneLine () {
+/*QLine ImageSource::getLeftLaneLine () {
 
     static    auto x1 = new QLine(10,20,30,40);
     return *x1;
@@ -105,6 +105,5 @@ QLine ImageSource::getRightLaneLine () {
     return *x2;
 }
 
-
-
+*/
 

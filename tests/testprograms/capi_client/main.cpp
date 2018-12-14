@@ -88,10 +88,12 @@ int main(int argc, char *argv[])
    while (!myProxy->isAvailable()) {
       MSLEEP(500);
    }
+   LOG(vehicle proxy is available now);
+
    while (!laneProxy->isAvailable()) {
       MSLEEP(500);
    }
-   LOG(proxy is available !);
+   LOG(lane proxy is available now);
 
    MSLEEP(2000);
 
@@ -99,9 +101,10 @@ int main(int argc, char *argv[])
    myProxy->getVehiclesAttribute().getChangedEvent().subscribe(&vehicles_attribute_update);
 
    // FIXME
+   LOG(register callback for LaneDetectedEvent);
    laneProxy->getLaneDetectedEvent().subscribe(&lane_broadcast_update);
 
-   LOG(registered callback);
+   LOG(Done registered callback);
 
    while (true) {
       // Not much happening here
