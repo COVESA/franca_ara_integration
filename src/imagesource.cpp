@@ -41,16 +41,6 @@ static QRect get_bounding_qrect(BoxDefinition box) {
    return QRect(box.x, box.y, box.width, box.height);
 }
 
-typedef std::pair<QLine, QLine> Drawn_Lane_Boundary_t;
-
-static Drawn_Lane_Boundary_t get_bounding_lines(const LaneLineDefinition &l, const LaneLineDefinition &r) {
-   return Drawn_Lane_Boundary_t(
-         QLine(l.upper_x, l.upper_y, l.lower_x, l.lower_y),
-         QLine(r.upper_x, r.upper_y, r.lower_x, r.lower_y)
-         );
-}
-
-
 // Public functions called by networking class/thread:
 
 // Init, called from main at startup
@@ -83,27 +73,3 @@ void ImageSource::newVehicleIdentification (const BoxDefinition &box) {
    printf("emit vehicleIdentified\n");
    emit vehicleIdentified(rect); // Signal to QML
 }
-
-void ImageSource::newLaneIdentification (const LaneLineDefinition &left, const LaneLineDefinition &right) {
-   Q_UNUSED(left);
-   Q_UNUSED(right);
-
-   Drawn_Lane_Boundary_t lines = get_bounding_lines(left, right);
-   printf("emit laneIdentified\n");
-   emit laneIdentified(lines.first, lines.second);  // Signal to QML
-}
-
-/*QLine ImageSource::getLeftLaneLine () {
-
-    static    auto x1 = new QLine(10,20,30,40);
-    return *x1;
-}
-
-QLine ImageSource::getRightLaneLine () {
-
-    static            auto x2 = new QLine(10,20,30,40);
-    return *x2;
-}
-
-*/
-
