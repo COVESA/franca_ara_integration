@@ -1,3 +1,8 @@
+// SPDX-License-Identifier: MPL-2.0
+
+// (C) 2018 GENIVI Alliance
+// This file is part of FRANCA--ARA integration demo/pilot project
+
 #ifndef IMAGESOURCE_H
 #define IMAGESOURCE_H
 
@@ -17,7 +22,6 @@ class ImageSource : public QObject
 {
     Q_OBJECT
 
-
 public:
     // Called from network class to initialize signals/slots etc
     void connectImageProvider(QQuickView &view);
@@ -27,16 +31,11 @@ public:
     // "non-Qt" data and construct an appropriate Qt object and send it by
     // signal to the QML thread.
     void newFrameId(int frameID);
-    void newVehicleIdentification(const BoxDefinition &box);
-    void newLaneIdentification(const LaneLineDefinition &left,
-                             const LaneLineDefinition &right);
-
-//    QLine getLeftLaneLine ();
-//    QLine getRightLaneLine ();
+    void newVehicleIdentification();
 
 Q_SIGNALS: // (Signals sent to QML graphics program)
     void imageReady(const QImage &s);
-    void vehicleIdentified(QRect box);
+    void vehicleIdentified();
     void laneIdentified(QLine &leftLine, QLine &rightLine);
 
 private:

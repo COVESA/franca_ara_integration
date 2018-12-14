@@ -1,3 +1,8 @@
+// SPDX-License-Identifier: MPL-2.0
+
+// (C) 2018 GENIVI Alliance
+// This file is part of FRANCA--ARA integration demo/pilot project
+
 #include <QGuiApplication>
 #undef QT_OPENGL_ES_3
 #include <QQuickView>
@@ -14,6 +19,7 @@ DLT_DECLARE_CONTEXT(DLT_FRA_ARA_CONTEXT)
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
+
     QQuickView view;
 
     DLT_REGISTER_APP("FRA","FRANCA-ARA Integration Demo");

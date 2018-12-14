@@ -13,6 +13,7 @@
 #define LOG(x) std::cerr << #x << std::endl;
 #define MSLEEP(x)                                                              \
     std::this_thread::sleep_for(std::chrono::milliseconds((x)));
+#define MAX_IMAGE_ID 228
 
 using v1::genivi::aasr::showcase::IVehicles;
 using v1::genivi::aasr::showcase::IVehiclesStubDefault;
@@ -54,87 +55,78 @@ int main() {
    IVehicles::ListOfVehicles list_of_vehicles;
    IVehicles::BoundingBox bounding_box;
 
-
-/*	
-	// Type definition of a lane
-	struct LaneType {
-		UInt16 frameId
-		UInt32 lowerLeftPointX
-		UInt32 lowerLeftPointY
-		UInt32 lowerRightPointX
-		UInt32 lowerRightPointY
-		UInt32 intersectionPointX
-		UInt32 intersectionPointY
-	}
-
-	// Messages --------------------------------------------
-
-	// Event-based communication of the detected lane
-	broadcast LaneDetected {
-		out {
-			LaneType drivingLane
-		}	
-	}
-}
-*/
-	
-   static int i = 0;
+   static int direction = -1;
    while (true) {
+      direction = -direction;
+      int i;
+      for (i = 0 ; i <= MAX_IMAGE_ID ; ++i) {
 
-      LOG(capi_server: Main loop is alive);
+         LOG(capi_server: Main loop is alive);
 
-      // Update value
+         // A slighly moving box. (Only set as valid for certain values of
+         // i -- see below)
+         IVehicles::BoundingBox box;
 
-      // Example of available setters:
-      //        inline void setFrameId(const uint16_t &_value) { std::get< 0>(values_) = _value; }
-      //        inline void setOneVehicle(const Vehicle &_value) { std::get< 1>(values_) = _value; }
-      //        inline void setTwoVehicle(const Vehicle &_value) { std::get< 2>(values_) = _value; }
-      //        inline void setFrameHash(const std::string &_value) { std::get< 3>(values_) = _value; }
+         /* box.setTopLeftX(100+i/3);
+            box.setTopLeftY(100+i/3);
+            box.setWidth(i*2+40);
+            box.setHeight(i*2+60);
+            */
 
-      // Change some value
-//      list_of_vehicles.setFrameId(i++);
+         // A constant box
+         box.setTopLeftX(180);
+         box.setTopLeftY(202);
+         box.setWidth(269);
+         box.setHeight(212);
 
-      // typedef std::unordered_map< uint8_t, uint16_t> Int_to_Int_Map;
-      //inline void setThemap(const Int_to_Int_Map &_value) { std::get< 1>(values_) = _value; }
-      IVehicles::BoundingBox box;
-      box.setTopLeftX(i);
-      box.setTopLeftY(i+20);
-      box.setWidth(i+40);
-      box.setHeight(i+60);
+         IVehicles::Vehicle v;
 
-      IVehicles::Vehicle v;
-      v.setId(0);
-      IVehicles::FlexibleFloatingPointContainer fpc;
-      IVehicles::FlexibleFloatingPoint value_s;
-      float f = 0.44;
-      value_s.setFloatingPoint32Bit(f);
-      value_s.setFloatingPoint64Bit((double)f);
-      fpc.setFloatingPoint(value_s);
-      v.setCurrentDistance(fpc);
-      v.setCollisionTime(fpc);
+         // Simulate the recognition of vehicle around
+         // frame number 180 and higher.
+         if (i > 180 && i < MAX_IMAGE_ID) {
+            v.setId(i);  // Valid ID for vehicle
+         }
+         else
+         {
+            v.setId(0); // Invalid (no vehicle)
+         }
 
-      list_of_vehicles.setFrameId(++i);
-      list_of_vehicles.setDetectedVehicle(v);
-      list_of_vehicles.setBox(box);
+         IVehicles::FlexibleFloatingPointContainer fpc;
+         IVehicles::FlexibleFloatingPoint value_s;
+         float f = 0.44;
+         value_s.setFloatingPoint32Bit(f);
+         value_s.setFloatingPoint64Bit((double)f);
+         fpc.setFloatingPoint(value_s);
+         v.setCurrentDistance(fpc);
+         v.setCollisionTime(fpc);
 
-      LOG(capi_server: Setting new list_of_vehicles value);
-      vService->setVehiclesAttribute(list_of_vehicles);
+         list_of_vehicles.setFrameId(i);
+         list_of_vehicles.setDetectedVehicle(v);
+         list_of_vehicles.setBox(box);
 
-      IDrivingLane::LaneType l;
-      l.setFrameId(i+200);
-      l.setLowerLeftPointX(100+4*i);
-      l.setLowerLeftPointY(200+4*i);
-      l.setLowerRightPointX(300+4*i);
-      l.setLowerRightPointY(400+4*i);
-      l.setIntersectionPointX(500+4*i);
-      l.setIntersectionPointY(600+4*i);
-      // TODO: How to set broadcast data and notify
-      LOG(capi_server: Broadcasting lane event);
-      lService->fireLaneDetectedEvent(l);
+         std::cerr << "capi_server: update, frameid i = " << i << " id = " << v.getId() << std::endl;
+         vService->setVehiclesAttribute(list_of_vehicles);
 
+         IDrivingLane::LaneType l;
+         l.setFrameId(i);
+         l.setLowerLeftPointX(0+i);
+         l.setLowerLeftPointY(470);
+         l.setLowerRightPointX(600-i);
+         l.setLowerRightPointY(440);
+         l.setIntersectionPointX(350);
+         l.setIntersectionPointY(200);
+         /*      if (i == 0)
+                 direction = 1;
+                 if (i == 200)
+                 direction = -1;
+                 */
 
+         // TODO: How to set broadcast data and notify
+         //LOG(capi_server: Broadcasting lane event);
+         lService->fireLaneDetectedEvent(l);
 
-      MSLEEP(5000);
+         MSLEEP(50);
+      }
    }
    return 0;
 }

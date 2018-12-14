@@ -1,3 +1,8 @@
+// SPDX-License-Identifier: MPL-2.0
+
+// (C) 2018 GENIVI Alliance
+// This file is part of FRANCA--ARA integration demo/pilot project
+
 #include "imageprovider.h"
 #include <iostream>
 #include <assert.h>
@@ -18,12 +23,12 @@ QPixmap ImageProvider::requestPixmap(const QString &id, QSize *size, const QSize
     Q_UNUSED(size);
     QPixmap pixmap;
 
-    std::cout << "requestPixmap!" << std::endl;
+    //std::cout << "requestPixmap!" << std::endl;
 
     DLT_LOG(DLT_FRA_ARA_CONTEXT, DLT_LOG_DEBUG, DLT_STRING("requestPixmap()!"));
 
     if (m_image.isNull()){
-        std::cout << "Request PIXMAP Failed: (NULL)" << std::endl;
+        std::cerr << "Request PIXMAP Failed: (NULL)" << std::endl;
         return QPixmap();
     }
     pixmap = QPixmap::fromImage(m_image);
@@ -34,14 +39,14 @@ QPixmap ImageProvider::requestPixmap(const QString &id, QSize *size, const QSize
     if (requestedSize.height() > 0)
         pixmap = pixmap.scaledToHeight(requestedSize.height());
 
-    std::cout << "requestPixmap DONE!" << std::endl;
+    //std::cout << "requestPixmap DONE!" << std::endl;
 
     return pixmap;
 }
 
 void ImageProvider::setImage(const QImage &img)
 {
-    std::cout << "setImage slot activated" << std::endl;
+    //std::cout << "setImage slot activated" << std::endl;
     DLT_LOG(DLT_FRA_ARA_CONTEXT, DLT_LOG_DEBUG, DLT_STRING("setImage()!"));
     assert (!img.isNull());
     m_image = img;

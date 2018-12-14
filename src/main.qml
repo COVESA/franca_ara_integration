@@ -1,34 +1,29 @@
+// SPDX-License-Identifier: MPL-2.0
+
+// (C) 2018 GENIVI Alliance
+// This file is part of FRANCA--ARA integration demo/pilot project
+
 import QtQuick 2.3
 
-Item {
+Rectangle {
     width: 1920 - 80
     height: 1080
+    color: "black"  // Use black background if there is any flickering
 
-    Connections {
-        target: imageprovider
-        onUpdateGraphicsImage: image.reload();
+    // Scaling of images & coordinates
+    property double xscale : width / 640.0
+    property double yscale : height / 480.0
+
+    VideoImage {
+        id: video
     }
 
-
-    Image {
-        id: image
-        anchors.fill: parent
-        source: "image://imageprovider"
-        cache: false
-        asynchronous: true
-        function reload() {
-            var oldSource = source;
-            source = "";
-            source = oldSource;
-        }
-    }
-
-    // Lane representation
-    Rectangle {
-        height: 200
-        width: 200
-        x: recognitionModel.laneLeftX1
-        y: recognitionModel.leftLaneY2
-        color: "yellow"
+    DebugTexts {
+        id: db
+        color: "black"
+        anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.leftMargin: 10
+        anchors.topMargin: 10
     }
 }

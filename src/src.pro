@@ -16,7 +16,8 @@ TARGET = ../franca-ara
 HEADERS += imageprovider.h \
            imagesource.h \
            recognitionmodel.h \
-           SomeIpNetworkThread.h
+           SomeIpNetworkThread.h \
+    SomeIpNetworkThreadTypes.h
 
 # Compile these sources
 SOURCES += main.cpp \
@@ -49,7 +50,7 @@ SOURCES += src-gen/v1/genivi/aasr/showcase/IDrivingLaneSomeIPDeployment.cpp \
            src-gen/v1/genivi/aasr/showcase/IVehiclesSomeIPProxy.cpp \
            src-gen/v1/genivi/aasr/showcase/IVehiclesSomeIPStubAdapter.cpp
 
-INCLUDEPATH += src-gen  /usr/local/include
+INCLUDEPATH += src-gen
 
 unix {
     CONFIG += link_pkgconfig

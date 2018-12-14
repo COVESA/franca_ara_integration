@@ -15,9 +15,6 @@
 #include <algorithm>
 #include <set>
 
-#define IMAGE_FEED_PATH                                                        \
-   "/usr/local/share/franca-ara/images"
-
 #define MAX_IMAGE_ID 228
 
 #define LOG(x) std::cout << #x << std::endl;
@@ -30,7 +27,7 @@ using v1::genivi::aasr::showcase::IDrivingLane;
 using v1::genivi::aasr::showcase::IDrivingLaneProxy;
 
 static int sanity_check_id (int id) {
-   return std::max(0, std::min(id, MAX_IMAGE_ID));
+    return std::max(0, std::min(id, MAX_IMAGE_ID));
 }
 
 
@@ -39,6 +36,7 @@ static int sanity_check_id (int id) {
 // color info, which was not given in the network protocol)
 static BoxDefinition get_pod_box(uint8_t id, const IVehicles::BoundingBox &box)
 {
+
     BoxDefinition b;
     b.height = box.getHeight();
     b.width = box.getWidth();
@@ -77,34 +75,37 @@ void SomeIpNetworkThread::connections(QQuickView &view)
 }
 
 static void debug_print_vehicle(const IVehicles::ListOfVehicles & v) {
-   auto vehicle = v.getDetectedVehicle();
-   auto id = vehicle.getId();
-   if (id != 0) {
-      std::cerr << "detectedVehicle.id = " << (int)id << std::endl;
-      std::cerr << "               .currentDistance(float) = " << vehicle.getCurrentDistance().getFloatingPoint().getFloatingPoint32Bit() << std::endl;
-      std::cerr << "               .currentDistance(double) = " << vehicle.getCurrentDistance().getFloatingPoint().getFloatingPoint64Bit() << std::endl;
-      auto box = v.getBox();
-      std::cerr << "box.topLeftX = " << box.getTopLeftX() << std::endl;
-      std::cerr << "box.topLeftY = " << box.getTopLeftY() << std::endl;
-      std::cerr << "box.width = " << box.getWidth() << std::endl;
-      std::cerr << "box.height = " << box.getHeight() << std::endl;
-   } else {
-      std::cerr << "No identified vehicle" << std::endl;
-   }
+#if 0
+    auto vehicle = v.getDetectedVehicle();
+    auto id = vehicle.getId();
+    if (id != 0) {
+        std::cerr << "detectedVehicle.id = " << (int)id << std::endl;
+        std::cerr << "               .currentDistance(float) = " << vehicle.getCurrentDistance().getFloatingPoint().getFloatingPoint32Bit() << std::endl;
+        std::cerr << "               .currentDistance(double) = " << vehicle.getCurrentDistance().getFloatingPoint().getFloatingPoint64Bit() << std::endl;
+        auto box = v.getBox();
+        std::cerr << "box.topLeftX = " << box.getTopLeftX() << std::endl;
+        std::cerr << "box.topLeftY = " << box.getTopLeftY() << std::endl;
+        std::cerr << "box.width = " << box.getWidth() << std::endl;
+        std::cerr << "box.height = " << box.getHeight() << std::endl;
+    } else {
+        std::cerr << "No identified vehicle" << std::endl;
+    }
+#endif
+    Q_UNUSED(v);
 }
-
 static void debug_print_lane(const IDrivingLane::LaneType &lane) {
-   std::cerr << "lane.lowerLeftPointX = " << lane.getLowerLeftPointX() << std::endl;
-   std::cerr << "    .lowerLeftPointY = " << lane.getLowerLeftPointY() << std::endl;
-   std::cerr << "    .lowerRightPointX = " << lane.getLowerRightPointX() << std::endl;
-   std::cerr << "    .lowerRightPointY = " << lane.getLowerRightPointY() << std::endl;
-   std::cerr << "    .intersectionPointX = " << lane.getIntersectionPointX() << std::endl;
-   std::cerr << "    .intersectionPointY = " << lane.getIntersectionPointY() << std::endl;
+#if 0
+    std::cerr << "lane.lowerLeftPointX = " << lane.getLowerLeftPointX() << std::endl;
+    std::cerr << "    .lowerLeftPointY = " << lane.getLowerLeftPointY() << std::endl;
+    std::cerr << "    .lowerRightPointX = " << lane.getLowerRightPointX() << std::endl;
+    std::cerr << "    .lowerRightPointY = " << lane.getLowerRightPointY() << std::endl;
+    std::cerr << "    .intersectionPointX = " << lane.getIntersectionPointX() << std::endl;
+    std::cerr << "    .intersectionPointY = " << lane.getIntersectionPointY() << std::endl;
+#endif
+    Q_UNUSED(lane);
 }
-
 void SomeIpNetworkThread::run()
 {
-
     // Initial image to get started
     m_image_source.newFrameId(0);
 
@@ -113,39 +114,55 @@ void SomeIpNetworkThread::run()
     // variable, and the closure this creates will make that possible.
     // There are surely a few other ways this could be done.
     auto vehicles_attribute_update = [&](const IVehicles::ListOfVehicles & v) {
-        std::cerr << "Received change on Vehicles Attributes for frameId: " << v.getFrameId() << std::endl;
+        //std::cerr << "Received change on Vehicles Attributes for frameId: " << v.getFrameId() << std::endl;
 
         debug_print_vehicle(v);
 
         int id = v.getFrameId();
+        m_recognition_model.setFrameId(id);
         m_image_source.newFrameId(id);
 
         auto vehicle = v.getDetectedVehicle();
-        auto bounding_box = v.getBox();
 
-        int vehicle_id = sanity_check_id(vehicle.getId());
-        BoxDefinition box_pod = get_pod_box(vehicle_id, bounding_box);
+        // frame ID == 0 means no identified vehicle(?)
+        if (vehicle.getId() != 0)
+        {
+            auto bounding_box = v.getBox();
+            int vehicle_id = sanity_check_id(vehicle.getId());
+            auto box_pod = get_pod_box(vehicle_id, bounding_box);
 
-        // Delegate to image class to signal QML graphics to draw vehicle identification lines
-        m_image_source.newVehicleIdentification(box_pod);
+            // Delegate to image class to signal QML graphics to draw vehicle identification lines
+
+            //  FIXME: This is obsolete now?
+
+            m_recognition_model.setBox(box_pod);
+        }
+        else
+        {
+            //LOG(No vehicle ID);
+            m_recognition_model.clearBox();
+        }
+
+        // Rename this because is really just driving the frame now...
+        // Box/ClearBox is driving vehicle identification
+        m_image_source.newVehicleIdentification();
+
     };
 
     auto lane_broadcast_update = [&](const IDrivingLane::LaneType & l) {
-        std::cerr << "Received change on Lane Attribute for frameId: " << l.getFrameId() << std::endl;
+        //std::cerr << "Received change on Lane Attribute for frameId: " << l.getFrameId() << std::endl;
 
         debug_print_lane(l);
 
         int id = l.getFrameId();
         LaneDefinition_t lines = get_bounding_lines(l);
 
-        // Delegate to image class to signal QML graphics to draw lane
+        // Delegate to recognition model class to signal QML graphics to draw lane
         // identification lines
         m_recognition_model.newLaneIdentification(lines);
 
         Q_UNUSED(id);  // FIXME
     };
-
-    printf("Running: SomeIpNetworkThread\n");
 
     std::string domain = "local";
     // We used "test" in the config file for Vehicle interface, it's not that nice but keeping it for now
@@ -169,17 +186,17 @@ void SomeIpNetworkThread::run()
     auto lProxy = runtime->buildProxy<IDrivingLaneProxy>(domain, lane_instance);
 
     if (!vProxy) {
-       LOG(Building vehicle i/f proxy failed!  Is NULL.  Stoppping);
-       return; // FIXME
+        LOG(Building vehicle i/f proxy failed!  Is NULL.  Stoppping);
+        return; // FIXME
     }
     if (!lProxy) {
-       LOG(Building lane i/f proxy failed!  Is NULL.  Stoppping);
-       return; // FIXME
+        LOG(Building lane i/f proxy failed!  Is NULL.  Stoppping);
+        return; // FIXME
     }
 
     // This helps me understand what the hell is going on...
-    LOG(Reminder : IVehicle Service ID = 1335 which is hex 0x537)
-    LOG(Reminder : IVehicle Instance ID is 22136 which is hex 0x5678)
+    //LOG(Reminder : IVehicle Service ID = 1335 which is hex 0x537)
+    //LOG(Reminder : IVehicle Instance ID is 22136 which is hex 0x5678)
 
     LOG(waiting for proxy isAvailable);
     while (!vProxy->isAvailable()) {
@@ -208,15 +225,7 @@ void SomeIpNetworkThread::run()
         LOG(MAIN LOOP);
         // Attributes are updated through callback above...
         // OK now what?
-        int x = 0;
-        ++x;
         MSLEEP(1000);
-
-        // Try one output of lane signal
-    static    auto x1 = new QLine(10,20,30,40);
-    static            auto x2 = new QLine(10,20,30,40);
-
-    m_image_source.laneIdentified(*x1,*x2);
     }
 }
 

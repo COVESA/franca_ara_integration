@@ -8,7 +8,7 @@
       },
       "level": "debug"
    },
-   "unicast": "192.168.100.44",
+   "unicast": "192.168.100.42",
    "applications": [
       {
          "name": "vsomeipd",

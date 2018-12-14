@@ -19,15 +19,14 @@ if [ $? -eq 0 ] ; then
   echo
 else
   echo -------------------------------
-  echo STARTING VSOMEIPD
+  echo "STARTING VSOMEIPD (hit return to continue)"
   echo -------------------------------
-read x
+  read x
   LD_LIBRARY_PATH=/usr/local/lib:/usr/local/lib64 vsomeipd &
 fi
-read x
 
 echo -------------------------------
-echo STARTING CAPI_SERVER
+echo "STARTING CAPI_SERVER (hit return to continue"
 echo -------------------------------
 read x
 
