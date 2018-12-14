@@ -8,7 +8,7 @@
 #include <CommonAPI/CommonAPI.hpp>
 #include "v1/genivi/aasr/showcase/IVehiclesStubDefault.hpp"
 #include "v1/genivi/aasr/showcase/IDrivingLaneStubDefault.hpp"
-
+#include <algorithm>
 
 #define LOG(x) std::cerr << #x << std::endl;
 #define MSLEEP(x)                                                              \
@@ -79,6 +79,7 @@ int main() {
 */
 	
    static int i = 0;
+   static int direction = 1;
    while (true) {
 
       LOG(capi_server: Main loop is alive);
@@ -113,7 +114,8 @@ int main() {
       v.setCurrentDistance(fpc);
       v.setCollisionTime(fpc);
 
-      list_of_vehicles.setFrameId(++i);
+      i = i + direction;
+      list_of_vehicles.setFrameId(i);
       list_of_vehicles.setDetectedVehicle(v);
       list_of_vehicles.setBox(box);
 
@@ -121,20 +123,23 @@ int main() {
       vService->setVehiclesAttribute(list_of_vehicles);
 
       IDrivingLane::LaneType l;
-      l.setFrameId(i+200);
-      l.setLowerLeftPointX(100+4*i);
-      l.setLowerLeftPointY(200+4*i);
-      l.setLowerRightPointX(300+4*i);
-      l.setLowerRightPointY(400+4*i);
-      l.setIntersectionPointX(500+4*i);
-      l.setIntersectionPointY(600+4*i);
+      l.setFrameId(i);
+      l.setLowerLeftPointX(50+i);
+      l.setLowerLeftPointY(700);
+      l.setLowerRightPointX(900-i);
+      l.setLowerRightPointY(700);
+      l.setIntersectionPointX(350);
+      l.setIntersectionPointY(50);
+      if (i == 0)
+         direction = 1;
+      if (i == 200)
+         direction = -1;
+
       // TODO: How to set broadcast data and notify
       LOG(capi_server: Broadcasting lane event);
       lService->fireLaneDetectedEvent(l);
 
-
-
-      MSLEEP(5000);
+      MSLEEP(50);
    }
    return 0;
 }
