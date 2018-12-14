@@ -73,6 +73,7 @@ static LaneDefinition_t get_bounding_lines(IDrivingLane::LaneType l)
 void SomeIpNetworkThread::connections(QQuickView &view)
 {
     m_image_source.connectImageProvider(view);
+    m_recognition_model.connectRecognitionModel(view);
 }
 
 static void debug_print_vehicle(const IVehicles::ListOfVehicles & v) {
