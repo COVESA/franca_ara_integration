@@ -31,8 +31,8 @@ public:
     void newLaneIdentification(const LaneLineDefinition &left,
                              const LaneLineDefinition &right);
 
-    QLine getLeftLaneLine ();
-    QLine getRightLaneLine ();
+//    QLine getLeftLaneLine ();
+//    QLine getRightLaneLine ();
 
 Q_SIGNALS: // (Signals sent to QML graphics program)
     void imageReady(const QImage &s);

@@ -1,5 +1,8 @@
+misc/
+franca.ara.pro.user
 .qmake*
 Makefile
 qrc_*
 src/build
 build
+tags
