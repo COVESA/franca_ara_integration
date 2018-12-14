@@ -22,6 +22,5 @@ fi
   echo STARTING FRANCA-ARA
   echo -------------------------------
 
-cd "$(dirname "$0")"
-./franca-ara
+/usr/apps/franca-ara/bin/franca-ara
 
