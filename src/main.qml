@@ -31,4 +31,24 @@ Item {
         y: recognitionModel.leftLaneY2
         color: "yellow"
     }
+
+    Connections {
+        target: imageprovider
+        onLaneChanged: lane.requestPaint();
+    }
+
+    LaneIndicator {
+        x: 100
+        y: 500
+        width: 1300
+        height: 1000
+        lineWidth: 20
+        leftX : recognitionModel.laneLeftX1
+        leftY : recognitionModel.laneleftY1
+        rightX : recognitionModel.laneRightX1
+        rightY : recognitionModel.laneRightY1
+        intersectionX : recognitionModel.laneLeftX2
+        intersectionY : recognitionModel.laneLeftY2
+    }
+
 }

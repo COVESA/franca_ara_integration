@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>VehicleBoundingBox.qml</file>
+        <file>LaneIndicator.qml</file>
     </qresource>
 </RCC>
