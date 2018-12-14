@@ -78,8 +78,8 @@ int main() {
 }
 */
 	
+   static int i = 0;
    while (true) {
-      static int i = 0;
 
       LOG(capi_server: Main loop is alive);
 
