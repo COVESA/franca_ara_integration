@@ -9,15 +9,14 @@ Item {
         onUpdateGraphicsImage: image.reload();
     }
 
-    ListView {
-        width: 100; height: 100
-        model: recognitionModel
-        Rectangle {
-            height: model.modelData.box.height
-            width: model.modelData.box.width
-            color: model.modelData.box.color
-            Text { text: name }
-        }
+// Test connection to data moddel
+    Rectangle {
+        height: recognitionModel.boxH
+        width: recognitionModel.boxW
+        x: recognitionModel.boxH
+        y: recognitionModel.boxW
+        color: recognitionModel.boxColor
+        //Text { text: name }
     }
 
     Image {
