@@ -48,6 +48,8 @@ static BoxDefinition get_pod_box(uint8_t id, const IVehicles::BoundingBox &box)
     // color is constant too (and could just as well be handled in QML)
     b.color = "red";
     return b;
+
+    Q_UNUSED(id);
 }
 
 static LaneDefinition_t get_bounding_lines(IDrivingLane::LaneType l)
@@ -114,8 +116,12 @@ void SomeIpNetworkThread::run()
     printf("Running: SomeIpNetworkThread\n");
 
     std::string domain = "local";
-    std::string instance = "test"; // FIXME
-    //   std::string connection = "mysomeipconnection";
+    // We used "test" in the config file for Vehicle interface, it's not that nice but keeping it for now
+    std::string vehicle_instance = "test";
+    // drivinglane is the correct instance name for the Lane interface
+    std::string lane_instance = "drivinglane";
+    // We don't need to define a connection for this simple setup
+    // std::string connection = "mysomeipconnection";
 
     std::shared_ptr <CommonAPI::Runtime> runtime = CommonAPI::Runtime::get();
 
@@ -123,16 +129,16 @@ void SomeIpNetworkThread::run()
     MSLEEP(1000);
 
     LOG(buildProxy);
-    auto vProxy = runtime->buildProxy<IVehiclesProxy>(domain, instance);
-    auto lProxy = runtime->buildProxy<IDrivingLaneProxy>(domain, instance);
+    auto vProxy = runtime->buildProxy<IVehiclesProxy>(domain, vehicle_instance);
+    auto lProxy = runtime->buildProxy<IDrivingLaneProxy>(domain, lane_instance);
 
     if (!vProxy) {
        LOG(Building vehicle i/f proxy failed!  Is NULL.  Stoppping);
-       exit(1);
+       return; // FIXME
     }
     if (!lProxy) {
        LOG(Building lane i/f proxy failed!  Is NULL.  Stoppping);
-       exit(1);
+       return; // FIXME
     }
 
     // This helps me understand what the hell is going on...
