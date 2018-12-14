@@ -5,6 +5,9 @@
 #include "recognitionmodel.h"
 #include <iostream>
 
+#include <QQmlContext>
+#include <QQmlEngine>
+
 RecognitionModel::RecognitionModel(QObject *parent)
     : QObject(parent)
 {
@@ -16,19 +19,6 @@ RecognitionModel::RecognitionModel(int id, const BoxDefinition &box,
 {
 }
 
-/*
-int RecognitionModel::id() const
-{
-    return m_id;
-}
-
-void RecognitionModel::setId(const int &id)
-{
-        m_id = id;
-        emit idChanged();
-}
-*/
-
 BoxDefinition RecognitionModel::box() const
 {
     return m_box;
@@ -36,8 +26,8 @@ BoxDefinition RecognitionModel::box() const
 
 void RecognitionModel::setBox(const BoxDefinition &box)
 {
-        m_box = box;
-        emit boxChanged();
+    m_box = box;
+    emit boxChanged();
 }
 
 LaneDefinition_t RecognitionModel::lanes() const
@@ -47,8 +37,12 @@ LaneDefinition_t RecognitionModel::lanes() const
 
 void RecognitionModel::newLaneIdentification(const LaneDefinition_t &lanes)
 {
-   std::cerr << "Model: Emitting signal, after newlLane value: lanes.first.lower_x = " << lanes.first.lower_x << std::endl;
-        m_lanes = lanes;
-        emit lanesChanged();
+    m_lanes = lanes;
+    emit laneChanged();
 }
 
+void RecognitionModel::connectRecognitionModel(QQuickView &view)
+{
+    view.engine()->rootContext()->setContextProperty("recognitionModel", this);
+
+}
