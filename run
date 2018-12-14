@@ -1,0 +1,5 @@
+#!/bin/bash
+cd $(dirname $0)
+export VSOMEIP_APPLICATION_NAME=FrancaAraSomeIP_instance
+export VSOMEIP_CONFIGURATION="$(readlink -f conf/devhost/vsomeip.json)"
+LD_LIBRARY_PATH=/usr/local/lib:/usr/local/lib64 $1 ./franca-ara

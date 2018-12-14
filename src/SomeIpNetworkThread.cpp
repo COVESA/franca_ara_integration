@@ -49,6 +49,8 @@ static BoxDefinition get_pod_box(uint8_t id, const IVehicles::BoundingBox &box)
     // color is constant too (and could just as well be handled in QML)
     b.color = "red";
     return b;
+
+    Q_UNUSED(id);
 }
 
 static LaneDefinition_t get_bounding_lines(IDrivingLane::LaneType l)
@@ -73,6 +75,32 @@ void SomeIpNetworkThread::connections(QQuickView &view)
     m_image_source.connectImageProvider(view);
 }
 
+static void debug_print_vehicle(const IVehicles::ListOfVehicles & v) {
+   auto vehicle = v.getDetectedVehicle();
+   auto id = vehicle.getId();
+   if (id != 0) {
+      std::cerr << "detectedVehicle.id = " << (int)id << std::endl;
+      std::cerr << "               .currentDistance(float) = " << vehicle.getCurrentDistance().getFloatingPoint().getFloatingPoint32Bit() << std::endl;
+      std::cerr << "               .currentDistance(double) = " << vehicle.getCurrentDistance().getFloatingPoint().getFloatingPoint64Bit() << std::endl;
+      auto box = v.getBox();
+      std::cerr << "box.topLeftX = " << box.getTopLeftX() << std::endl;
+      std::cerr << "box.topLeftY = " << box.getTopLeftY() << std::endl;
+      std::cerr << "box.width = " << box.getWidth() << std::endl;
+      std::cerr << "box.height = " << box.getHeight() << std::endl;
+   } else {
+      std::cerr << "No identified vehicle" << std::endl;
+   }
+}
+
+static void debug_print_lane(const IDrivingLane::LaneType &lane) {
+   std::cerr << "lane.lowerLeftPointX = " << lane.getLowerLeftPointX() << std::endl;
+   std::cerr << "    .lowerLeftPointY = " << lane.getLowerLeftPointY() << std::endl;
+   std::cerr << "    .lowerRightPointX = " << lane.getLowerRightPointX() << std::endl;
+   std::cerr << "    .lowerRightPointY = " << lane.getLowerRightPointY() << std::endl;
+   std::cerr << "    .intersectionPointX = " << lane.getIntersectionPointX() << std::endl;
+   std::cerr << "    .intersectionPointY = " << lane.getIntersectionPointY() << std::endl;
+}
+
 void SomeIpNetworkThread::run()
 {
 
@@ -85,6 +113,8 @@ void SomeIpNetworkThread::run()
     // There are surely a few other ways this could be done.
     auto vehicles_attribute_update = [&](const IVehicles::ListOfVehicles & v) {
         std::cerr << "Received change on Vehicles Attributes for frameId: " << v.getFrameId() << std::endl;
+
+        debug_print_vehicle(v);
 
         int id = v.getFrameId();
         m_image_source.newFrameId(id);
@@ -102,12 +132,14 @@ void SomeIpNetworkThread::run()
     auto lane_broadcast_update = [&](const IDrivingLane::LaneType & l) {
         std::cerr << "Received change on Lane Attribute for frameId: " << l.getFrameId() << std::endl;
 
+        debug_print_lane(l);
+
         int id = l.getFrameId();
         LaneDefinition_t lines = get_bounding_lines(l);
 
         // Delegate to image class to signal QML graphics to draw lane
         // identification lines
-        m_image_source.newLaneIdentification(lines.first, lines.second);
+        m_recognition_model.newLaneIdentification(lines);
 
         Q_UNUSED(id);  // FIXME
     };
@@ -115,8 +147,12 @@ void SomeIpNetworkThread::run()
     printf("Running: SomeIpNetworkThread\n");
 
     std::string domain = "local";
-    std::string instance = "test"; // FIXME
-    //   std::string connection = "mysomeipconnection";
+    // We used "test" in the config file for Vehicle interface, it's not that nice but keeping it for now
+    std::string vehicle_instance = "test";
+    // drivinglane is the correct instance name for the Lane interface
+    std::string lane_instance = "drivinglane";
+    // We don't need to define a connection for this simple setup
+    // std::string connection = "mysomeipconnection";
 
     std::shared_ptr <CommonAPI::Runtime> runtime = CommonAPI::Runtime::get();
 
@@ -128,16 +164,16 @@ void SomeIpNetworkThread::run()
     //        (domain, instance);
     //
     LOG(buildProxy);
-    auto vProxy = runtime->buildProxy<IVehiclesProxy>(domain, instance);
-    auto lProxy = runtime->buildProxy<IDrivingLaneProxy>(domain, instance);
+    auto vProxy = runtime->buildProxy<IVehiclesProxy>(domain, vehicle_instance);
+    auto lProxy = runtime->buildProxy<IDrivingLaneProxy>(domain, lane_instance);
 
     if (!vProxy) {
        LOG(Building vehicle i/f proxy failed!  Is NULL.  Stoppping);
-       exit(1);
+       return; // FIXME
     }
     if (!lProxy) {
        LOG(Building lane i/f proxy failed!  Is NULL.  Stoppping);
-       exit(1);
+       return; // FIXME
     }
 
     // This helps me understand what the hell is going on...

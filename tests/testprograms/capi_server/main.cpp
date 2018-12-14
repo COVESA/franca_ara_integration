@@ -78,8 +78,8 @@ int main() {
 }
 */
 	
+   static int i = 0;
    while (true) {
-      static int i = 0;
 
       LOG(capi_server: Main loop is alive);
 
@@ -97,10 +97,10 @@ int main() {
       // typedef std::unordered_map< uint8_t, uint16_t> Int_to_Int_Map;
       //inline void setThemap(const Int_to_Int_Map &_value) { std::get< 1>(values_) = _value; }
       IVehicles::BoundingBox box;
-      box.setTopLeftX(0);
-      box.setTopLeftY(0);
-      box.setWidth(0);
-      box.setHeight(0);
+      box.setTopLeftX(i);
+      box.setTopLeftY(i+20);
+      box.setWidth(i+40);
+      box.setHeight(i+60);
 
       IVehicles::Vehicle v;
       v.setId(0);
@@ -121,13 +121,13 @@ int main() {
       vService->setVehiclesAttribute(list_of_vehicles);
 
       IDrivingLane::LaneType l;
-      l.setFrameId(0);
-      l.setLowerLeftPointX(1);
-      l.setLowerLeftPointY(2);
-      l.setLowerRightPointX(3);
-      l.setLowerRightPointY(4);
-      l.setIntersectionPointX(5);
-      l.setIntersectionPointY(6);
+      l.setFrameId(i+200);
+      l.setLowerLeftPointX(100+4*i);
+      l.setLowerLeftPointY(200+4*i);
+      l.setLowerRightPointX(300+4*i);
+      l.setLowerRightPointY(400+4*i);
+      l.setIntersectionPointX(500+4*i);
+      l.setIntersectionPointY(600+4*i);
       // TODO: How to set broadcast data and notify
       LOG(capi_server: Broadcasting lane event);
       lService->fireLaneDetectedEvent(l);

@@ -1,11 +1,12 @@
-#!/bin/bash -x
+#!/bin/bash
 cd $(dirname $0)
 
 test_file_exists() {
   [ -f "$1" ] || { echo "Missing file $1 !" ; exit 1 ; }
 }
 
-export VSOMEIP_CONFIGURATION="$(readlink -f ./conf/vsomeip.json)"
+export VSOMEIP_CONFIGURATION="$(readlink -f ./conf/vsomeip_ecu1.json)"
+[ -z "$VSOMEIP_CONFIGURATION" ] && echo VSOMEIP_CONFIGURATION is empty!
 test_file_exists $VSOMEIP_CONFIGURATION
 
 export VSOMEIP_CLIENTSIDELOGGING=true
@@ -20,11 +21,14 @@ else
   echo -------------------------------
   echo STARTING VSOMEIPD
   echo -------------------------------
+read x
   LD_LIBRARY_PATH=/usr/local/lib:/usr/local/lib64 vsomeipd &
 fi
+read x
 
 echo -------------------------------
 echo STARTING CAPI_SERVER
 echo -------------------------------
+read x
 
 LD_LIBRARY_PATH=/usr/local/lib:/usr/local/lib64 ./capi_server

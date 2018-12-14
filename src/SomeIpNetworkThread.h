@@ -8,6 +8,7 @@
 
 #include <QThread>
 #include "imagesource.h"
+#include "recognitionmodel.h"
 
 // Static view:
 
@@ -40,6 +41,7 @@ class SomeIpNetworkThread : public QThread
 {
    private:
          ImageSource m_image_source;
+         RecognitionModel m_recognition_model;
 
    public:
     void run() override;

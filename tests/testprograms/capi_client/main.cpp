@@ -7,7 +7,6 @@
 #include "v1/genivi/aasr/showcase/IDrivingLaneProxy.hpp"
 #include "v1/genivi/aasr/showcase/IVehiclesProxy.hpp"
 #include "v1/genivi/aasr/showcase/IVehiclesSomeIPProxy.hpp"
-#include <CommonAPI/AttributeCacheExtension.hpp>
 #include <CommonAPI/CommonAPI.hpp>
 
 #define LOG(x) std::cerr << #x << std::endl;
@@ -44,6 +43,7 @@ static void lane_broadcast_update(const v1::genivi::aasr::showcase::IDrivingLane
    std::cerr << "lane.lowerLeftPointX = " << lane.getLowerLeftPointX() << std::endl;
    std::cerr << "    .lowerLeftPointY = " << lane.getLowerLeftPointY() << std::endl;
    std::cerr << "    .lowerRightPointX = " << lane.getLowerRightPointX() << std::endl;
+   std::cerr << "    .lowerRightPointY = " << lane.getLowerRightPointY() << std::endl;
    std::cerr << "    .intersectionPointX = " << lane.getIntersectionPointX() << std::endl;
    std::cerr << "    .intersectionPointY = " << lane.getIntersectionPointY() << std::endl;
 }
@@ -88,10 +88,12 @@ int main(int argc, char *argv[])
    while (!myProxy->isAvailable()) {
       MSLEEP(500);
    }
+   LOG(vehicle proxy is available now);
+
    while (!laneProxy->isAvailable()) {
       MSLEEP(500);
    }
-   LOG(proxy is available !);
+   LOG(lane proxy is available now);
 
    MSLEEP(2000);
 
@@ -99,9 +101,10 @@ int main(int argc, char *argv[])
    myProxy->getVehiclesAttribute().getChangedEvent().subscribe(&vehicles_attribute_update);
 
    // FIXME
+   LOG(register callback for LaneDetectedEvent);
    laneProxy->getLaneDetectedEvent().subscribe(&lane_broadcast_update);
 
-   LOG(registered callback);
+   LOG(Done registered callback);
 
    while (true) {
       // Not much happening here
