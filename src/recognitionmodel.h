@@ -7,6 +7,7 @@
 #define RECOGNITION_MODEL_H
 
 #include <QObject>
+#include <QColor>
 
 #include "SomeIpNetworkThreadTypes.h"
 
@@ -15,8 +16,14 @@ class RecognitionModel : public QObject
     Q_OBJECT
 
     Q_PROPERTY(int id READ id WRITE setId NOTIFY idChanged)
-    Q_PROPERTY(BoxDefinition box READ box WRITE setBox NOTIFY boxChanged)
+  //  Q_PROPERTY(BoxDefinition box READ box WRITE setBox NOTIFY boxChanged)
     Q_PROPERTY(LaneDefinition_t lanes READ lanes WRITE setLanes NOTIFY lanesChanged)
+
+    Q_PROPERTY(int boxX READ boxX NOTIFY boxChanged);
+    Q_PROPERTY(int boxY READ boxY NOTIFY boxChanged);
+    Q_PROPERTY(int boxH READ boxH NOTIFY boxChanged);
+    Q_PROPERTY(int boxW READ boxW NOTIFY boxChanged);
+    Q_PROPERTY(QColor boxColor READ boxColor NOTIFY boxChanged);
 
 public:
     RecognitionModel(QObject *parent=0);
@@ -26,6 +33,12 @@ public:
 
     BoxDefinition box() const;
     void setBox(const BoxDefinition &name);
+
+    int boxX() const {return m_box.x; }
+    int boxY() const {return m_box.y; };
+    int boxH() const {return m_box.height; };
+    int boxW() const {return m_box.width; };
+    QColor boxColor() const {return QColor(m_box.color.c_str()); };
 
     LaneDefinition_t lanes() const;
     void setLanes(const LaneDefinition_t &color);
