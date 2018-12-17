@@ -32,11 +32,11 @@ public:
     // "non-Qt" data and construct an appropriate Qt object and send it by
     // signal to the QML thread.
     void newFrameId(int frameID);
-    void newVehicleIdentification(const BoxDefinition &box);
+    void newVehicleIdentification();
 
 Q_SIGNALS: // (Signals sent to QML graphics program)
     void imageReady(const QImage &s);
-    void vehicleIdentified(QRect box);
+    void vehicleIdentified();
     void laneIdentified(QLine &leftLine, QLine &rightLine);
 
 private:

@@ -12,7 +12,7 @@ Canvas {
 
     anchors.fill: parent
 
-    onIntersectionYChanged: requestPaint();
+    onIntersectionYChanged: cc.requestPaint();
 
     opacity:0.5
 
@@ -46,10 +46,10 @@ Canvas {
         ctx.stroke();
 
         // Reference
-        var lX = 50
-        var lY = 500
-        var rX = 800
-        var rY = 500
+        var lX = 100
+        var lY = 750
+        var rX = 750
+        var rY = 750
         var iX = 350
         var iY = 50
         ctx.beginPath();
@@ -74,9 +74,9 @@ Canvas {
         // Draw some text
         ctx.beginPath();
         ctx.moveTo(200, 200);
-        ctx.lineWidth = 6
+        ctx.lineWidth = 4
         ctx.strokeStyle = "darkblue"
-        ctx.font = "80px sans-serif";
+        ctx.font = "50px sans-serif";
         ctx.text("Hello!", width/2, 50);
         ctx.stroke();
     }

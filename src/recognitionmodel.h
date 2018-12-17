@@ -21,6 +21,9 @@ class RecognitionModel : public QObject
     Q_PROPERTY(int boxH READ boxH NOTIFY boxChanged);
     Q_PROPERTY(int boxW READ boxW NOTIFY boxChanged);
 
+    /* Box valid? (a.k.a. vehicle identified) */
+//    Q_PROPERTY(int boxValid READ boxValid NOTIFY vehicleIdentified);
+
     Q_PROPERTY(QColor boxColor READ boxColor NOTIFY boxChanged);
 
     Q_PROPERTY(int laneLeftX1 READ laneLeftX1 NOTIFY laneChanged);
@@ -41,11 +44,14 @@ public:
 
     BoxDefinition box() const;
     void setBox(const BoxDefinition &name);
+    void clearBox();
 
     int boxX() const { return m_box.x; };
     int boxY() const { return m_box.y; };
     int boxH() const { return m_box.height; };
     int boxW() const { return m_box.width; };
+    int boxValid() const { return m_box_valid; };
+
     QColor boxColor() const { return QColor(m_box.color.c_str()); };
 
     int laneLeftX1() const { return m_lanes.first.lower_x; };
@@ -66,10 +72,12 @@ public:
 signals:
     void boxChanged();
     void laneChanged();
+    void vehicleIdentified();
 
 private:
     int m_id;
     BoxDefinition m_box;
+    bool m_box_valid;
     LaneDefinition_t m_lanes;
 };
 

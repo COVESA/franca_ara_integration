@@ -13,6 +13,7 @@
 #define LOG(x) std::cerr << #x << std::endl;
 #define MSLEEP(x)                                                              \
     std::this_thread::sleep_for(std::chrono::milliseconds((x)));
+#define MAX_IMAGE_ID 228
 
 using v1::genivi::aasr::showcase::IVehicles;
 using v1::genivi::aasr::showcase::IVehiclesStubDefault;
@@ -78,68 +79,68 @@ int main() {
 }
 */
 	
-   static int i = 0;
-   static int direction = 1;
+   static int direction = -1;
    while (true) {
+      direction = -direction;
+      int i;
+      for (i = 0 ; i <= MAX_IMAGE_ID ; ++i) {
 
-      LOG(capi_server: Main loop is alive);
+         LOG(capi_server: Main loop is alive);
 
-      // Update value
+         IVehicles::BoundingBox box;
+         box.setTopLeftX(i);
+         box.setTopLeftY(i+20);
+         box.setWidth(i+40);
+         box.setHeight(i+60);
 
-      // Example of available setters:
-      //        inline void setFrameId(const uint16_t &_value) { std::get< 0>(values_) = _value; }
-      //        inline void setOneVehicle(const Vehicle &_value) { std::get< 1>(values_) = _value; }
-      //        inline void setTwoVehicle(const Vehicle &_value) { std::get< 2>(values_) = _value; }
-      //        inline void setFrameHash(const std::string &_value) { std::get< 3>(values_) = _value; }
+         IVehicles::Vehicle v;
 
-      // Change some value
-//      list_of_vehicles.setFrameId(i++);
+         // Simulate the recognition of vehicle around
+         // frame number 180 and higher.
+         if (i > 180 && i < MAX_IMAGE_ID) {
+            v.setId(i);  // Valid ID for vehicle
+         }
+         else
+         {
+            v.setId(0); // Invalid (no vehicle)
+         }
 
-      // typedef std::unordered_map< uint8_t, uint16_t> Int_to_Int_Map;
-      //inline void setThemap(const Int_to_Int_Map &_value) { std::get< 1>(values_) = _value; }
-      IVehicles::BoundingBox box;
-      box.setTopLeftX(i);
-      box.setTopLeftY(i+20);
-      box.setWidth(i+40);
-      box.setHeight(i+60);
+         IVehicles::FlexibleFloatingPointContainer fpc;
+         IVehicles::FlexibleFloatingPoint value_s;
+         float f = 0.44;
+         value_s.setFloatingPoint32Bit(f);
+         value_s.setFloatingPoint64Bit((double)f);
+         fpc.setFloatingPoint(value_s);
+         v.setCurrentDistance(fpc);
+         v.setCollisionTime(fpc);
 
-      IVehicles::Vehicle v;
-      v.setId(0);
-      IVehicles::FlexibleFloatingPointContainer fpc;
-      IVehicles::FlexibleFloatingPoint value_s;
-      float f = 0.44;
-      value_s.setFloatingPoint32Bit(f);
-      value_s.setFloatingPoint64Bit((double)f);
-      fpc.setFloatingPoint(value_s);
-      v.setCurrentDistance(fpc);
-      v.setCollisionTime(fpc);
+         list_of_vehicles.setFrameId(i);
+         list_of_vehicles.setDetectedVehicle(v);
+         list_of_vehicles.setBox(box);
 
-      i = i + direction;
-      list_of_vehicles.setFrameId(i);
-      list_of_vehicles.setDetectedVehicle(v);
-      list_of_vehicles.setBox(box);
+         std::cerr << "capi_server: Setting new list_of_vehicles value at i = " << i << " id = " << v.getId() << std::endl;
+         vService->setVehiclesAttribute(list_of_vehicles);
 
-      LOG(capi_server: Setting new list_of_vehicles value);
-      vService->setVehiclesAttribute(list_of_vehicles);
+         IDrivingLane::LaneType l;
+         l.setFrameId(i);
+         l.setLowerLeftPointX(50+i);
+         l.setLowerLeftPointY(700);
+         l.setLowerRightPointX(900-i);
+         l.setLowerRightPointY(700);
+         l.setIntersectionPointX(350);
+         l.setIntersectionPointY(50);
+         /*      if (i == 0)
+                 direction = 1;
+                 if (i == 200)
+                 direction = -1;
+                 */
 
-      IDrivingLane::LaneType l;
-      l.setFrameId(i);
-      l.setLowerLeftPointX(50+i);
-      l.setLowerLeftPointY(700);
-      l.setLowerRightPointX(900-i);
-      l.setLowerRightPointY(700);
-      l.setIntersectionPointX(350);
-      l.setIntersectionPointY(50);
-      if (i == 0)
-         direction = 1;
-      if (i == 200)
-         direction = -1;
+         // TODO: How to set broadcast data and notify
+         LOG(capi_server: Broadcasting lane event);
+         lService->fireLaneDetectedEvent(l);
 
-      // TODO: How to set broadcast data and notify
-      LOG(capi_server: Broadcasting lane event);
-      lService->fireLaneDetectedEvent(l);
-
-      MSLEEP(50);
+         MSLEEP(50);
+      }
    }
    return 0;
 }

@@ -16,7 +16,8 @@ TARGET = ../franca-ara
 HEADERS += imageprovider.h \
            imagesource.h \
            recognitionmodel.h \
-           SomeIpNetworkThread.h
+           SomeIpNetworkThread.h \
+    SomeIpNetworkThreadTypes.h
 
 # Compile these sources
 SOURCES += main.cpp \

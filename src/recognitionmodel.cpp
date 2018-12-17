@@ -14,8 +14,8 @@ RecognitionModel::RecognitionModel(QObject *parent)
 }
 
 RecognitionModel::RecognitionModel(int id, const BoxDefinition &box,
-    const LaneDefinition_t &lanes, QObject *parent)
-    : QObject(parent), m_id(id), m_box(box), m_lanes(lanes)
+                                   const LaneDefinition_t &lanes, QObject *parent)
+    : QObject(parent), m_id(id), m_box(box), m_box_valid(false), m_lanes(lanes)
 {
 }
 
@@ -27,7 +27,14 @@ BoxDefinition RecognitionModel::box() const
 void RecognitionModel::setBox(const BoxDefinition &box)
 {
     m_box = box;
+    m_box_valid = true;
     emit boxChanged();
+}
+
+void RecognitionModel::clearBox()
+{
+   m_box = BoxDefinition {0,0,0,0, false, ""};
+   m_box_valid = false;
 }
 
 LaneDefinition_t RecognitionModel::lanes() const
