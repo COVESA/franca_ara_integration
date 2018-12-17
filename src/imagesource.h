@@ -22,7 +22,6 @@ class ImageSource : public QObject
 {
     Q_OBJECT
 
-
 public:
     // Called from network class to initialize signals/slots etc
     void connectImageProvider(QQuickView &view);

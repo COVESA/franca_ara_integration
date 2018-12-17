@@ -16,6 +16,8 @@ class RecognitionModel : public QObject
 {
     Q_OBJECT
 
+    Q_PROPERTY(int frameId READ frameId NOTIFY boxChanged);
+
     Q_PROPERTY(int boxX READ boxX NOTIFY boxChanged);
     Q_PROPERTY(int boxY READ boxY NOTIFY boxChanged);
     Q_PROPERTY(int boxH READ boxH NOTIFY boxChanged);
@@ -45,12 +47,14 @@ public:
     BoxDefinition box() const;
     void setBox(const BoxDefinition &name);
     void clearBox();
+    void setFrameId(int id);
 
     int boxX() const { return m_box.x; };
     int boxY() const { return m_box.y; };
     int boxH() const { return m_box.height; };
     int boxW() const { return m_box.width; };
     int boxValid() const { return m_box_valid; };
+    int frameId() const { return m_frame_id; }
 
     QColor boxColor() const { return QColor(m_box.color.c_str()); };
 
@@ -75,9 +79,9 @@ signals:
     void vehicleIdentified();
 
 private:
-    int m_id;
-    BoxDefinition m_box;
+    int m_frame_id;
     bool m_box_valid;
+    BoxDefinition m_box;
     LaneDefinition_t m_lanes;
 };
 

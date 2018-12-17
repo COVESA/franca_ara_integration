@@ -88,10 +88,10 @@ int main() {
          LOG(capi_server: Main loop is alive);
 
          IVehicles::BoundingBox box;
-         box.setTopLeftX(i);
-         box.setTopLeftY(i+20);
-         box.setWidth(i+40);
-         box.setHeight(i+60);
+         box.setTopLeftX(100+i/3);
+         box.setTopLeftY(100+i/3);
+         box.setWidth(i*2+40);
+         box.setHeight(i*2+60);
 
          IVehicles::Vehicle v;
 

@@ -117,6 +117,7 @@ void SomeIpNetworkThread::run()
         debug_print_vehicle(v);
 
         int id = v.getFrameId();
+        m_recognition_model.setFrameId(id);
         m_image_source.newFrameId(id);
 
         auto vehicle = v.getDetectedVehicle();
@@ -137,7 +138,7 @@ void SomeIpNetworkThread::run()
         else
         {
             LOG(No vehicle ID)
-            m_recognition_model.clearBox();
+                    m_recognition_model.clearBox();
         }
 
         // Rename this because is really just driving the frame now...
@@ -149,7 +150,7 @@ void SomeIpNetworkThread::run()
     auto lane_broadcast_update = [&](const IDrivingLane::LaneType & l) {
         std::cerr << "Received change on Lane Attribute for frameId: " << l.getFrameId() << std::endl;
 
-//        debug_print_lane(l);
+        //        debug_print_lane(l);
 
         int id = l.getFrameId();
         LaneDefinition_t lines = get_bounding_lines(l);
