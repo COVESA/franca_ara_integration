@@ -1,8 +1,9 @@
 import QtQuick 2.3
 
-Item {
+Rectangle {
     width: 1920 - 80
     height: 1080
+    color: black  // This ensures the background is black
 
     Connections {
         target: imagesource

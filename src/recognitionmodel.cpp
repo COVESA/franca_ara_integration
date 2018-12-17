@@ -40,7 +40,7 @@ void RecognitionModel::clearBox()
 void RecognitionModel::setFrameId(int id)
 {
     m_frame_id = id;
-    std::cerr << "NEW FRAME ID:" << m_frame_id << std::endl;
+    //std::cerr << "setFrameId: " << m_frame_id << std::endl;
 }
 
 LaneDefinition_t RecognitionModel::lanes() const

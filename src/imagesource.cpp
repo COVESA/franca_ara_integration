@@ -30,9 +30,8 @@ static int limit_id(int id) {
 
 static QString image_url(int frameId)
 {
-    qDebug() << QString("%1/l_image%2.png").arg(IMAGE_FEED_PATH).arg(frameId);
+    //qDebug() << QString("%1/l_image%2.png").arg(IMAGE_FEED_PATH).arg(frameId);
     auto s = QString("%1/l_image%2.png").arg(IMAGE_FEED_PATH).arg(frameId);
-    std::cout << "Using image path: " << s.toStdString() << std::endl;
     return QString("%1/l_image%2.png").arg(IMAGE_FEED_PATH).arg(frameId);
 }
 
@@ -61,13 +60,12 @@ void ImageSource::connectImageProvider(QQuickView &view)
 }
 
 void ImageSource::newFrameId(int frameID) {
-    printf("newFrameId is: %d\n", frameID);
     QImageReader reader(image_url(limit_id(frameID)));
-    printf("emit imageReady\n");
+    //std::cerr << "emit imageReady" << std::endl;
     emit imageReady(reader.read()); // Signal to ImageProvider
 }
 
 void ImageSource::newVehicleIdentification () {
-   printf("emit vehicleIdentified\n");
+   //std::cerr << "emit vehicleIdentified" << std::endl;
    emit vehicleIdentified(); // Signal to QML
 }
