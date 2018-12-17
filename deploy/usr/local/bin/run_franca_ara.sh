@@ -22,5 +22,5 @@ fi
   echo STARTING FRANCA-ARA
   echo -------------------------------
 
-/usr/apps/franca-ara/bin/franca-ara
+/usr/apps/franca-ara/bin/franca-ara -platform wayland
 

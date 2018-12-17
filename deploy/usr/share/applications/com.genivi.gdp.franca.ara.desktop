@@ -3,5 +3,6 @@ Name=Franca Ara Integration
 Type=Application
 Icon=file:///usr/share/app-info/icons/14.0.0/64x64/com.genivi.gdp.franca-ara.svg
 Unit=com.genivi.gdp.franca.ara
-Exec=bwrap --ro-bind / / --dev-bind /dev/dri/ /dev/dri --unshare-user --uid 128 --gid 512 /usr/apps/franca-ara/bin//franca-ara
+#Exec=bwrap --ro-bind / / --dev-bind /dev/dri/ /dev/dri --unshare-user --uid 128 --gid 512 /usr/apps/franca-ara/bin//franca-ara
+Exec=/usr/local/bin/run_franca_ara.sh
 
