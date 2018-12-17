@@ -89,7 +89,6 @@ static void debug_print_vehicle(const IVehicles::ListOfVehicles & v) {
         std::cerr << "No identified vehicle" << std::endl;
     }
 }
-/*
 static void debug_print_lane(const IDrivingLane::LaneType &lane) {
     std::cerr << "lane.lowerLeftPointX = " << lane.getLowerLeftPointX() << std::endl;
     std::cerr << "    .lowerLeftPointY = " << lane.getLowerLeftPointY() << std::endl;
@@ -98,9 +97,8 @@ static void debug_print_lane(const IDrivingLane::LaneType &lane) {
     std::cerr << "    .intersectionPointX = " << lane.getIntersectionPointX() << std::endl;
     std::cerr << "    .intersectionPointY = " << lane.getIntersectionPointY() << std::endl;
 }
-*/
 void SomeIpNetworkThread::run()
-{    
+{
     // Initial image to get started
     m_image_source.newFrameId(0);
 
@@ -109,7 +107,7 @@ void SomeIpNetworkThread::run()
     // variable, and the closure this creates will make that possible.
     // There are surely a few other ways this could be done.
     auto vehicles_attribute_update = [&](const IVehicles::ListOfVehicles & v) {
-        std::cerr << "Received change on Vehicles Attributes for frameId: " << v.getFrameId() << std::endl;
+        //std::cerr << "Received change on Vehicles Attributes for frameId: " << v.getFrameId() << std::endl;
 
         debug_print_vehicle(v);
 
@@ -134,8 +132,8 @@ void SomeIpNetworkThread::run()
         }
         else
         {
-            LOG(No vehicle ID)
-                    m_recognition_model.clearBox();
+            //LOG(No vehicle ID);
+            m_recognition_model.clearBox();
         }
 
         // Rename this because is really just driving the frame now...
@@ -145,9 +143,9 @@ void SomeIpNetworkThread::run()
     };
 
     auto lane_broadcast_update = [&](const IDrivingLane::LaneType & l) {
-        std::cerr << "Received change on Lane Attribute for frameId: " << l.getFrameId() << std::endl;
+        //std::cerr << "Received change on Lane Attribute for frameId: " << l.getFrameId() << std::endl;
 
-        //        debug_print_lane(l);
+        debug_print_lane(l);
 
         int id = l.getFrameId();
         LaneDefinition_t lines = get_bounding_lines(l);
@@ -158,8 +156,6 @@ void SomeIpNetworkThread::run()
 
         Q_UNUSED(id);  // FIXME
     };
-
-    printf("Running: SomeIpNetworkThread\n");
 
     std::string domain = "local";
     // We used "test" in the config file for Vehicle interface, it's not that nice but keeping it for now
@@ -188,10 +184,10 @@ void SomeIpNetworkThread::run()
     }
 
     // This helps me understand what the hell is going on...
-    LOG(Reminder : IVehicle Service ID = 1335 which is hex 0x537)
-            LOG(Reminder : IVehicle Instance ID is 22136 which is hex 0x5678)
+    //LOG(Reminder : IVehicle Service ID = 1335 which is hex 0x537)
+    //LOG(Reminder : IVehicle Instance ID is 22136 which is hex 0x5678)
 
-            LOG(waiting for proxy isAvailable);
+    LOG(waiting for proxy isAvailable);
     while (!vProxy->isAvailable()) {
         std::this_thread::sleep_for(std::chrono::microseconds(500000));
     }
@@ -218,8 +214,6 @@ void SomeIpNetworkThread::run()
         LOG(MAIN LOOP);
         // Attributes are updated through callback above...
         // OK now what?
-        int x = 0;
-        ++x;
         MSLEEP(1000);
     }
 }
