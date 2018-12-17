@@ -16,8 +16,7 @@
 #include <iostream>
 #include <math.h>
 
-#define IMAGE_FEED_PATH                                                        \
-    "/home/user/devel/GENIVI/franca_ara_integration/src/feed"
+#define IMAGE_FEED_PATH "/usr/share/franca-ara"
 #define MAX_IMAGE_ID 228
 
 // Internal helpers
