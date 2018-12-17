@@ -55,30 +55,6 @@ int main() {
    IVehicles::ListOfVehicles list_of_vehicles;
    IVehicles::BoundingBox bounding_box;
 
-
-/*	
-	// Type definition of a lane
-	struct LaneType {
-		UInt16 frameId
-		UInt32 lowerLeftPointX
-		UInt32 lowerLeftPointY
-		UInt32 lowerRightPointX
-		UInt32 lowerRightPointY
-		UInt32 intersectionPointX
-		UInt32 intersectionPointY
-	}
-
-	// Messages --------------------------------------------
-
-	// Event-based communication of the detected lane
-	broadcast LaneDetected {
-		out {
-			LaneType drivingLane
-		}	
-	}
-}
-*/
-	
    static int direction = -1;
    while (true) {
       direction = -direction;
@@ -118,7 +94,7 @@ int main() {
          list_of_vehicles.setDetectedVehicle(v);
          list_of_vehicles.setBox(box);
 
-         std::cerr << "capi_server: Setting new list_of_vehicles value at i = " << i << " id = " << v.getId() << std::endl;
+         std::cerr << "capi_server: update, frameid i = " << i << " id = " << v.getId() << std::endl;
          vService->setVehiclesAttribute(list_of_vehicles);
 
          IDrivingLane::LaneType l;
@@ -136,7 +112,7 @@ int main() {
                  */
 
          // TODO: How to set broadcast data and notify
-         LOG(capi_server: Broadcasting lane event);
+         //LOG(capi_server: Broadcasting lane event);
          lService->fireLaneDetectedEvent(l);
 
          MSLEEP(50);
