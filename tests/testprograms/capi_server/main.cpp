@@ -55,30 +55,6 @@ int main() {
    IVehicles::ListOfVehicles list_of_vehicles;
    IVehicles::BoundingBox bounding_box;
 
-
-/*	
-	// Type definition of a lane
-	struct LaneType {
-		UInt16 frameId
-		UInt32 lowerLeftPointX
-		UInt32 lowerLeftPointY
-		UInt32 lowerRightPointX
-		UInt32 lowerRightPointY
-		UInt32 intersectionPointX
-		UInt32 intersectionPointY
-	}
-
-	// Messages --------------------------------------------
-
-	// Event-based communication of the detected lane
-	broadcast LaneDetected {
-		out {
-			LaneType drivingLane
-		}	
-	}
-}
-*/
-	
    static int direction = -1;
    while (true) {
       direction = -direction;
@@ -87,11 +63,21 @@ int main() {
 
          LOG(capi_server: Main loop is alive);
 
+         // A slighly moving box. (Only set as valid for certain values of
+         // i -- see below)
          IVehicles::BoundingBox box;
-         box.setTopLeftX(100+i/3);
-         box.setTopLeftY(100+i/3);
-         box.setWidth(i*2+40);
-         box.setHeight(i*2+60);
+
+         /* box.setTopLeftX(100+i/3);
+            box.setTopLeftY(100+i/3);
+            box.setWidth(i*2+40);
+            box.setHeight(i*2+60);
+            */
+
+         // A constant box
+         box.setTopLeftX(180);
+         box.setTopLeftY(202);
+         box.setWidth(269);
+         box.setHeight(212);
 
          IVehicles::Vehicle v;
 
@@ -118,17 +104,17 @@ int main() {
          list_of_vehicles.setDetectedVehicle(v);
          list_of_vehicles.setBox(box);
 
-         std::cerr << "capi_server: Setting new list_of_vehicles value at i = " << i << " id = " << v.getId() << std::endl;
+         std::cerr << "capi_server: update, frameid i = " << i << " id = " << v.getId() << std::endl;
          vService->setVehiclesAttribute(list_of_vehicles);
 
          IDrivingLane::LaneType l;
          l.setFrameId(i);
-         l.setLowerLeftPointX(50+i);
-         l.setLowerLeftPointY(700);
-         l.setLowerRightPointX(900-i);
-         l.setLowerRightPointY(700);
+         l.setLowerLeftPointX(0+i);
+         l.setLowerLeftPointY(470);
+         l.setLowerRightPointX(600-i);
+         l.setLowerRightPointY(440);
          l.setIntersectionPointX(350);
-         l.setIntersectionPointY(50);
+         l.setIntersectionPointY(200);
          /*      if (i == 0)
                  direction = 1;
                  if (i == 200)
@@ -136,7 +122,7 @@ int main() {
                  */
 
          // TODO: How to set broadcast data and notify
-         LOG(capi_server: Broadcasting lane event);
+         //LOG(capi_server: Broadcasting lane event);
          lService->fireLaneDetectedEvent(l);
 
          MSLEEP(50);
