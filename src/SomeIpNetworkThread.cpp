@@ -14,9 +14,6 @@
 #include <algorithm>
 #include <set>
 
-#define IMAGE_FEED_PATH                                                        \
-    "/usr/local/share/franca-ara/images"
-
 #define MAX_IMAGE_ID 228
 
 #define LOG(x) std::cout << #x << std::endl;
