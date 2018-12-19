@@ -4,6 +4,10 @@ Item {
     width: 1920 - 80
     height: 1080
 
+    // Scaling of images & coordinates
+    property double xscale : width / 640.0
+    property double yscale : height / 480.0
+
     Connections {
         target: imagesource
         onVehicleIdentified:
@@ -52,12 +56,13 @@ Item {
     // Vehicle Identification Box
     VehicleBoundingBox {
         id : box
-        height: recognitionModel.boxH
-        width: recognitionModel.boxW
+        height: recognitionModel.boxH * yscale
+        width: recognitionModel.boxW * xscale
         x: recognitionModel.boxX
         y: recognitionModel.boxY
         fillColor: "blue"
         lineColor: "orange"
         visible: true
+        anchors.centerIn: parent
     }
 }
