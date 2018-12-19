@@ -63,11 +63,21 @@ int main() {
 
          LOG(capi_server: Main loop is alive);
 
+         // A slighly moving box. (Only set as valid for certain values of
+         // i -- see below)
          IVehicles::BoundingBox box;
-         box.setTopLeftX(100+i/3);
-         box.setTopLeftY(100+i/3);
-         box.setWidth(i*2+40);
-         box.setHeight(i*2+60);
+
+         /* box.setTopLeftX(100+i/3);
+            box.setTopLeftY(100+i/3);
+            box.setWidth(i*2+40);
+            box.setHeight(i*2+60);
+            */
+
+         // A constant box
+         box.setTopLeftX(180);
+         box.setTopLeftY(202);
+         box.setWidth(269);
+         box.setHeight(212);
 
          IVehicles::Vehicle v;
 
