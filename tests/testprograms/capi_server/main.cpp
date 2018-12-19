@@ -110,9 +110,9 @@ int main() {
          IDrivingLane::LaneType l;
          l.setFrameId(i);
          l.setLowerLeftPointX(50+i);
-         l.setLowerLeftPointY(700);
-         l.setLowerRightPointX(900-i);
-         l.setLowerRightPointY(700);
+         l.setLowerLeftPointY(750);
+         l.setLowerRightPointX(750);
+         l.setLowerRightPointY(750);
          l.setIntersectionPointX(350);
          l.setIntersectionPointY(50);
          /*      if (i == 0)

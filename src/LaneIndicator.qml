@@ -9,8 +9,7 @@ Canvas {
     property int rightY
     property int intersectionX
     property int intersectionY
-
-    anchors.fill: parent
+    property string color
 
     onIntersectionYChanged: cc.requestPaint();
 
@@ -22,30 +21,31 @@ Canvas {
 
         ctx.fillStyle = "white"
         ctx.beginPath();
-        ctx.clearRect(0, 0, implicitWidth, implicitHeight);
+        ctx.clearRect(0, 0, width, height);
         ctx.fill();
 
-        // Check Outline
+        // Draw an outline around the whole item
         ctx.beginPath();
-        ctx.lineWidth = 30;
+        ctx.lineWidth = 20;
         ctx.strokeStyle = "white"
         ctx.moveTo(0, 0);
-        ctx.lineTo(0, height);
-        ctx.lineTo(width,height);
-        ctx.lineTo(width, 0);
+        ctx.lineTo(0, cc.height);
+        ctx.lineTo(cc.width,cc.height);
+        ctx.lineTo(cc.width, 0);
         ctx.lineTo(0, 0);
         ctx.stroke();
 
-        // The dynamic lane lines
+        // The real dynamic lane lines
         ctx.beginPath();
         ctx.lineWidth = lineWidth;
-        ctx.strokeStyle = "blue"
+        ctx.strokeStyle = color;
         ctx.moveTo(leftX, leftY);
         ctx.lineTo(intersectionX, intersectionY);
         ctx.lineTo(rightX, rightY);
         ctx.stroke();
 
-        // Reference
+        /*
+        // Reference lines
         var lX = 100
         var lY = 750
         var rX = 750
@@ -53,24 +53,14 @@ Canvas {
         var iX = 350
         var iY = 50
         ctx.beginPath();
-        ctx.lineWidth = lineWidth;
+        ctx.lineWidth = 2;
         ctx.strokeStyle = "yellow"
         ctx.moveTo(lX, lY);
         ctx.lineTo(iX, iY);  // to intersection
         ctx.lineTo(rX, rY); // ... and back
         ctx.stroke();
-
-
-        /*
-        // Draw a circle
-        ctx.beginPath();
-        ctx.fillStyle = "orange"
-        ctx.strokeStyle = "red"
-        ctx.moveTo(width/2+60, height/2);
-        ctx.arc(withX*2, height*2, 60, 0, 2*Math.PI, true)
-        ctx.fill();
-        ctx.stroke();
 */
+        /*
         // Draw some text
         ctx.beginPath();
         ctx.moveTo(200, 200);
@@ -79,7 +69,7 @@ Canvas {
         ctx.font = "50px sans-serif";
         ctx.text("Hello!", width/2, 50);
         ctx.stroke();
+    */
     }
 }
-
 

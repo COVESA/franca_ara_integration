@@ -62,35 +62,27 @@ Item {
         x: recognitionModel.boxX
         y: recognitionModel.boxY
         fillColor: "blue"
-        lineColor: "orange"
+        lineColor: "yellow"
         visible: true
         anchors.centerIn: parent
     }
 
-
-/*
-    // Not sure this is getting triggered...
-    Connections {
-        target: recognitionModel
-        onLaneChanged: lane.requestPaint();
-    }
-
-
     LaneIndicator {
         id: lane
-        x: 100
-        y: 500
-        width: 1300
-        height: 1000
-        lineWidth: 20
-        leftX : recognitionModel.laneLeftX1
-        leftY : recognitionModel.laneleftY1
-        rightX : recognitionModel.laneRightX1
-        rightY : recognitionModel.laneRightY1
-        intersectionX : recognitionModel.laneRightX2
-        intersectionY : recognitionModel.laneRightY2
+        color: "#999955"
+        width: parent.width
+        height: parent.height
+        lineWidth: 10
+        anchors.fill: parent
+
+        leftX : recognitionModel.laneLeftX1 * xscale
+        leftY : recognitionModel.laneLeftY1 * yscale
+        rightX : recognitionModel.laneRightX1 * xscale
+        rightY : recognitionModel.laneRightY1 * yscale
+        intersectionX : recognitionModel.laneRightX2 * xscale
+        intersectionY : recognitionModel.laneRightY2 * yscale
     }
-*/
+
     DebugTexts {
         id: db
     }
