@@ -16,7 +16,7 @@
 #include <iostream>
 #include <math.h>
 
-#define IMAGE_FEED_PATH "/usr/share/franca-ara"
+#define IMAGE_FEED_PATH "/usr/local/share/franca-ara/images"
 #define MAX_IMAGE_ID 228
 
 // Internal helpers
