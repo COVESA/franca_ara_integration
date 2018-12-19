@@ -28,17 +28,17 @@ Item {
         {
             image.reload();
 
-            db.text6 = "laneLeftX1: " + recognitionModel.laneLeftX1.toString();
-            db.text7 = "laneLeftY1: " + recognitionModel.laneLeftY1.toString();
-            db.text8 = "laneRightX1: " + recognitionModel.laneRightX1.toString();
-            db.text9 = "laneRightY1: " + recognitionModel.laneRightY1.toString();
-            db.text10 = "laneLeftX2: " + recognitionModel.laneLeftX2.toString();
-            db.text11 = "laneLeftY2: " + recognitionModel.laneLeftY2.toString();
-            db.text12 = "laneRightX2: " + recognitionModel.laneRightX2.toString();
-            db.text13 = "laneRightY2: " + recognitionModel.laneRightY2.toString();
-
+            db.text6 = "laneLeftX1: " + recognitionModel.laneLeftX1
+            db.text7 = "laneLeftY1: " + recognitionModel.laneLeftY1
+            db.text8 = "laneRightX1: " + recognitionModel.laneRightX1
+            db.text9 = "laneRightY1: " + recognitionModel.laneRightY1
+            db.text10 = "laneLeftX2: " + recognitionModel.laneLeftX2
+            db.text11 = "laneLeftY2: " + recognitionModel.laneLeftY2
+            db.text12 = "laneRightX2: " + recognitionModel.laneRightX2
+            db.text13 = "laneRightY2: " + recognitionModel.laneRightY2
         }
     }
+
 
     Image {
         id: image
@@ -61,7 +61,7 @@ Item {
         x: recognitionModel.boxX
         y: recognitionModel.boxY
         fillColor: "blue"
-        lineColor: "orange"
+        lineColor: "yellow"
         visible: true
         anchors.centerIn: parent
     }
@@ -72,17 +72,29 @@ Item {
     }
 
     LaneIndicator {
-        x: 100
-        y: 500
-        width: 1300
-        height: 1000
-        lineWidth: 20
-        leftX : recognitionModel.laneLeftX1
-        leftY : recognitionModel.laneleftY1
-        rightX : recognitionModel.laneRightX1
-        rightY : recognitionModel.laneRightY1
-        intersectionX : recognitionModel.laneLeftX2
-        intersectionY : recognitionModel.laneLeftY2
+        id: lane
+        color: "#999955"
+        width: parent.width
+        height: parent.height
+        lineWidth: 10
+        anchors.fill: parent
+
+        leftX : recognitionModel.laneLeftX1 * xscale
+        leftY : recognitionModel.laneLeftY1 * yscale
+        rightX : recognitionModel.laneRightX1 * xscale
+        rightY : recognitionModel.laneRightY1 * yscale
+        intersectionX : recognitionModel.laneRightX2 * xscale
+        intersectionY : recognitionModel.laneRightY2 * yscale
+    }
+
+    // Set up redraw trigger for lanes
+    Connections {
+        target: recognitionModel
+        onLaneChanged: lane.requestPaint();
+    }
+
+    DebugTexts {
+        id: db
     }
 
 }
