@@ -49,12 +49,15 @@ Item {
         }
     }
 
-    // Lane representation
-    Rectangle {
-        height: 200
-        width: 200
-        x: recognitionModel.laneLeftX1
-        y: recognitionModel.leftLaneY2
-        color: "yellow"
+    // Vehicle Identification Box
+    VehicleBoundingBox {
+        id : box
+        height: recognitionModel.boxH
+        width: recognitionModel.boxW
+        x: recognitionModel.boxX
+        y: recognitionModel.boxY
+        fillColor: "blue"
+        lineColor: "orange"
+        visible: true
     }
 }
