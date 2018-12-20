@@ -74,6 +74,7 @@ void SomeIpNetworkThread::connections(QQuickView &view)
 }
 
 static void debug_print_vehicle(const IVehicles::ListOfVehicles & v) {
+#if 0
     auto vehicle = v.getDetectedVehicle();
     auto id = vehicle.getId();
     if (id != 0) {
@@ -88,14 +89,19 @@ static void debug_print_vehicle(const IVehicles::ListOfVehicles & v) {
     } else {
         std::cerr << "No identified vehicle" << std::endl;
     }
+#endif
+    Q_UNUSED(v);
 }
 static void debug_print_lane(const IDrivingLane::LaneType &lane) {
+#if 0
     std::cerr << "lane.lowerLeftPointX = " << lane.getLowerLeftPointX() << std::endl;
     std::cerr << "    .lowerLeftPointY = " << lane.getLowerLeftPointY() << std::endl;
     std::cerr << "    .lowerRightPointX = " << lane.getLowerRightPointX() << std::endl;
     std::cerr << "    .lowerRightPointY = " << lane.getLowerRightPointY() << std::endl;
     std::cerr << "    .intersectionPointX = " << lane.getIntersectionPointX() << std::endl;
     std::cerr << "    .intersectionPointY = " << lane.getIntersectionPointY() << std::endl;
+#endif
+    Q_UNUSED(lane);
 }
 void SomeIpNetworkThread::run()
 {
