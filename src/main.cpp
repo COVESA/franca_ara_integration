@@ -19,6 +19,7 @@ DLT_DECLARE_CONTEXT(DLT_FRA_ARA_CONTEXT)
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
+
     QQuickView view;
 
     DLT_REGISTER_APP("FRA","FRANCA-ARA Integration Demo");
