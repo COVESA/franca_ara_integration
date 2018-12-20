@@ -9,7 +9,10 @@ Canvas {
     property int rightY
     property int intersectionX
     property int intersectionY
-    property string color
+    property string coneColorLower
+    property string coneColorUpper
+    property string lineColorLower
+    property string lineColorUpper
 
     onIntersectionYChanged: cc.requestPaint();
 
@@ -36,12 +39,22 @@ Canvas {
         ctx.stroke();
 
         // The real dynamic lane lines
+        var coneGradient = ctx.createLinearGradient(0, 480*yscale, 0, 200*yscale); // From lower on screen, to about half way up on screen
+        coneGradient .addColorStop("0" , coneColorLower);
+        coneGradient .addColorStop("1.0", coneColorUpper);
+
+        var lineGradient = ctx.createLinearGradient(0, 480*yscale, 0, 200*yscale); // From lower on screen, to about half way up on screen
+        lineGradient .addColorStop("0" , lineColorLower);
+        lineGradient .addColorStop("1.0", lineColorUpper);
+
         ctx.beginPath();
         ctx.lineWidth = lineWidth;
-        ctx.strokeStyle = color;
         ctx.moveTo(leftX, leftY);
         ctx.lineTo(intersectionX, intersectionY);
         ctx.lineTo(rightX, rightY);
+        ctx.fillStyle = coneGradient;
+        ctx.fill();
+        ctx.strokeStyle = lineGradient;
         ctx.stroke();
 
         /*
