@@ -11,6 +11,7 @@
 // POD datatypes used only between networking & graphics classes
 struct BoxDefinition {
     int x, y, width, height;
+    bool valid;
     std::string color;
 };
 
