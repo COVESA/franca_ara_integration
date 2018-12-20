@@ -14,10 +14,10 @@ Item {
         {
             box.visible = recognitionModel.boxY != 0
 
-            db.text2 = "box.height: " + recognitionModel.boxH;
-            db.text3 = "box.width: " + recognitionModel.boxW;
-            db.text4 = "box.x: " + recognitionModel.boxX;
-            db.text5 = "box.y: " + recognitionModel.boxY.toString();
+            db.text2 = "box.x: " + recognitionModel.boxX;
+            db.text3 = "box.y: " + recognitionModel.boxY;
+            db.text4 = "box.height: " + recognitionModel.boxH;
+            db.text5 = "box.width: " + recognitionModel.boxW;
             db.text1 = "Received Frame ID: " + recognitionModel.frameId;
         }
     }
@@ -38,7 +38,6 @@ Item {
             db.text13 = "laneRightY2: " + recognitionModel.laneRightY2
         }
     }
-
 
     Image {
         id: image
@@ -64,11 +63,6 @@ Item {
         lineColor: "yellow"
         visible: true
         anchors.centerIn: parent
-    }
-
-    Connections {
-        target: imageprovider
-        onLaneChanged: lane.requestPaint();
     }
 
     LaneIndicator {
