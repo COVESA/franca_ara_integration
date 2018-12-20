@@ -117,22 +117,40 @@ void SomeIpNetworkThread::run()
         debug_print_vehicle(v);
 
         int id = v.getFrameId();
+        m_recognition_model.setFrameId(id);
         m_image_source.newFrameId(id);
 
         auto vehicle = v.getDetectedVehicle();
-        auto bounding_box = v.getBox();
 
-        int vehicle_id = sanity_check_id(vehicle.getId());
-        BoxDefinition box_pod = get_pod_box(vehicle_id, bounding_box);
+        // frame ID == 0 means no identified vehicle(?)
+        if (vehicle.getId() != 0)
+        {
+            auto bounding_box = v.getBox();
+            int vehicle_id = sanity_check_id(vehicle.getId());
+            auto box_pod = get_pod_box(vehicle_id, bounding_box);
 
-        // Delegate to image class to signal QML graphics to draw vehicle identification lines
-        m_image_source.newVehicleIdentification(box_pod);
+            // Delegate to image class to signal QML graphics to draw vehicle identification lines
+
+            //  FIXME: This is obsolete now?
+
+            m_recognition_model.setBox(box_pod);
+        }
+        else
+        {
+            LOG(No vehicle ID)
+                    m_recognition_model.clearBox();
+        }
+
+        // Rename this because is really just driving the frame now...
+        // Box/ClearBox is driving vehicle identification
+        m_image_source.newVehicleIdentification();
+
     };
 
     auto lane_broadcast_update = [&](const IDrivingLane::LaneType & l) {
         std::cerr << "Received change on Lane Attribute for frameId: " << l.getFrameId() << std::endl;
 
-        debug_print_lane(l);
+        //        debug_print_lane(l);
 
         int id = l.getFrameId();
         LaneDefinition_t lines = get_bounding_lines(l);
