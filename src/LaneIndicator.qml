@@ -56,33 +56,6 @@ Canvas {
         ctx.fill();
         ctx.strokeStyle = lineGradient;
         ctx.stroke();
-
-        /*
-        // Reference lines
-        var lX = 100
-        var lY = 750
-        var rX = 750
-        var rY = 750
-        var iX = 350
-        var iY = 50
-        ctx.beginPath();
-        ctx.lineWidth = 2;
-        ctx.strokeStyle = "yellow"
-        ctx.moveTo(lX, lY);
-        ctx.lineTo(iX, iY);  // to intersection
-        ctx.lineTo(rX, rY); // ... and back
-        ctx.stroke();
-*/
-        /*
-        // Draw some text
-        ctx.beginPath();
-        ctx.moveTo(200, 200);
-        ctx.lineWidth = 4
-        ctx.strokeStyle = "darkblue"
-        ctx.font = "50px sans-serif";
-        ctx.text("Hello!", width/2, 50);
-        ctx.stroke();
-    */
     }
 }
 
