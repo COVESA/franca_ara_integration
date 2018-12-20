@@ -15,7 +15,7 @@
 #include <set>
 
 #define IMAGE_FEED_PATH                                                        \
-   "/usr/local/share/franca-ara/images"
+    "/usr/local/share/franca-ara/images"
 
 #define MAX_IMAGE_ID 228
 
@@ -29,7 +29,7 @@ using v1::genivi::aasr::showcase::IDrivingLane;
 using v1::genivi::aasr::showcase::IDrivingLaneProxy;
 
 static int sanity_check_id (int id) {
-   return std::max(0, std::min(id, MAX_IMAGE_ID));
+    return std::max(0, std::min(id, MAX_IMAGE_ID));
 }
 
 
@@ -38,6 +38,7 @@ static int sanity_check_id (int id) {
 // color info, which was not given in the network protocol)
 static BoxDefinition get_pod_box(uint8_t id, const IVehicles::BoundingBox &box)
 {
+
     BoxDefinition b;
     b.height = box.getHeight();
     b.width = box.getWidth();
@@ -76,34 +77,33 @@ void SomeIpNetworkThread::connections(QQuickView &view)
 }
 
 static void debug_print_vehicle(const IVehicles::ListOfVehicles & v) {
-   auto vehicle = v.getDetectedVehicle();
-   auto id = vehicle.getId();
-   if (id != 0) {
-      std::cerr << "detectedVehicle.id = " << (int)id << std::endl;
-      std::cerr << "               .currentDistance(float) = " << vehicle.getCurrentDistance().getFloatingPoint().getFloatingPoint32Bit() << std::endl;
-      std::cerr << "               .currentDistance(double) = " << vehicle.getCurrentDistance().getFloatingPoint().getFloatingPoint64Bit() << std::endl;
-      auto box = v.getBox();
-      std::cerr << "box.topLeftX = " << box.getTopLeftX() << std::endl;
-      std::cerr << "box.topLeftY = " << box.getTopLeftY() << std::endl;
-      std::cerr << "box.width = " << box.getWidth() << std::endl;
-      std::cerr << "box.height = " << box.getHeight() << std::endl;
-   } else {
-      std::cerr << "No identified vehicle" << std::endl;
-   }
+    auto vehicle = v.getDetectedVehicle();
+    auto id = vehicle.getId();
+    if (id != 0) {
+        std::cerr << "detectedVehicle.id = " << (int)id << std::endl;
+        std::cerr << "               .currentDistance(float) = " << vehicle.getCurrentDistance().getFloatingPoint().getFloatingPoint32Bit() << std::endl;
+        std::cerr << "               .currentDistance(double) = " << vehicle.getCurrentDistance().getFloatingPoint().getFloatingPoint64Bit() << std::endl;
+        auto box = v.getBox();
+        std::cerr << "box.topLeftX = " << box.getTopLeftX() << std::endl;
+        std::cerr << "box.topLeftY = " << box.getTopLeftY() << std::endl;
+        std::cerr << "box.width = " << box.getWidth() << std::endl;
+        std::cerr << "box.height = " << box.getHeight() << std::endl;
+    } else {
+        std::cerr << "No identified vehicle" << std::endl;
+    }
 }
-
+/*
 static void debug_print_lane(const IDrivingLane::LaneType &lane) {
-   std::cerr << "lane.lowerLeftPointX = " << lane.getLowerLeftPointX() << std::endl;
-   std::cerr << "    .lowerLeftPointY = " << lane.getLowerLeftPointY() << std::endl;
-   std::cerr << "    .lowerRightPointX = " << lane.getLowerRightPointX() << std::endl;
-   std::cerr << "    .lowerRightPointY = " << lane.getLowerRightPointY() << std::endl;
-   std::cerr << "    .intersectionPointX = " << lane.getIntersectionPointX() << std::endl;
-   std::cerr << "    .intersectionPointY = " << lane.getIntersectionPointY() << std::endl;
+    std::cerr << "lane.lowerLeftPointX = " << lane.getLowerLeftPointX() << std::endl;
+    std::cerr << "    .lowerLeftPointY = " << lane.getLowerLeftPointY() << std::endl;
+    std::cerr << "    .lowerRightPointX = " << lane.getLowerRightPointX() << std::endl;
+    std::cerr << "    .lowerRightPointY = " << lane.getLowerRightPointY() << std::endl;
+    std::cerr << "    .intersectionPointX = " << lane.getIntersectionPointX() << std::endl;
+    std::cerr << "    .intersectionPointY = " << lane.getIntersectionPointY() << std::endl;
 }
-
+*/
 void SomeIpNetworkThread::run()
-{
-
+{    
     // Initial image to get started
     m_image_source.newFrameId(0);
 
@@ -182,19 +182,19 @@ void SomeIpNetworkThread::run()
     auto lProxy = runtime->buildProxy<IDrivingLaneProxy>(domain, lane_instance);
 
     if (!vProxy) {
-       LOG(Building vehicle i/f proxy failed!  Is NULL.  Stoppping);
-       return; // FIXME
+        LOG(Building vehicle i/f proxy failed!  Is NULL.  Stoppping);
+        return; // FIXME
     }
     if (!lProxy) {
-       LOG(Building lane i/f proxy failed!  Is NULL.  Stoppping);
-       return; // FIXME
+        LOG(Building lane i/f proxy failed!  Is NULL.  Stoppping);
+        return; // FIXME
     }
 
     // This helps me understand what the hell is going on...
     LOG(Reminder : IVehicle Service ID = 1335 which is hex 0x537)
-    LOG(Reminder : IVehicle Instance ID is 22136 which is hex 0x5678)
+            LOG(Reminder : IVehicle Instance ID is 22136 which is hex 0x5678)
 
-    LOG(waiting for proxy isAvailable);
+            LOG(waiting for proxy isAvailable);
     while (!vProxy->isAvailable()) {
         std::this_thread::sleep_for(std::chrono::microseconds(500000));
     }
