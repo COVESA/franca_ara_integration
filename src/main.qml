@@ -59,12 +59,11 @@ Rectangle {
         id : box
         height: recognitionModel.boxH * yscale
         width: recognitionModel.boxW * xscale
-        x: recognitionModel.boxX
-        y: recognitionModel.boxY
+        x: recognitionModel.boxX * xscale
+        y: recognitionModel.boxY * yscale
         fillColor: "blue"
         lineColor: "yellow"
         visible: true
-        anchors.centerIn: parent
     }
 
     LaneIndicator {
