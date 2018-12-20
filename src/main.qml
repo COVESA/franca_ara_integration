@@ -1,8 +1,9 @@
 import QtQuick 2.3
 
-Item {
+Rectangle {
     width: 1920 - 80
     height: 1080
+    color: "black"  // Use black background if there is any flickering
 
     // Scaling of images & coordinates
     property double xscale : width / 640.0
