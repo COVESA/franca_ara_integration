@@ -3,7 +3,6 @@ import QtQuick 2.0
 Item {
 
     // FIXME: Can Repeaters be used here instead?
-
     property alias text1 : text1.text
     property alias text2 : text2.text
     property alias text3 : text3.text
@@ -18,16 +17,19 @@ Item {
     property alias text12 : text12.text
     property alias text13 : text13.text
 
+    property string color
+
     Text {
         id: text1
         text: "WAITING"
         font.pixelSize: 40
+        color: parent.color
     }
     Text {
         id: text2
         text: "WAITING"
-
         font.pixelSize: 40
+        color: parent.color
         anchors.top : text1.bottom
     }
     Text {
@@ -35,6 +37,7 @@ Item {
 
         id: text3
         font.pixelSize: 40
+        color: parent.color
         anchors.top : text2.bottom
     }
     Text {
@@ -42,6 +45,7 @@ Item {
 
         id: text4
         font.pixelSize: 40
+        color: parent.color
         anchors.top : text3.bottom
     }
     Text {
@@ -49,6 +53,7 @@ Item {
 
         id: text5
         font.pixelSize: 40
+        color: parent.color
         anchors.top : text4.bottom
     }
     Text {
@@ -56,56 +61,56 @@ Item {
 
         id: text6
         font.pixelSize: 40
+        color: parent.color
         anchors.top : text5.bottom
     }
     Text {
         id: text7
         text: "WAITING"
-
         font.pixelSize: 40
+        color: parent.color
         anchors.top : text6.bottom
     }
     Text {
         id: text8
         text: "WAITING"
-
         font.pixelSize: 40
+        color: parent.color
         anchors.top : text7.bottom
     }
     Text {
         id: text9
         text: "WAITING"
-
         font.pixelSize: 40
+        color: parent.color
         anchors.top : text8.bottom
     }
     Text {
         id: text10
         text: "WAITING"
-
         font.pixelSize: 40
+        color: parent.color
         anchors.top : text9.bottom
     }
     Text {
         id: text11
         text: "WAITING"
-
         font.pixelSize: 40
+        color: parent.color
         anchors.top : text10.bottom
     }
     Text {
         id: text12
         text: "WAITING"
-
         font.pixelSize: 40
+        color: parent.color
         anchors.top : text11.bottom
     }
     Text {
         id: text13
-        text: "EMPTY"
-
+        text: "WAITING"
         font.pixelSize: 40
+        color: parent.color
         anchors.top : text12.bottom
     }
-
 }

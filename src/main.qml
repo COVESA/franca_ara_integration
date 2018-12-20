@@ -15,6 +15,10 @@ Rectangle {
 
     DebugTexts {
         id: db
+        color: "black"
+        anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.leftMargin: 10
+        anchors.topMargin: 10
     }
-
 }
