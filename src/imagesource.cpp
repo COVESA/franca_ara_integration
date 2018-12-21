@@ -34,11 +34,8 @@ static QString image_url(int frameId)
     return QString("%1/l_image%2.png").arg(IMAGE_FEED_PATH).arg(frameId);
 }
 
-/*static QRect get_bounding_qrect(BoxDefinition box) {
-   return QRect(box.x, box.y, box.width, box.height);
 }
 
-*/
 // Public functions called by networking class/thread:
 
 // Init, called from main at startup
