@@ -14,6 +14,7 @@
 #include "SomeIpNetworkThreadTypes.h"
 #include <iostream>
 #include <math.h>
+#include <vector>
 
 #define IMAGE_FEED_PATH "/usr/local/share/franca-ara/images"
 #define MAX_IMAGE_ID 228
@@ -34,6 +35,13 @@ static QString image_url(int frameId)
     return QString("%1/l_image%2.png").arg(IMAGE_FEED_PATH).arg(frameId);
 }
 
+ImageSource::ImageSource() {
+   // Initialize vector of images (for performance reason)
+    QImageReader reader;
+    for (int i = 0 ; i <= MAX_IMAGE_ID ; ++i) {
+       reader.setFileName(image_url(i));
+       m_image_vector.push_back(reader.read());
+    }
 }
 
 // Public functions called by networking class/thread:
@@ -56,9 +64,7 @@ void ImageSource::connectImageProvider(QQuickView &view)
 }
 
 void ImageSource::newFrameId(int frameID) {
-    QImageReader reader(image_url(limit_id(frameID)));
-    //std::cerr << "emit imageReady" << std::endl;
-    emit imageReady(reader.read()); // Signal to ImageProvider
+    emit imageReady(m_image_vector[limit_id(frameID)]);
 }
 
 void ImageSource::newVehicleIdentification () {

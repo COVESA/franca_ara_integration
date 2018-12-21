@@ -23,6 +23,8 @@ class ImageSource : public QObject
     Q_OBJECT
 
 public:
+    ImageSource();
+
     // Called from network class to initialize signals/slots etc
     void connectImageProvider(QQuickView &view);
 
@@ -39,6 +41,7 @@ Q_SIGNALS: // (Signals sent to QML graphics program)
     void laneIdentified(QLine &leftLine, QLine &rightLine);
 
 private:
+    std::vector<QImage>  m_image_vector;
     ImageProvider _provider;
 };
 
