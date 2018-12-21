@@ -12,7 +12,7 @@ Item {
         anchors.fill: parent
         source: "image://imageprovider"
         cache: false
-        asynchronous: true
+        asynchronous: false
         function reload() {
             var oldSource = source;
             source = "";
