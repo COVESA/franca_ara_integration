@@ -3,4 +3,4 @@ Name=Franca Ara Integration
 Type=Application
 Icon=file://@APPLICATION_ICON_TARGET_PATH@
 Unit=@APPLICATION_UNIT@
-Exec=bwrap --ro-bind / / --dev-bind /dev/dri/ /dev/dri --unshare-user --uid 128 --gid 512 @APPLICATION_BIN_TARGET_PATH@
+Exec=@APPLICATION_BIN_TARGET_PATH@
