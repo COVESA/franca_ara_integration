@@ -1,7 +1,7 @@
 #!/bin/sh -x
 
 export VSOMEIP_CONFIGURATION="$(readlink -f /usr/local/share/franca-ara/conf/vsomeip_ecu1.json)"
-export VSOMEIP_CLIENTSIDELOGGING=true
+#export VSOMEIP_CLIENTSIDELOGGING=true
 
 [ -z "$VSOMEIP_CONFIGURATION" ] && { echo "ERROR: Did not find VSOMEIP_CONFIGURATION file as expected!" ; exit 1 ; }
 

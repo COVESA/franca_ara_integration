@@ -6,7 +6,7 @@
          "path": "/var/log/vsomeip.log",
          "enable": "false"
       },
-      "level": "debug"
+      "level": "warning"
    },
    "unicast": "192.168.100.10",
    "applications": [
