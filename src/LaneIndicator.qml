@@ -54,9 +54,20 @@ Canvas {
 
         ctx.beginPath();
         ctx.lineWidth = lineWidth;
-        ctx.moveTo(leftX, leftY);
+        if (leftY < cc.height) {
+            ctx.moveTo(leftX, cc.height)
+            ctx.lineTo(leftX, leftY);
+        } else {
+            ctx.moveTo(leftX, leftY);
+        }
+
         ctx.lineTo(intersectionX, intersectionY);
+
         ctx.lineTo(rightX, rightY);
+        if (rightY < cc.height) {
+            ctx.lineTo(rightX, cc.height)
+        }
+
         ctx.fillStyle = coneGradient;
         ctx.fill();
         ctx.strokeStyle = lineGradient;
