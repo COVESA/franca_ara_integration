@@ -9,6 +9,8 @@
 #include "v1/genivi/aasr/showcase/IVehiclesStubDefault.hpp"
 #include "v1/genivi/aasr/showcase/IDrivingLaneStubDefault.hpp"
 
+#include "conf/datatable.h"
+
 
 #define LOG(x) std::cerr << #x << std::endl;
 #define MSLEEP(x)                                                              \
@@ -48,7 +50,6 @@ int main() {
       MSLEEP(2000);
    }
 
-
    std::cout << "Successfully Registered Service!" << std::endl;
 
    // The attribute that is being tested, updated inside loop
@@ -63,27 +64,19 @@ int main() {
 
          LOG(capi_server: Main loop is alive);
 
-         // A slighly moving box. (Only set as valid for certain values of
-         // i -- see below)
          IVehicles::BoundingBox box;
 
-         /* box.setTopLeftX(100+i/3);
-            box.setTopLeftY(100+i/3);
-            box.setWidth(i*2+40);
-            box.setHeight(i*2+60);
-            */
+         // Bounding box: Fetching data from predefined table, driven by
+         // the i counter
+         box.setTopLeftX(VehicleDetected_data[i].BoxTopLeftX);
+         box.setTopLeftY(VehicleDetected_data[i].BoxTopLeftY);
+         box.setWidth(VehicleDetected_data[i].BoxWidth);
+         box.setHeight(VehicleDetected_data[i].BoxHeight);
 
-         // A constant box
-         box.setTopLeftX(180);
-         box.setTopLeftY(202);
-         box.setWidth(269);
-         box.setHeight(212);
-
+         // Vehicle ID: Just set a valid (random) vehicle ID *if* there is
+         // a non-zero bounding box defined
          IVehicles::Vehicle v;
-
-         // Simulate the recognition of vehicle around
-         // frame number 180 and higher.
-         if (i > 180 && i < MAX_IMAGE_ID) {
+         if (box.getTopLeftX() != 0) {
             v.setId(i);  // Valid ID for vehicle
          }
          else
@@ -91,6 +84,7 @@ int main() {
             v.setId(0); // Invalid (no vehicle)
          }
 
+         // Distance and Collision:  Just sending dummy data
          IVehicles::FlexibleFloatingPointContainer fpc;
          IVehicles::FlexibleFloatingPoint value_s;
          float f = 0.44;
@@ -109,20 +103,16 @@ int main() {
 
          IDrivingLane::LaneType l;
          l.setFrameId(i);
-         l.setLowerLeftPointX(0+i);
-         l.setLowerLeftPointY(470);
-         l.setLowerRightPointX(600-i);
-         l.setLowerRightPointY(440);
-         l.setIntersectionPointX(350);
-         l.setIntersectionPointY(200);
-         /*      if (i == 0)
-                 direction = 1;
-                 if (i == 200)
-                 direction = -1;
-                 */
 
-         // TODO: How to set broadcast data and notify
-         //LOG(capi_server: Broadcasting lane event);
+         // Lanes: Fetching data from predefined table, driven by the i
+         // counter
+         l.setLowerLeftPointX(LaneDetected_data[i].LeftX);
+         l.setLowerLeftPointY(LaneDetected_data[i].LeftY);
+         l.setLowerRightPointX(LaneDetected_data[i].RightX);
+         l.setLowerRightPointY(LaneDetected_data[i].RightY);
+         l.setIntersectionPointX(LaneDetected_data[i].IntersectionX);
+         l.setIntersectionPointY(LaneDetected_data[i].IntersectionY);
+
          lService->fireLaneDetectedEvent(l);
 
          MSLEEP(50);
