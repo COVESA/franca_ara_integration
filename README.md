@@ -9,8 +9,46 @@ Platform.
 It communicates over interfaces defined by ARA::COM XML format and 
 Franca IDL.
 
-Some stuff to remember
-----------------------
+Dependencies
+-------------
+
+Roughly the following packages are needed.  If compiled and installed
+manually, they should be found by QtCreator via pkgconfig.
+
+PackageName (source-repository-name):
+
+CommonAPI (capicxx-core-runtime)
+CommonAPI-SomeIP (capicxx-someip-runtime)
+vsomeip (vsomeip)
+automotive-dlt (dlt-daemon)
+
+Development
+-----------
+
+WARNING: This is not "nicely" packaged or fully documented.  If you are
+working with this, you may need to do a bit of tweaking, but the following
+info should provide some starting points at least.
+
+* Patches, send them as PRs on the GitHub repository.
+* Code-specific issues or questions about code (not general support help)-
+GitHub Issues.  Note that processing them might be fairly low priority.
+* General questions or contact: genivi-projects (at) lists.genivi.org or ask
+around
+
+Compiling and testing for Target Systems
+----------------------------------------
+
+Specific support for different target OSes is stored in different places.
+
+1. For GENIVI Development Platform, the instructions are encoded in
+OpenEmbedded/Yocto "bitbake" files inside the genivi-development-platform 
+repository -- (see branch ces_demo if not found on master)
+
+2. For other platforms, such as Apertis, WebOS, etc. this is Work-in-progress
+   and TBD
+
+Compiling and testing on Development Host (and general info)
+------------------------------------------------------------
 
 * You need a system with bash shell, probably.   Only Linux dev host has been
 tested.
@@ -29,6 +67,16 @@ examples and are useful for getting printouts of the communication.
 * Programs will need link against CommonAPI runtime, CommonAPI SOME/IP
 runtime, vSOMEIP, and in many cases, DLT.  You will need to have those
 libraries installed on your development host environment.
+To compile in QtCreator, you may need to adjust the search paths.
+If libraries are stored in /usr/local then this environment was set
+up before launching QtCreator in that shell: 
+
+```
+export LD_LIBRARY_PATH=/usr/local/lib
+```
+
+There might be other ways to adjust the search path within the project
+instead, patches welcome.
 
 * The main program depends on Qt 5 libraries.  Not sure exactly which minimum
 version - just use a fairly modern one.
@@ -53,8 +101,12 @@ know that in some cases running more than one server or more than one client
 might conflict.
 
 * Be mindful that many test program dirs refer to other dirs through symlinks,
-This is to minimize duplication, if they need the exact same basis (e.g same
+This is to minimize duplication, if they need the exact same input (e.g same
 source code, configuration files, Franca IDL interface, or even the
 result of code generation in src-gen). The flip side of that is that a change
 for one thing will affect another.
 
+* The "video" frames are provided as a set of individual images at the moment.
+Download the file "video.tar" from the Releases tab on GitHub.  Unpack onto
+your development or target system -- currently path is hard-coded to
+"/usr/local/share/franca-ara/images" - feel free to edit.
