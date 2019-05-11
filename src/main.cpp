@@ -11,10 +11,10 @@
 
 #include "SomeIpNetworkThread.h"
 
-#include <dlt.h>
-#include "dltloggername.h"
+//#include <dlt.h>
+//#include "dltloggername.h"
 
-DLT_DECLARE_CONTEXT(DLT_FRA_ARA_CONTEXT)
+//DLT_DECLARE_CONTEXT(DLT_FRA_ARA_CONTEXT)
 
 int main(int argc, char *argv[])
 {
@@ -22,10 +22,10 @@ int main(int argc, char *argv[])
 
     QQuickView view;
 
-    DLT_REGISTER_APP("FRA","FRANCA-ARA Integration Demo");
-    DLT_REGISTER_CONTEXT(dl_fra_ara,"CON","First context");
+   // DLT_REGISTER_APP("FRA","FRANCA-ARA Integration Demo");
+    //DLT_REGISTER_CONTEXT(dl_fra_ara,"CON","First context");
 
-    DLT_LOG(dl_fra_ara,DLT_LOG_INFO,DLT_STRING("Hello world!"));
+    //DLT_LOG(dl_fra_ara,DLT_LOG_INFO,DLT_STRING("Hello world!"));
 
     setenv("QT_QPA_PLATFORM", "wayland", 1);
     setenv("QT_WAYLAND_DISABLE_WINDOWDECORATION", "1", 1);

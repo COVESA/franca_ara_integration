@@ -54,7 +54,8 @@ INCLUDEPATH += src-gen
 
 unix {
     CONFIG += link_pkgconfig
-    PKGCONFIG += CommonAPI CommonAPI-SomeIP vsomeip automotive-dlt
+    PKGCONFIG += CommonAPI CommonAPI-SomeIP vsomeip
+#automotive-dlt
 }
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
